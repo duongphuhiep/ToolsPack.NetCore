@@ -1,0 +1,1 @@
+dotnet nuget push *.nupkg -k [api_key] -s https://www.nuget.org/api/v2/package
