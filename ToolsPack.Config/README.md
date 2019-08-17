@@ -1,4 +1,4 @@
-## ConfigReader
+# ToolsPack.Config
 
 use it to read `app.config`
 

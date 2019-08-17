@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7E836789
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.Log4net.Tests", "Tests\ToolsPack.Log4net.Tests\ToolsPack.Log4net.Tests.csproj", "{A6D05D85-8FB2-4A60-B34B-3ECAA07C4F23}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.String", "ToolsPack.String\ToolsPack.String.csproj", "{F3756DA2-5960-4A11-BE5F-24551296A9FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,6 +101,18 @@ Global
 		{A6D05D85-8FB2-4A60-B34B-3ECAA07C4F23}.Release|x64.Build.0 = Release|Any CPU
 		{A6D05D85-8FB2-4A60-B34B-3ECAA07C4F23}.Release|x86.ActiveCfg = Release|Any CPU
 		{A6D05D85-8FB2-4A60-B34B-3ECAA07C4F23}.Release|x86.Build.0 = Release|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Debug|x64.Build.0 = Debug|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Debug|x86.Build.0 = Debug|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Release|x64.ActiveCfg = Release|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Release|x64.Build.0 = Release|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Release|x86.ActiveCfg = Release|Any CPU
+		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
