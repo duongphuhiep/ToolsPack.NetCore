@@ -1,7 +1,7 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
 
-namespace Datalayer.EFCore
+namespace ToolsPack.String
 {
     public static class SqlServerConnectionStringBuilder
     {

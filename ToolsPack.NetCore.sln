@@ -5,19 +5,21 @@ VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsPack.Displayer", "ToolsPack.Displayer\ToolsPack.Displayer.csproj", "{07DE6291-BA3F-47F1-A6E7-67099B24B571}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.Log4net", "ToolsPack.Log4net\ToolsPack.Log4net.csproj", "{E29C5405-4C07-49D2-9534-D18F122B0FCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsPack.Log4net", "ToolsPack.Log4net\ToolsPack.Log4net.csproj", "{E29C5405-4C07-49D2-9534-D18F122B0FCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.Config", "ToolsPack.Config\ToolsPack.Config.csproj", "{8ED008E1-D357-4D4C-9EBA-94B5F4F70A1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsPack.Config", "ToolsPack.Config\ToolsPack.Config.csproj", "{8ED008E1-D357-4D4C-9EBA-94B5F4F70A1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.Thread", "ToolsPack.Thread\ToolsPack.Thread.csproj", "{D66A9FF2-9C74-4782-8B1E-1B63A4488CB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsPack.Thread", "ToolsPack.Thread\ToolsPack.Thread.csproj", "{D66A9FF2-9C74-4782-8B1E-1B63A4488CB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.Sql", "ToolsPack.Sql\ToolsPack.Sql.csproj", "{5FE5DB5C-F716-4B9E-8850-C2F6CE22B795}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsPack.Sql", "ToolsPack.Sql\ToolsPack.Sql.csproj", "{5FE5DB5C-F716-4B9E-8850-C2F6CE22B795}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{7E836789-B02E-4C44-A5F0-CD6E4DBC3B89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.Log4net.Tests", "Tests\ToolsPack.Log4net.Tests\ToolsPack.Log4net.Tests.csproj", "{A6D05D85-8FB2-4A60-B34B-3ECAA07C4F23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsPack.Log4net.Tests", "Tests\ToolsPack.Log4net.Tests\ToolsPack.Log4net.Tests.csproj", "{A6D05D85-8FB2-4A60-B34B-3ECAA07C4F23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.String", "ToolsPack.String\ToolsPack.String.csproj", "{F3756DA2-5960-4A11-BE5F-24551296A9FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsPack.String", "ToolsPack.String\ToolsPack.String.csproj", "{F3756DA2-5960-4A11-BE5F-24551296A9FB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsPack.String.Tests", "Tests\ToolsPack.String.Tests\ToolsPack.String.Tests.csproj", "{1899E021-BFFE-48A3-AA89-FB114ADF877B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,14 +115,27 @@ Global
 		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Release|x64.Build.0 = Release|Any CPU
 		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Release|x86.ActiveCfg = Release|Any CPU
 		{F3756DA2-5960-4A11-BE5F-24551296A9FB}.Release|x86.Build.0 = Release|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Debug|x64.Build.0 = Debug|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Debug|x86.Build.0 = Debug|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Release|x64.ActiveCfg = Release|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Release|x64.Build.0 = Release|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Release|x86.ActiveCfg = Release|Any CPU
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {707666E7-6364-4E9B-A729-DAD90524D31B}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A6D05D85-8FB2-4A60-B34B-3ECAA07C4F23} = {7E836789-B02E-4C44-A5F0-CD6E4DBC3B89}
+		{1899E021-BFFE-48A3-AA89-FB114ADF877B} = {7E836789-B02E-4C44-A5F0-CD6E4DBC3B89}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {707666E7-6364-4E9B-A729-DAD90524D31B}
 	EndGlobalSection
 EndGlobal

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace ToolsPack.Config
+namespace ToolsPack.String
 {
     /// <summary>
     /// Generate a string
