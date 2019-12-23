@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using System.Threading.Channels;
 
-namespace utils
+namespace ToolsPack.Thread
 {
     /// <summary>
     /// A generic loader with zero argument
