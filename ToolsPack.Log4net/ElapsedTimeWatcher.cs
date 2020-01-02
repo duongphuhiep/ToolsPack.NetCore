@@ -25,7 +25,7 @@ namespace ToolsPack.Log4net
 	///                Thread.Sleep(400);
 	///            }
 	/// </summary>
-	public class ElapsedTimeWatcher : IDisposable
+	public sealed class ElapsedTimeWatcher : IDisposable
 	{
 		private bool _autoJumpContext = false;
 		private int _autoJumpContextToInfo = 5;
@@ -666,8 +666,8 @@ namespace ToolsPack.Log4net
 			{
 				return;
 			}
-			_unitarySw.Stop();
-			_log.WarnFormat(_scopeId + " - " + _unitarySw.DisplayMicro() + " - " + format, args);
+            _unitarySw.Stop();
+            _log.WarnFormat(_scopeId + " - " + _unitarySw.DisplayMicro() + " - " + format, args);
 			_unitarySw.Reset();
 			_unitarySw.Start();
 		}

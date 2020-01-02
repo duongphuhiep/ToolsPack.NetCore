@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ToolsPack.Sql
 {
@@ -32,10 +33,10 @@ namespace ToolsPack.Sql
 	public class AdoHelper : IDisposable
 	{
 		// Internal members
-		protected string _connString = null;
-		protected SqlConnection _conn = null;
-		protected SqlTransaction _trans = null;
-		protected bool _disposed = false;
+		private string _connString = null;
+        private SqlConnection _conn = null;
+        private SqlTransaction _trans = null;
+        private bool _disposed = false;
 
 		/// <summary>
 		/// Sets or returns the connection string use by all instances of this class.
@@ -141,70 +142,135 @@ namespace ToolsPack.Sql
 				return cmd.ExecuteNonQuery();
 			}
 		}
-
-		/// <summary>
-		/// Executes a stored procedure that returns no results
+        /// <summary>
+		/// Executes a query that returns no results
 		/// </summary>
-		/// <param name="proc">Name of stored proceduret</param>
+		/// <param name="qry">Query text</param>
 		/// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
 		/// <returns>The number of rows affected</returns>
-		public int ExecNonQueryProc(string proc, params object[] args)
+		public async Task<int> ExecNonQueryAsync(string qry, params object[] args)
+        {
+            using (SqlCommand cmd = CreateCommand(qry, CommandType.Text, args))
+            {
+                return await cmd.ExecuteNonQueryAsync().ConfigureAwait(false);
+            }
+        }
+
+        /// <summary>
+        /// Executes a stored procedure that returns no results
+        /// </summary>
+        /// <param name="proc">Name of stored proceduret</param>
+        /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
+        /// <returns>The number of rows affected</returns>
+        public int ExecNonQueryProc(string proc, params object[] args)
 		{
 			using (SqlCommand cmd = CreateCommand(proc, CommandType.StoredProcedure, args))
 			{
 				return cmd.ExecuteNonQuery();
 			}
 		}
+        /// <summary>
+        /// Executes a stored procedure that returns no results
+        /// </summary>
+        /// <param name="proc">Name of stored proceduret</param>
+        /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
+        /// <returns>The number of rows affected</returns>
+        public async Task<int> ExecNonQueryProcAsync(string proc, params object[] args)
+        {
+            using (SqlCommand cmd = CreateCommand(proc, CommandType.StoredProcedure, args))
+            {
+                return await cmd.ExecuteNonQueryAsync().ConfigureAwait(false);
+            }
+        }
 
-		/// <summary>
-		/// Executes a query that returns a single value
-		/// </summary>
-		/// <param name="qry">Query text</param>
-		/// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
-		/// <returns>Value of first column and first row of the results</returns>
-		public object ExecScalar(string qry, params object[] args)
+        /// <summary>
+        /// Executes a query that returns a single value
+        /// </summary>
+        /// <param name="qry">Query text</param>
+        /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
+        /// <returns>Value of first column and first row of the results</returns>
+        public object ExecScalar(string qry, params object[] args)
 		{
 			using (SqlCommand cmd = CreateCommand(qry, CommandType.Text, args))
 			{
 				return cmd.ExecuteScalar();
 			}
 		}
+        /// <summary>
+        /// Executes a query that returns a single value
+        /// </summary>
+        /// <param name="qry">Query text</param>
+        /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
+        /// <returns>Value of first column and first row of the results</returns>
+        public async Task<object> ExecScalarAsync(string qry, params object[] args)
+        {
+            using (SqlCommand cmd = CreateCommand(qry, CommandType.Text, args))
+            {
+                return await cmd.ExecuteScalarAsync().ConfigureAwait(false);
+            }
+        }
 
-		/// <summary>
-		/// Executes a query that returns a single value
-		/// </summary>
-		/// <param name="proc">Name of stored proceduret</param>
-		/// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
-		/// <returns>Value of first column and first row of the results</returns>
-		public object ExecScalarProc(string qry, params object[] args)
+        /// <summary>
+        /// Executes a query that returns a single value
+        /// </summary>
+        /// <param name="proc">Name of stored proceduret</param>
+        /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
+        /// <returns>Value of first column and first row of the results</returns>
+        public object ExecScalarProc(string qry, params object[] args)
 		{
 			using (SqlCommand cmd = CreateCommand(qry, CommandType.StoredProcedure, args))
 			{
 				return cmd.ExecuteScalar();
 			}
 		}
+        /// <summary>
+        /// Executes a query that returns a single value
+        /// </summary>
+        /// <param name="proc">Name of stored proceduret</param>
+        /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
+        /// <returns>Value of first column and first row of the results</returns>
+        public async Task<object> ExecScalarProcAsync(string qry, params object[] args)
+        {
+            using (SqlCommand cmd = CreateCommand(qry, CommandType.StoredProcedure, args))
+            {
+                return await cmd.ExecuteScalarAsync().ConfigureAwait(false);
+            }
+        }
 
-		/// <summary>
-		/// Executes a query and returns the results as a SqlDataReader
-		/// </summary>
-		/// <param name="qry">Query text</param>
-		/// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
-		/// <returns>Results as a SqlDataReader</returns>
-		public SqlDataReader ExecDataReader(string qry, params object[] args)
+        /// <summary>
+        /// Executes a query and returns the results as a SqlDataReader
+        /// </summary>
+        /// <param name="qry">Query text</param>
+        /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
+        /// <returns>Results as a SqlDataReader</returns>
+        public SqlDataReader ExecDataReader(string qry, params object[] args)
 		{
 			using (SqlCommand cmd = CreateCommand(qry, CommandType.Text, args))
 			{
 				return cmd.ExecuteReader();
 			}
 		}
+        /// <summary>
+        /// Executes a query and returns the results as a SqlDataReader
+        /// </summary>
+        /// <param name="qry">Query text</param>
+        /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
+        /// <returns>Results as a SqlDataReader</returns>
+        public async Task<SqlDataReader> ExecDataReaderAsync(string qry, params object[] args)
+        {
+            using (SqlCommand cmd = CreateCommand(qry, CommandType.Text, args))
+            {
+                return await cmd.ExecuteReaderAsync().ConfigureAwait(false);
+            }
+        }
 
-		/// <summary>
-		/// Executes a stored procedure and returns the results as a SqlDataReader
-		/// </summary>
-		/// <param name="proc">Name of stored proceduret</param>
-		/// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
-		/// <returns>Results as a SqlDataReader</returns>
-		public SqlDataReader ExecDataReaderProc(string qry, params object[] args)
+        /// <summary>
+        /// Executes a stored procedure and returns the results as a SqlDataReader
+        /// </summary>
+        /// <param name="proc">Name of stored proceduret</param>
+        /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
+        /// <returns>Results as a SqlDataReader</returns>
+        public SqlDataReader ExecDataReaderProc(string qry, params object[] args)
 		{
 			using (SqlCommand cmd = CreateCommand(qry, CommandType.StoredProcedure, args))
 			{
@@ -222,27 +288,31 @@ namespace ToolsPack.Sql
 		{
 			using (SqlCommand cmd = CreateCommand(qry, CommandType.Text, args))
 			{
-				SqlDataAdapter adapt = new SqlDataAdapter(cmd);
-				DataSet ds = new DataSet();
-				adapt.Fill(ds);
-				return ds;
+                using (SqlDataAdapter adapt = new SqlDataAdapter(cmd))
+                {
+                    DataSet ds = new DataSet();
+                    adapt.Fill(ds);
+                    return ds;
+                }
 			}
 		}
-
-		/// <summary>
-		/// Executes a stored procedure and returns the results as a Data Set
-		/// </summary>
-		/// <param name="proc">Name of stored proceduret</param>
-		/// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
-		/// <returns>Results as a DataSet</returns>
-		public DataSet ExecDataSetProc(string qry, params object[] args)
+        
+        /// <summary>
+        /// Executes a stored procedure and returns the results as a Data Set
+        /// </summary>
+        /// <param name="proc">Name of stored proceduret</param>
+        /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
+        /// <returns>Results as a DataSet</returns>
+        public DataSet ExecDataSetProc(string qry, params object[] args)
 		{
 			using (SqlCommand cmd = CreateCommand(qry, CommandType.StoredProcedure, args))
 			{
-				SqlDataAdapter adapt = new SqlDataAdapter(cmd);
-				DataSet ds = new DataSet();
-				adapt.Fill(ds);
-				return ds;
+                using (SqlDataAdapter adapt = new SqlDataAdapter(cmd))
+                {
+                    DataSet ds = new DataSet();
+                    adapt.Fill(ds);
+                    return ds;
+                }
 			}
 		}
 
