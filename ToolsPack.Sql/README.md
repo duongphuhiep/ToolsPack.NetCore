@@ -20,7 +20,9 @@ using (AdoHelper db = new AdoHelper(connectionString))
 	    while (rdr.Read())
 	    {
 	        rdr.GetValue<int?>("views"); //no need to check null value anymore
+            rdr.GetIntNullable("views2"); //no need to check null value anymore
 	        rdr.GetValue<DateTime?>("lastModified");
+            rdr.GetDateTimeNulable(5);
 	    }
 	}
 }

@@ -1,6 +1,6 @@
 # ToolsPack.Config
 
-use it to read `app.config`
+use it to read `app.config` (or `web.config`)
 
 Example `app.config` of your application
 
