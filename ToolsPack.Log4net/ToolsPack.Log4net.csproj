@@ -9,11 +9,12 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Log4net</PackageProjectUrl>
         <PackageIconUrl>https://lh4.googleusercontent.com/-VgSJNwk2FB4/Ts-0IhWLO9I/AAAAAAAACXg/BbQEppr15eQ/w643-h641-no/Z20110402-200403.png</PackageIconUrl>
-        <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore</RepositoryUrl>
+        <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Log4net</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="log4net" Version="2.0.8" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.1" />
         <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
