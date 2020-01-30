@@ -1,29 +1,36 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ToolsPack.Samba;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using log4net;
 using System.Threading.Tasks;
 using System.IO;
 using Microsoft.Extensions.Logging;
 using ToolsPack.Log4net;
+using log4net.Repository;
 
 namespace ToolsPack.Samba.Tests
 {
     [TestClass()]
     public class CifsConnectionManagerTests
     {
-        ILogger log;
-        [TestInitialize]
-        public void Setup()
+        Microsoft.Extensions.Logging.ILogger log;
+        
+        [TestInitialize()]
+        public void SetUp()
         {
-            Log4NetQuickSetup.SetupConsole();
-            log = new Log4NetLogger(new Log4NetProviderOptions {})
+            Console.WriteLine("init test");
+            ILoggerRepository loggerRepo = log4net.LogManager.GetRepository("G");
+            Log4NetQuickSetup.SetUpConsole(Log4NetQuickSetup.GetSimplePattern(), loggerRepo);
+            //Log4NetQuickSetup.SetUpFile(Log4NetQuickSetup.GetSimplePattern(), loggerRepo);
+            log = new Log4NetLogger(new Log4NetProviderOptions {LoggerRepository = "G"});
         }
 
-        //[TestMethod()]
+        [TestMethod()]
         public async Task<byte[]> CifsConnectionManagerTest()
         {
+            Console.WriteLine("Start test console");
+            log.LogInformation("Start test");
+            
             //in this example we will try to access to the file @"\\10.20.30.40\carte_identity\mb\01\doc.pdf";
 
             //maybe the connection is already etablised (on the machine by other app) so we will just return the content of the file

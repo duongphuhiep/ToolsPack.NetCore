@@ -3,6 +3,7 @@ using ToolsPack.Samba;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace ToolsPack.Samba.Tests
 {
@@ -17,7 +18,7 @@ namespace ToolsPack.Samba.Tests
                 RemoteLocation = @"\\10.20.9.10\carte_identite",
                 BaseLocation = @"app\dev"
             };
-            Assert.AreEqual(f.BasePath, @"\\10.20.9.10\carte_identite\app\dev");
+            Assert.AreEqual(f.BasePath, $@"\\10.20.9.10\carte_identite{Path.DirectorySeparatorChar}app\dev");
         }
     }
 }

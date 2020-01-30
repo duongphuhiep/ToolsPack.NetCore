@@ -21,7 +21,7 @@ namespace ToolsPack.Samba
         /// <summary>
         /// it is just a combination of RemoteLocation\BaseLocation
         /// </summary>
-        public string BasePath => string.IsNullOrEmpty(BaseLocation) ? System.IO.Path.Combine(RemoteLocation, BaseLocation) : RemoteLocation;
+        public string BasePath => string.IsNullOrEmpty(BaseLocation) ? RemoteLocation : System.IO.Path.Combine(RemoteLocation, BaseLocation);
 
         public bool Equals(FileStorageSetting other)
         {
