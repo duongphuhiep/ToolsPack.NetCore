@@ -4,7 +4,7 @@ using System.Linq;
 namespace ToolsPack.String
 {
     /// <summary>
-    /// Generate a string
+    /// Generate a random string
     /// </summary>
     public static class StringGenerator
     {

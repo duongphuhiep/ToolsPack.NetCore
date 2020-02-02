@@ -1,17 +1,13 @@
-﻿using System;
-using System.Globalization;
-using System.Linq;
+﻿using System.Globalization;
 using System.Text;
 
 namespace ToolsPack.String
 {
     /// <summary>
-    /// Generate a string
+    /// Remove accent from string
     /// </summary>
     public static class DiacriticsRemover
     {
-        private static Random random = new Random();
-
         /// <summary>
         /// Remove accent from string "Léo lacrève" => "Leo lacreve"
         /// </summary>

@@ -8,7 +8,7 @@ namespace ToolsPack.String.Tests
         [Fact]
         public void RemoveTest()
         {
-            Assert.Equal("Leo lacreve", "Léo lacrève".RemoveDiacritics());
+            Assert.Equal("Leo lacreve", "LÃ©o lacrÃ¨ve".RemoveDiacritics());
         }
     }
 }
