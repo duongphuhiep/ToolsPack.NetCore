@@ -13,7 +13,15 @@ namespace ToolsPack.Samba
     public static class CifsConnectionManagerFactory
     {
         static readonly ConcurrentDictionary<FileStorageSetting, CifsConnectionManager> cache = new ConcurrentDictionary<FileStorageSetting, CifsConnectionManager>();
-        public static CifsConnectionManager GetOrCreate(FileStorageSetting fss, ILogger log)
+        
+        /// <summary>
+        /// Create a new CifsConnectionManager and cache it to reuse next time it is called with the same FileStorageSetting.
+        /// Avoid to create a new FileStorageSetting
+        /// </summary>
+        /// <param name="fss">FileStorageSetting</param>
+        /// <param name="log"></param>
+        /// <returns></returns>
+        public static CifsConnectionManager GetOrCreate(FileStorageSetting fss, ILogger log = null)
         {
             if (fss == null) 
             { 

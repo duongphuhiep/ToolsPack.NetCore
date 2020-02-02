@@ -7,6 +7,7 @@ using System.IO;
 using Microsoft.Extensions.Logging;
 using ToolsPack.Log4net;
 using log4net.Repository;
+using System.Reflection;
 
 namespace ToolsPack.Samba.Tests
 {
@@ -18,17 +19,15 @@ namespace ToolsPack.Samba.Tests
         [TestInitialize()]
         public void SetUp()
         {
-            Console.WriteLine("init test");
-            ILoggerRepository loggerRepo = log4net.LogManager.GetRepository("G");
-            Log4NetQuickSetup.SetUpConsole(Log4NetQuickSetup.GetSimplePattern(), loggerRepo);
-            //Log4NetQuickSetup.SetUpFile(Log4NetQuickSetup.GetSimplePattern(), loggerRepo);
-            log = new Log4NetLogger(new Log4NetProviderOptions {LoggerRepository = "G"});
+            ILoggerFactory loggerFactory = new LoggerFactory();
+            loggerFactory.AddLog4Net(); //load log4net.config by default
+            log = loggerFactory.CreateLogger("T");
+            log.LogDebug("Init test");
         }
 
         [TestMethod()]
-        public async Task<byte[]> CifsConnectionManagerTest()
+        public void CifsConnectionManagerTest()
         {
-            Console.WriteLine("Start test console");
             log.LogInformation("Start test");
             
             //in this example we will try to access to the file @"\\10.20.30.40\carte_identity\mb\01\doc.pdf";
@@ -36,7 +35,8 @@ namespace ToolsPack.Samba.Tests
             //maybe the connection is already etablised (on the machine by other app) so we will just return the content of the file
             if (File.Exists(@"\\10.20.30.40\carte_identity\mb\01\doc.pdf"))
             {
-                return await File.ReadAllBytesAsync(@"\\10.20.30.40\carte_identity\mb\01\doc.pdf");
+                File.ReadAllBytesAsync(@"\\10.20.30.40\carte_identity\mb\01\doc.pdf").GetAwaiter().GetResult();
+                return;
             }
 
             //we didn't entered the above "if" So maybe the connection is not etablished or the file really not exist on the remote disk
@@ -51,10 +51,10 @@ namespace ToolsPack.Samba.Tests
                 Password = "secret",
             };
             //CifsConnectionManagerFactory give a unique instance of a CifsConnectionManager correspond to the setting
-            CifsConnectionManager conn = CifsConnectionManagerFactory.GetOrCreate(setting, log);
+            CifsConnectionManager conn = CifsConnectionManagerFactory.GetOrCreate(setting);
 
             //try to connect to the RemoteLocation 3 times. In the end it will throw NetworkDiskException if failed
-            await conn.Connect();
+            conn.Connect().GetAwaiter().GetResult();
 
             //Here the Connect() function didn't throw the NetworkDiskException. It means that the connection was succesfully etablished
 
@@ -73,7 +73,7 @@ namespace ToolsPack.Samba.Tests
             if (File.Exists(pathToFile))
             {
                 //return the content of the file
-                return await File.ReadAllBytesAsync(pathToFile);
+                File.ReadAllBytesAsync(pathToFile).GetAwaiter().GetResult();
             }
             else
             {

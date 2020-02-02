@@ -35,7 +35,7 @@ namespace ToolsPack.Samba
         private readonly NetworkCredential _credentials;
         private readonly ILogger Log;
 
-        public NetworkConnection(string networkName, NetworkCredential credentials, ILogger log)
+        public NetworkConnection(string networkName, NetworkCredential credentials, ILogger log = null)
         {
             Log = log;
             _networkName = networkName;
@@ -67,7 +67,7 @@ namespace ToolsPack.Samba
 
             var ctx = $"{nameof(WNetAddConnection2)}(scope={netResource.Scope}, type={netResource.ResourceType}; display={netResource.DisplayType}, remote={_networkName}, user={userName}, password={_credentials.Password})";
 
-            Log.LogDebug($"Start open remote disk connection {ctx}");
+            Log?.LogDebug($"Start open remote disk connection {ctx}");
             Stopwatch sw = Stopwatch.StartNew();
             var result = WNetAddConnection2(
                 netResource,
@@ -79,12 +79,12 @@ namespace ToolsPack.Samba
             {
                 var win32error = new Win32Exception(result);
                 ctx = $"Failed to connect with {ctx}. Error {result} - {win32error.Message} / Elapsed: {sw.ElapsedMilliseconds} ms";
-                Log.LogError(ctx);
+                Log?.LogError(ctx);
                 throw new NetworkDiskException(ctx, win32error);
             }
             else
             {
-                Log.LogInformation($"Success open remote disk connection. Elapsed: {sw.ElapsedMilliseconds} ms");
+                Log?.LogInformation($"Success open remote disk connection. Elapsed: {sw.ElapsedMilliseconds} ms");
             }
         }
 
@@ -95,7 +95,7 @@ namespace ToolsPack.Samba
         {
             var ctx = $"{nameof(WNetCancelConnection2)}({_networkName})";
 
-            Log.LogDebug($"Disconnect remote disk {ctx}");
+            Log?.LogDebug($"Disconnect remote disk {ctx}");
             Stopwatch sw = Stopwatch.StartNew();
             var result = WNetCancelConnection2(_networkName, flag, force);
             
@@ -103,12 +103,12 @@ namespace ToolsPack.Samba
             {
                 var win32error = new Win32Exception(result);
                 ctx = $"Failed to Disconnect with {ctx}. Error {result} - {win32error.Message} / Elapsed: {sw.ElapsedMilliseconds} ms";
-                Log.LogError(ctx);
+                Log?.LogError(ctx);
                 throw new NetworkDiskException(ctx, win32error);
             }
             else
             {
-                Log.LogInformation($"Success disconnect remote disk. Elapsed: {sw.ElapsedMilliseconds} ms");
+                Log?.LogInformation($"Success disconnect remote disk. Elapsed: {sw.ElapsedMilliseconds} ms");
             }
         }
 

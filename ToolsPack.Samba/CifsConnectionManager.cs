@@ -13,7 +13,7 @@ namespace ToolsPack.Samba
         public FileStorageSetting Config { get; private set; }
         private readonly NetworkConnection network;
 
-        public CifsConnectionManager(FileStorageSetting cf, ILogger log)
+        public CifsConnectionManager(FileStorageSetting cf, ILogger log = null)
         {
             if (cf is null)
             {
@@ -61,7 +61,7 @@ namespace ToolsPack.Samba
             catch (Exception ex)
 #pragma warning restore CA1031 // Do not catch general exception types
             {
-                Log.LogError(ex, "Failed to monitor the connection");
+                Log?.LogError(ex, "Failed to monitor the connection");
                 return ex.Message;
             }
         }
