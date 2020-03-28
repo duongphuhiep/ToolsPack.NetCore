@@ -8,6 +8,7 @@
     <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.String</PackageProjectUrl>
     <PackageIcon>toolspack-128.png</PackageIcon>
     <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore</RepositoryUrl>
+    <Authors>hiep</Authors>
   </PropertyGroup>
 
   <ItemGroup>

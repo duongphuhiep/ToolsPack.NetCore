@@ -10,6 +10,7 @@
     <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Log4net</PackageProjectUrl>
     <PackageIcon>toolspack-128.png</PackageIcon>
     <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Log4net</RepositoryUrl>
+    <Authors>hiep</Authors>
   </PropertyGroup>
 
   <ItemGroup>

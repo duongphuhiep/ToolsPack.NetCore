@@ -5,7 +5,7 @@ using N = NLog;
 
 namespace ToolsPack.NLog
 {
-    class JsonNetSerializer : N.IJsonConverter
+    public class JsonNetSerializer : N.IJsonConverter
     {
         private static readonly JsonSerializerSettings DefaultJsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
 
