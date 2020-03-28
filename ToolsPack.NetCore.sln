@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.Samba", "ToolsPac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.Samba.Tests", "Tests\ToolsPack.Samba.Tests\ToolsPack.Samba.Tests.csproj", "{80925325-1271-42F7-9364-ACF9FAA6F98E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.NLog", "ToolsPack.NLog\ToolsPack.NLog.csproj", "{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -155,6 +157,18 @@ Global
 		{80925325-1271-42F7-9364-ACF9FAA6F98E}.Release|x64.Build.0 = Release|Any CPU
 		{80925325-1271-42F7-9364-ACF9FAA6F98E}.Release|x86.ActiveCfg = Release|Any CPU
 		{80925325-1271-42F7-9364-ACF9FAA6F98E}.Release|x86.Build.0 = Release|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Debug|x64.Build.0 = Debug|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Debug|x86.Build.0 = Debug|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Release|x64.ActiveCfg = Release|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Release|x64.Build.0 = Release|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Release|x86.ActiveCfg = Release|Any CPU
+		{F0D1D4E9-4796-4F10-9AC8-9569E6F7E116}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

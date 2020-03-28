@@ -1,6 +1,6 @@
 # ToolsPack.Config
 
-use it to read `app.config` (or `web.config`)
+use it to read `app.config`. It won't work for ASP.NET Core application.
 
 Example `app.config` of your application
 
