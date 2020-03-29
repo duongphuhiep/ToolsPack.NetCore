@@ -9,7 +9,7 @@ using log4net.Repository;
 
 namespace ToolsPack.Log4net
 {
-    public static class Log4NetQuickSetup
+    public static class LogQuickConfig
     {
         private static readonly ILoggerRepository DefaultRepository = LogManager.GetRepository(Assembly.GetCallingAssembly());
         private const string DefaultPattern = "%date{HH:mm:ss,fff} [%-5level] %message  [%logger{1}:%line]%newline";
@@ -43,7 +43,7 @@ namespace ToolsPack.Log4net
             "}] %message%newline";
         }
 
-        public static void SetUpConsole(string pattern = DefaultPattern, ILoggerRepository repository = null)
+        public static void SetupConsole(string pattern = DefaultPattern, ILoggerRepository repository = null)
         {
             var layout = new PatternLayout(pattern);
             var appender = new ConsoleAppender
@@ -58,7 +58,7 @@ namespace ToolsPack.Log4net
             BasicConfigurator.Configure(repository, appender);
         }
 
-        public static void SetUpFile(string filePath, string pattern = DefaultPattern, ILoggerRepository repository = null)
+        public static void SetupFile(string filePath, string pattern = DefaultPattern, ILoggerRepository repository = null)
         {
             var layout = new PatternLayout(pattern);
             var appender = new FileAppender()

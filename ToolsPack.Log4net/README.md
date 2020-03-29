@@ -7,13 +7,13 @@ In a Unit test project, or a temporary console application, you donnot have to c
 Call
 
 ```CSharp
-Log4NetQuickSetup.SetUpConsole();
+LogQuickConfig.SetupConsole();
 ```
 
 or
 
 ```CSharp
-Log4NetQuickSetup.SetUpFile("my_small_app.log");
+LogQuickConfig.SetupFile("my_small_app.log");
 ```
 
 it will setup a typical log4net appender so that you can use them in your test application. Example:

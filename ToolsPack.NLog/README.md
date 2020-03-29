@@ -13,4 +13,43 @@ JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings {
 NLog.Config.ConfigurationItemFactory.Default.JsonConverter = new ToolsPack.NLog.JsonNetSerializer(jsonSerializerSettings);
 ```
 
-Note: Here how to use `NLog` to create a `Microsoft.Extensions.Logging.ILogger`: https://stackoverflow.com/a/60859465/347051
+Shortcut:
+
+```csharp
+LogQuickConfig.UseNewtonsoftJson()
+```
+
+In unit test and for most basic logging needs:
+
+```csharp
+LogQuickConfig.SetupConsole();
+```
+or
+```csharp
+LogQuickConfig.SetupFile("./log/app.log");
+```
+or
+```csharp
+LogQuickConfig.SetupFileAndConsole("./log/app.log");
+```
+
+once setup, you can write logs as usual:
+
+```csharp
+private static readonly NLog.ILogger log = NLog.LogManager.GetCurrentClassLogger();
+log.Info("{@request}", req); //structured logging
+
+```
+
+Some library (APS.NET Core) require a `Microsoft.Extensions.Logging.ILogger` for logging. 
+You can use `NLog` to create one: https://stackoverflow.com/a/60859465/347051
+
+```csharp
+private static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
+{
+    builder.AddNLog();
+});
+private static readonly ILogger<Program> log = loggerFactory.CreateLogger<Program>();
+
+log.LogInformation("{@request}", jsonRequest);
+```
