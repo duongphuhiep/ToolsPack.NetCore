@@ -7,7 +7,7 @@ namespace ToolsPack.String
     {
         static public string Build(string host, string dbname, string login, string password, string connectionStringTemplate = "Data Source={ip};Initial Catalog={dbname};User ID={login};Password={password};")
         {
-            return connectionStringTemplate
+            return connectionStringTemplate?
                         .Replace("{ip}", host)
                         .Replace("{dbname}", dbname)
                         .Replace("{login}", login)
@@ -16,7 +16,7 @@ namespace ToolsPack.String
 
         public static string Build(string host, string dbname, string login, string password, int connectionTimeOutInSecond, string connectionStringTemplate = "Data Source={ip};Initial Catalog={dbname};User ID={login};Password={password};  Connection Timeout={timeout}")
         {
-            return connectionStringTemplate
+            return connectionStringTemplate?
                         .Replace("{ip}", host)
                         .Replace("{dbname}", dbname)
                         .Replace("{login}", login)

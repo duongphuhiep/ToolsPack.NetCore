@@ -91,8 +91,8 @@ namespace ToolsPack.NLog
             var config = new N.Config.LoggingConfiguration();
             N.Targets.FileTarget targetFile = GetFileTarget(filePath, pattern);
             N.Targets.ConsoleTarget targetConsole = GetConsoleTarget(pattern);
-            config.AddRule(N.LogLevel.Debug, N.LogLevel.Fatal, targetFile);
-            config.AddRule(N.LogLevel.Debug, N.LogLevel.Fatal, targetConsole);
+            config.AddRule(N.LogLevel.Trace, N.LogLevel.Fatal, targetFile);
+            config.AddRule(N.LogLevel.Trace, N.LogLevel.Fatal, targetConsole);
             config.DefaultCultureInfo = CultureInfo.InvariantCulture;
             return config;
         }
@@ -104,7 +104,7 @@ namespace ToolsPack.NLog
         {
             var config = new N.Config.LoggingConfiguration();
             N.Targets.FileTarget targetFile = GetFileTarget(filePath, pattern);
-            config.AddRule(N.LogLevel.Debug, N.LogLevel.Fatal, targetFile);
+            config.AddRule(N.LogLevel.Trace, N.LogLevel.Fatal, targetFile);
             config.DefaultCultureInfo = CultureInfo.InvariantCulture;
             return config;
         }
@@ -116,7 +116,7 @@ namespace ToolsPack.NLog
         {
             var config = new N.Config.LoggingConfiguration();
             N.Targets.ConsoleTarget targetConsole = GetConsoleTarget(pattern);
-            config.AddRule(N.LogLevel.Debug, N.LogLevel.Fatal, targetConsole);
+            config.AddRule(N.LogLevel.Trace, N.LogLevel.Fatal, targetConsole);
             config.DefaultCultureInfo = CultureInfo.InvariantCulture;
             return config;
         }

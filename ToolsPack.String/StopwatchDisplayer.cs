@@ -1,15 +1,14 @@
+using System;
 using System.Globalization;
 using System.Diagnostics;
-using System;
 
-namespace ToolsPack.Displayer
+namespace ToolsPack.String
 {
     /// <summary>
     ///convert Elapse time of a stopwatch to String (used in log message)
     ///This class must not depend on anything else, 
     ///and can be move to anywhere (CommonServices for example)
     /// </summary>
-    [Obsolete("Use ToolsPack.String instead. This class is moved to ToolsPack.String.StopwatchDisplayer")]
     public static class StopwatchDisplayer
     {
         public enum TimeUnit

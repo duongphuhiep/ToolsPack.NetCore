@@ -5,7 +5,7 @@
     <PackageIcon>toolspack-128.png</PackageIcon>
     <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore</RepositoryUrl>
     <Description>Wrapping native Windows call to connect to a Samba 1.0 (CIFS) server</Description>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>hiep</Authors>
   </PropertyGroup>
 
@@ -13,7 +13,14 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.1" />
     <PackageReference Include="System.Threading.Channels" Version="4.7.0" />
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+  
   <ItemGroup>
     <None Include="..\icon\toolspack-128.png" Pack="true" PackagePath=""/>
   </ItemGroup>

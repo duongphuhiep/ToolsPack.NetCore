@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ToolsPack.Displayer
+namespace ToolsPack.String
 {
     /// <summary>
     /// convert Array/List to String (used in log message)
@@ -14,7 +14,6 @@ namespace ToolsPack.Displayer
     /// IEnumerable arr;
     /// arr.Display().SeparatedBy("; ").MaxItems(5);
     /// </summary>
-    [Obsolete("Use ToolsPack.String instead. This class is moved to ToolsPack.String.ArrayDisplayer")]
     public static class ArrayDisplayer
     {
         public class ArrayFormat

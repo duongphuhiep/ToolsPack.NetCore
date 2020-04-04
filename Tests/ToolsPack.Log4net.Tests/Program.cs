@@ -14,7 +14,7 @@ namespace ToolsPack.Log4net.Tests
         {
             ILog Log = LogManager.GetLogger(typeof(Program));
 
-            Log4NetQuickSetup.SetUpFile("~/tmp/logs/a.log", Log4NetQuickSetup.GetSimplePattern());
+            LogQuickConfig.SetupFile("~/tmp/logs/a.log", LogQuickConfig.GetSimplePattern());
 
             Log.Info("Something");
             var pp = Directory.GetCurrentDirectory();

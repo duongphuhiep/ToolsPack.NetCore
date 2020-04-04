@@ -16,6 +16,7 @@ namespace ToolsPack.String
         /// <returns></returns>
         public static string RemoveDiacritics(this string s)
         {
+            if (s == null) return null;
             var normalizedString = s.Normalize(NormalizationForm.FormD);
             var stringBuilder = new StringBuilder();
 

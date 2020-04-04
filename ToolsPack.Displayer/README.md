@@ -1,3 +1,8 @@
+
+# This package is obsolete. Use the [ToolsPack.String](https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.String) package instead.
+
+--
+
 # ToolsPack.Displayer
 
 - No dependencies

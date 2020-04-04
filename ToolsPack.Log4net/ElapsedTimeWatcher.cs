@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using log4net;
 using log4net.Core;
-using ToolsPack.Displayer;
+using ToolsPack.String;
 
 namespace ToolsPack.Log4net
 {

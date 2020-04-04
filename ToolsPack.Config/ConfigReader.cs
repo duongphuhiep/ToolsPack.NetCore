@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Globalization;
 
 namespace ToolsPack.Config
 {
@@ -18,7 +19,7 @@ namespace ToolsPack.Config
 				{
 					return defaultValue;
 				}
-				return (T)Convert.ChangeType(value, typeof(T));
+				return (T)Convert.ChangeType(value, typeof(T), CultureInfo.InvariantCulture);
 			}
 			catch (Exception ex)
 			{
