@@ -5,7 +5,8 @@ Various string utilities
 ```
 SqlServerConnectionStringBuilder.Build("localhost", "mydb", "root", "secretpassword");
 RemoveDiacritics.DiacriticsRemover("où déjà aperçu la phénomène");
-StringGenerator.CreateRandomString()
+StringGenerator.CreateRandomString();
+Utf8SealCalculator.HMACSHA256("payload", "secret");
 ```
 
 ## ArrayDisplayer
