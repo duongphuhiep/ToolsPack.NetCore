@@ -1,14 +1,5 @@
 # ToolsPack.String
 
-Various string utilities
-
-```
-SqlServerConnectionStringBuilder.Build("localhost", "mydb", "root", "secretpassword");
-RemoveDiacritics.DiacriticsRemover("où déjà aperçu la phénomène");
-StringGenerator.CreateRandomString();
-Utf8SealCalculator.HMACSHA256("payload", "secret");
-```
-
 ## ArrayDisplayer
 
 - Know to convert a IEnummerable to string in order do display in a log message
@@ -64,4 +55,47 @@ Newtonsoft.Json.JsonConvert.SerializeObject(someObject);
 ```CSharp
 ArrayDisplayer.DefaultEllipsis("1234567890", 4, "..."); //gives "1234..."
 ArrayDisplayer.WordEllipsis("123 567 90", 5, "..."); //gives "123 567..."
+```
+
+## Utf8SealCalculator
+
+```CSharp
+string signature = Utf8SealCalculator.HMACSHA256("payload", "secret", Utf8SealCalculator.ToHex);
+```
+* Convert the payload string and the secret string to **byte[] tables** with a **Utf-8 encoder**
+* Use the secret byte[] table to hash the payload byte[] table with the **HMACSHA256 algorithm**
+* the third parameter convert the hash result back to string. You can use for example:
+  * `Utf8SealCalculator.ToHex`: format the hash result from byte[] to hexa value string
+  * `Convert.ToBase64String`: format the hash result from byte[] to a base64 string
+
+The result string is usually used as a seal or a signature to authenticate the payload content. 
+
+Other supported hashing algorithms are:
+* HMACSHA1 (not secure)
+* HMACSHA256
+* HMACSHA384
+* HMACSHA512
+* SHA1 (not secure)
+* SHA256
+* SHA384
+* SHA512
+
+## DiacriticsRemover
+
+```CSharp
+string message = DiacriticsRemover.RemoveDiacritics("où déjà aperçu la phénomène"); //returns "ou deja apercu la phenomene"
+```
+
+## CreateRandomString
+
+```CSharp
+string randomString = StringGenerator.CreateRandomString(4, "abcdefghijklmnpqrstuvwxyz0123456789");
+```
+
+Generate a random string of length 4 using random characters in `"abcdefghijklmnpqrstuvwxyz0123456789"`
+
+## SqlServerConnectionStringBuilder
+
+```Csharp
+string connectionString = SqlServerConnectionStringBuilder.Build("localhost", "mydb", "root", "secretpassword");
 ```

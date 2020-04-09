@@ -14,73 +14,82 @@ namespace ToolsPack.String
         public static readonly UTF8Encoding UTF8 = new UTF8Encoding();
 
         [Obsolete("CA5350 Do Not Use Weak Cryptographic Algorithms")]
-        public static string HMACSHA1(string payload, string secret)
+        public static string HMACSHA1(string payload, string secret, Func<byte[], string> hashToStringFunc)
         {
+            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
             using (var alg = new HMACSHA1(UTF8.GetBytes(secret)))
             {
                 var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return ToHex(sha);
+                return hashToStringFunc(sha);
             }
         }
-        public static string HMACSHA256(string payload, string secret)
+        public static string HMACSHA256(string payload, string secret, Func<byte[], string> hashToStringFunc)
         {
+            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
             using (var alg = new HMACSHA256(UTF8.GetBytes(secret)))
             {
                 var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return ToHex(sha);
+                return hashToStringFunc(sha);
             }
         }
-        public static string HMACSHA384(string payload, string secret)
+        public static string HMACSHA384(string payload, string secret, Func<byte[], string> hashToStringFunc)
         {
+            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
             using (var alg = new HMACSHA384(UTF8.GetBytes(secret)))
             {
                 var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return ToHex(sha);
+                return hashToStringFunc(sha);
             }
         }
-        public static string HMACSHA512(string payload, string secret)
+        public static string HMACSHA512(string payload, string secret, Func<byte[], string> hashToStringFunc)
         {
+            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
             using (var alg = new HMACSHA512(UTF8.GetBytes(secret)))
             {
                 var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return ToHex(sha);
+                return hashToStringFunc(sha);
             }
         }
 
         [Obsolete("CA5350 Do Not Use Weak Cryptographic Algorithms")]
-        public static string SHA1Managed(string payload)
+        public static string SHA1Managed(string payload, Func<byte[], string> hashToStringFunc)
         {
+            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
             using (var alg = new SHA1Managed())
             {
                 var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return ToHex(sha);
+                return hashToStringFunc(sha);
             }
         }
-       
-        public static string SHA256Managed(string payload)
+
+        public static string SHA256Managed(string payload, Func<byte[], string> hashToStringFunc)
         {
+            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
             using (var alg = new SHA256Managed())
             {
                 var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return ToHex(sha);
+                return hashToStringFunc(sha);
             }
         }
-        public static string SHA384Managed(string payload)
+        public static string SHA384Managed(string payload, Func<byte[], string> hashToStringFunc)
         {
+            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
             using (var alg = new SHA384Managed())
             {
                 var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return ToHex(sha);
+                return hashToStringFunc(sha);
             }
         }
-        public static string SHA512Managed(string payload)
+        public static string SHA512Managed(string payload, Func<byte[], string> hashToStringFunc)
         {
+            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
             using (var alg = new SHA512Managed())
             {
                 var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return ToHex(sha);
+                return hashToStringFunc(sha);
             }
         }
+
         public static string ToHex(byte[] ba)
         {
             if (ba == null)
