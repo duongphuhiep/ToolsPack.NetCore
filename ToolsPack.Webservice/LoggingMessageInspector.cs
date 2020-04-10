@@ -7,6 +7,7 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Xml;
+using ToolsPack.String;
 
 namespace ToolsPack.Webservice
 {
@@ -23,21 +24,21 @@ namespace ToolsPack.Webservice
             using (var buffer = reply.CreateBufferedCopy(int.MaxValue))
             {
                 var document = GetDocument(buffer.CreateMessage());
-                Logger.LogTrace(document.OuterXml);
-
+                Logger.LogTrace("Response #{id} | {body}", correlationState, document.OuterXml);
                 reply = buffer.CreateMessage();
             }
         }
 
         public object BeforeSendRequest(ref Message request, IClientChannel channel)
         {
+            string id = StringGenerator.CreateRandomString(5, "abcdefghijklmnpqrstuvwxyz0123456789");
             using (var buffer = request?.CreateBufferedCopy(int.MaxValue))
             {
                 var document = GetDocument(buffer.CreateMessage());
-                Logger.LogTrace(document.OuterXml);
+                Logger.LogTrace("Request #{id} | {body} | {endpointUrl}", id, document.OuterXml, channel?.RemoteAddress);
 
                 request = buffer.CreateMessage();
-                return null;
+                return id;
             }
         }
 
