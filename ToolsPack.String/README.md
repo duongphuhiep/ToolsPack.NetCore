@@ -89,10 +89,13 @@ string message = DiacriticsRemover.RemoveDiacritics("où déjà aperçu la phénomène
 ## CreateRandomString
 
 ```CSharp
-string randomString = StringGenerator.CreateRandomString(4, "abcdefghijklmnpqrstuvwxyz0123456789");
+string randomString = StringGenerator.CreateRandomString(5, "abcdefghijklmnpqrstuvwxyz0123456789");
 ```
+Generate a random string of length 5 using random characters in `"abcdefghijklmnpqrstuvwxyz0123456789"`
 
-Generate a random string of length 4 using random characters in `"abcdefghijklmnpqrstuvwxyz0123456789"`
+Remark:
+ * A normal C# Guid.NewGuid() generates a length-32 string and up to 32^16 different ids (that is alot)
+ * The above example generate only a length-5 string (much shorter) but up to 5^35 different ids (x2.4 time bigger than a normal Guid)
 
 ## SqlServerConnectionStringBuilder
 
