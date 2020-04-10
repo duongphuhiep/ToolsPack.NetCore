@@ -12,6 +12,7 @@ namespace ToolsPack.Webservice
 {
     public static class ServiceFactory
     {
+        [Obsolete("Newer svcutil generates the Client consumer, use it instead")]
         public static T CreateServiceProxy<T>(Uri url, int maxReceivedMessageSize = 100000) where T : class
         {
             if (url == null)
