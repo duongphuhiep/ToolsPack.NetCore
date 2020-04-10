@@ -102,3 +102,12 @@ Remark:
 ```Csharp
 string connectionString = SqlServerConnectionStringBuilder.Build("localhost", "mydb", "root", "secretpassword");
 ```
+
+## XmlDocumentFactory
+
+Serialize a object to a XmlDocument
+
+```Csharp
+XmlDocument xmlDoc = XmlDocumentFactory.Create(p);
+Console.WriteLine(xmlDoc.OuterXml);
+```
