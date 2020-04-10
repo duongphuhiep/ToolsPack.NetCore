@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsPack.NLog", "ToolsPack
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToolsPack.Webservice", "ToolsPack.Webservice\ToolsPack.Webservice.csproj", "{99733A02-EFC6-48BE-81F0-CF3CC907CB28}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToolsPack.NLog.Tests", "ToolsPack.NLog.Tests\ToolsPack.NLog.Tests.csproj", "{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,18 @@ Global
 		{99733A02-EFC6-48BE-81F0-CF3CC907CB28}.Release|x64.Build.0 = Release|Any CPU
 		{99733A02-EFC6-48BE-81F0-CF3CC907CB28}.Release|x86.ActiveCfg = Release|Any CPU
 		{99733A02-EFC6-48BE-81F0-CF3CC907CB28}.Release|x86.Build.0 = Release|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Debug|x64.Build.0 = Debug|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Debug|x86.Build.0 = Debug|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Release|x64.ActiveCfg = Release|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Release|x64.Build.0 = Release|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Release|x86.ActiveCfg = Release|Any CPU
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -177,6 +191,7 @@ Global
 		{A6D05D85-8FB2-4A60-B34B-3ECAA07C4F23} = {7E836789-B02E-4C44-A5F0-CD6E4DBC3B89}
 		{1899E021-BFFE-48A3-AA89-FB114ADF877B} = {7E836789-B02E-4C44-A5F0-CD6E4DBC3B89}
 		{80925325-1271-42F7-9364-ACF9FAA6F98E} = {7E836789-B02E-4C44-A5F0-CD6E4DBC3B89}
+		{01CF86B3-0FE8-430F-9E4D-135B5E56FDB3} = {7E836789-B02E-4C44-A5F0-CD6E4DBC3B89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {707666E7-6364-4E9B-A729-DAD90524D31B}

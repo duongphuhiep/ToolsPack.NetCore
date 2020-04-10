@@ -23,8 +23,8 @@ namespace ToolsPack.NLog
         /// </summary>
         public static readonly string DefaultPattern = defaultPattern;
 
-        private const string defaultPattern = "${longdate} ${level:uppercase=true} ${message}${exception:format=ToString}  [${logger:shortname=true}]";
-        private const string defaultPatternConsole = "${time} ${level:uppercase=true} ${message}${exception:format=ToString}  [${logger:shortname=true}]";
+        private const string defaultPattern = "${longdate} ${pad:padding=5:inner=${level:uppercase=true}} ${message}${exception:format=ToString}  [${logger:shortname=true}]";
+        private const string defaultPatternConsole = "${time} ${pad:padding=5:inner=${level:uppercase=true}} ${message}${exception:format=ToString}  [${logger:shortname=true}]";
 
         /// <summary>
         /// Setup NLog to write to file
