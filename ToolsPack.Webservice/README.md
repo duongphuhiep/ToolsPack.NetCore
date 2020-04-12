@@ -6,11 +6,11 @@ This package help you to `AddLog` to the webservice client call. Checkout the [S
 ILogger log = loggerFactory.CreateLogger<SomeWebServiceClient>(); //create a Microsoft Logger
 var svc = new SomeWebServiceClient(...); //create the service 
 
-//tell the service to use the logger to log raw request
-svc.AddLog(logger); //shortcut for svc.Endpoint.EndpointBehaviors.Add(new LoggingEndpointBehaviour(new LoggingMessageInspector(logger))); 
+//tell the service to use the logger to log raw requests and responses
+svc.AddLog(logger, LogLevel.Trace); //shortcut for svc.Endpoint.EndpointBehaviors.Add(new LoggingEndpointBehaviour(new LoggingMessageInspector(logger, LogLevel.Trace))); 
 ```
 
-Raw request are logged on the TRACE level. In order to see them, make sure that the min log level is set to `Trace`
+if Raw requests are logged on the TRACE level then in order to see them, make sure that the min log level is set to `Trace`
 ```Csharp
 LoggerFactory loggerFactory = LoggerFactory.Create(builder =>
 {
@@ -36,8 +36,8 @@ svcutil http://localhost/someSoapService.asmx?wsdl /o:C:\ ... \generated\SomeSoa
 ILogger log = loggerFactory.CreateLogger<SomeWebServiceClient>(); //create a Microsoft Logger
 var svc = new SomeWebServiceClient(...); //create the service 
 
-//tell the service to use the logger to log raw request
-svc.AddLog(logger); //shortcut for svc.Endpoint.EndpointBehaviors.Add(new LoggingEndpointBehaviour(new LoggingMessageInspector(logger))); 
+//tell the service to use the logger to log raw requests and response (in `Information` level)
+svc.AddLog(logger, LogLevel.Information);
 ```
 
 ## `ServiceFactory` is deprecated
