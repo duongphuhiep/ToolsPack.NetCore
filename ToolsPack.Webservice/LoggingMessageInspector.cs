@@ -13,18 +13,20 @@ namespace ToolsPack.Webservice
 {
     public class LoggingMessageInspector : IClientMessageInspector
     {
-        public LoggingMessageInspector(ILogger logger)
+        public LoggingMessageInspector(ILogger logger, LogLevel level = LogLevel.Trace)
         {
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            LogLevel = level;
         }
         public ILogger Logger { get; }
+        public LogLevel LogLevel { get; }
 
         public void AfterReceiveReply(ref Message reply, object correlationState)
         {
             using (var buffer = reply.CreateBufferedCopy(int.MaxValue))
             {
                 var document = GetDocument(buffer.CreateMessage());
-                Logger.LogTrace("Response #{id} | {body}", correlationState, document.OuterXml);
+                Logger.Log(LogLevel, "Response #{id} | {body}", correlationState, document.OuterXml);
                 reply = buffer.CreateMessage();
             }
         }
@@ -35,7 +37,7 @@ namespace ToolsPack.Webservice
             using (var buffer = request?.CreateBufferedCopy(int.MaxValue))
             {
                 var document = GetDocument(buffer.CreateMessage());
-                Logger.LogTrace("Request #{id} | {body} | {endpointUrl}", id, document.OuterXml, channel?.RemoteAddress);
+                Logger.Log(LogLevel, "Request #{id} | {body} | {endpointUrl}", id, document.OuterXml, channel?.RemoteAddress);
 
                 request = buffer.CreateMessage();
                 return id;

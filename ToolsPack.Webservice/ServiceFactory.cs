@@ -34,9 +34,9 @@ namespace ToolsPack.Webservice
         /// <summary>
         /// tell the service to use the logger to log raw request, using the given logger
         /// </summary>
-        public static void AddLog<T>(this ClientBase<T> svc, ILogger logger) where T : class
+        public static void AddLog<T>(this ClientBase<T> svc, ILogger logger, LogLevel level = LogLevel.Trace) where T : class
         {
-            svc?.Endpoint.EndpointBehaviors.Add(new LoggingEndpointBehaviour(new LoggingMessageInspector(logger)));
+            svc?.Endpoint.EndpointBehaviors.Add(new LoggingEndpointBehaviour(new LoggingMessageInspector(logger, level)));
         }
     }
 }
