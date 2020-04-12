@@ -2,7 +2,7 @@
 
 ## ArrayDisplayer
 
-- Know to convert a IEnummerable to string in order do display in a log message
+- Know to convert a `IEnummerable` to string in order do display in a log message
 
 ```CSharp
 var arr = new string[1000] {"item1".."item1000"};
@@ -103,11 +103,30 @@ Remark:
 string connectionString = SqlServerConnectionStringBuilder.Build("localhost", "mydb", "root", "secretpassword");
 ```
 
-## XmlDocumentFactory
+## Working with XmlDocument and XDocument
 
-Serialize a object to a XmlDocument
+* `XDocument` is recommended over the old `XmlDocument`
+
+Serialize a object to a `XDocument`
 
 ```Csharp
-XmlDocument xmlDoc = XmlDocumentFactory.Create(p);
-Console.WriteLine(xmlDoc.OuterXml);
+XDocument doc = XDocumentFactory.CreateDocFromXmlSerializer(o);
+Console.WriteLine(xmlDoc.ToString());
 ```
+
+Serialize a object to a `XmlDocument`
+
+```Csharp
+XmlDocument doc = XmlDocumentFactory.Create(o);
+Console.WriteLine(doc.OuterXml);
+```
+
+Convert `XDocument` <=> `XmlDocument`
+
+```Csharp
+var xmlDoc = XmlDocumentFactory.Create(o);
+var xDoc = XDocumentFactory.CreateDocFromXmlSerializer(o);
+Console.WriteLine(xmlDoc.ToXDocument().ToString());
+Console.WriteLine(xDoc.ToXmlDocument().OuterXml);
+```
+
