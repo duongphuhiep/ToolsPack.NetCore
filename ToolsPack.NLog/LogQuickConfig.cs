@@ -121,7 +121,7 @@ namespace ToolsPack.NLog
             return config;
         }
 
-        private static N.Targets.ConsoleTarget GetConsoleTarget(string pattern)
+        public static N.Targets.ConsoleTarget GetConsoleTarget(string pattern)
         {
             return new N.Targets.ConsoleTarget("logconsole")
             {
@@ -129,7 +129,7 @@ namespace ToolsPack.NLog
             };
         }
 
-        private static N.Targets.FileTarget GetFileTarget(string filePath, string pattern)
+        public static N.Targets.FileTarget GetFileTarget(string filePath, string pattern)
         {
             return new N.Targets.FileTarget("logfile")
             {
@@ -137,7 +137,9 @@ namespace ToolsPack.NLog
                 ArchiveNumbering = N.Targets.ArchiveNumberingMode.DateAndSequence,
                 ArchiveEvery = N.Targets.FileArchivePeriod.Day,
                 KeepFileOpen = true,
-                ArchiveOldFileOnStartup = true,
+                OpenFileCacheTimeout = 30,
+                ConcurrentWrites = true,
+                ArchiveOldFileOnStartup = false,
                 EnableArchiveFileCompression = true,
                 Encoding = Encoding.UTF8,
                 Layout = pattern
