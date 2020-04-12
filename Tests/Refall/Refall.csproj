@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ToolsPack.Config\ToolsPack.Config.csproj" />
+    <ProjectReference Include="..\..\ToolsPack.Log4net\ToolsPack.Log4net.csproj" />
+    <ProjectReference Include="..\..\ToolsPack.NLog\ToolsPack.NLog.csproj" />
+    <ProjectReference Include="..\..\ToolsPack.Samba\ToolsPack.Samba.csproj" />
+    <ProjectReference Include="..\..\ToolsPack.Sql\ToolsPack.Sql.csproj" />
+    <ProjectReference Include="..\..\ToolsPack.String\ToolsPack.String.csproj" />
+    <ProjectReference Include="..\..\ToolsPack.Thread\ToolsPack.Thread.csproj" />
+    <ProjectReference Include="..\..\ToolsPack.Webservice\ToolsPack.Webservice.csproj" />
+  </ItemGroup>
+
+</Project>
