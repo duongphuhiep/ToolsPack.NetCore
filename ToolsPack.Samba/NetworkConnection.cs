@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
 using System.Runtime.InteropServices;
-
+using ToolsPack.String;
 
 /// <summary>
 /// Don't touch this class
@@ -34,15 +34,19 @@ namespace ToolsPack.Samba
         private readonly string _networkName;
         private readonly NetworkCredential _credentials;
         private readonly ILogger Log;
+        private readonly LogLevel logLevel;
 
-        public NetworkConnection(string networkName, NetworkCredential credentials, ILogger log = null)
+        public NetworkConnection(string networkName, NetworkCredential credentials, ILogger log = null, LogLevel logLevel = LogLevel.Debug)
         {
             Log = log;
+            this.logLevel = logLevel;
             _networkName = networkName;
             _credentials = credentials;
         }
 
-        //Overload
+        /// <summary>
+        /// connect
+        /// </summary>
         public void Connect()
         {
             Connect(ResourceScope.GlobalNetwork, ResourceType.Disk, ResourceDisplaytype.Share);
@@ -65,9 +69,11 @@ namespace ToolsPack.Samba
                 ? _credentials.UserName
                 : $@"{_credentials.Domain}\{_credentials.UserName}";
 
-            var ctx = $"{nameof(WNetAddConnection2)}(scope={netResource.Scope}, type={netResource.ResourceType}; display={netResource.DisplayType}, remote={_networkName}, user={userName}, password={_credentials.Password})";
+            var ctx = $"{nameof(WNetAddConnection2)}(scope={netResource.Scope}, type={netResource.ResourceType}; display={netResource.DisplayType}, remote={_networkName}, user={userName}, password=***)";
 
-            Log?.LogDebug($"Start open remote disk connection {ctx}");
+            var connId = StringGenerator.CreateRandomString();
+
+            Log?.Log(logLevel, $"Start open remote disk connection #{connId} {ctx}");
             Stopwatch sw = Stopwatch.StartNew();
             var result = WNetAddConnection2(
                 netResource,
@@ -78,13 +84,13 @@ namespace ToolsPack.Samba
             if (result != 0)
             {
                 var win32error = new Win32Exception(result);
-                ctx = $"Failed to connect with {ctx}. Error {result} - {win32error.Message} / Elapsed: {sw.ElapsedMilliseconds} ms";
+                ctx = $"Failed to connect with #{connId} {ctx}. Error {result} - {win32error.Message} / Elapsed: {sw.ElapsedMilliseconds} ms";
                 Log?.LogError(ctx);
                 throw new NetworkDiskException(ctx, win32error);
             }
             else
             {
-                Log?.LogInformation($"Success open remote disk connection. Elapsed: {sw.ElapsedMilliseconds} ms");
+                Log?.Log(logLevel, $"Success open remote disk connection #{connId}. Elapsed: {sw.ElapsedMilliseconds} ms");
             }
         }
 
@@ -94,21 +100,22 @@ namespace ToolsPack.Samba
         public void Disconnect(int flag, bool force)
         {
             var ctx = $"{nameof(WNetCancelConnection2)}({_networkName})";
+            var connId = StringGenerator.CreateRandomString();
 
-            Log?.LogDebug($"Disconnect remote disk {ctx}");
+            Log?.Log(logLevel, $"Disconnect remote disk #{connId} {ctx}");
             Stopwatch sw = Stopwatch.StartNew();
             var result = WNetCancelConnection2(_networkName, flag, force);
             
             if (result != 0)
             {
                 var win32error = new Win32Exception(result);
-                ctx = $"Failed to Disconnect with {ctx}. Error {result} - {win32error.Message} / Elapsed: {sw.ElapsedMilliseconds} ms";
+                ctx = $"Failed to Disconnect with #{connId} {ctx}. Error {result} - {win32error.Message} / Elapsed: {sw.ElapsedMilliseconds} ms";
                 Log?.LogError(ctx);
                 throw new NetworkDiskException(ctx, win32error);
             }
             else
             {
-                Log?.LogInformation($"Success disconnect remote disk. Elapsed: {sw.ElapsedMilliseconds} ms");
+                Log?.Log(logLevel,$"Success disconnect remote disk #{connId}. Elapsed: {sw.ElapsedMilliseconds} ms");
             }
         }
 

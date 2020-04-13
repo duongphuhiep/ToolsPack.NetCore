@@ -7,6 +7,9 @@ using System.Text;
 
 namespace ToolsPack.Webservice
 {
+    /// <summary>
+    /// Use the LoggingMessageInspector
+    /// </summary>
     public class LoggingEndpointBehaviour : IEndpointBehavior
     {
         public LoggingMessageInspector MessageInspector { get; }

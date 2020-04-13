@@ -37,6 +37,10 @@ namespace ToolsPack.Thread
 
         private bool expired => lastValue == null || (DateTime.Now.Ticks - lastUpdateTicks) > expiryInTick;
 
+        /// <summary>
+        /// Get value in the memory cache if not expired.
+        /// </summary>
+        /// <returns></returns>
         public T GetValue()
         {
             if (expired)

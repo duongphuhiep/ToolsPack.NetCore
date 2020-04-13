@@ -5,8 +5,9 @@
     <PackageIcon>toolspack-128.png</PackageIcon>
     <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore</RepositoryUrl>
     <Description>Wrapping native Windows call to connect to a Samba 1.0 (CIFS) server</Description>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>hiep</Authors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,10 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Include="..\icon\toolspack-128.png" Pack="true" PackagePath=""/>
+    <None Include="..\icon\toolspack-128.png" Pack="true" PackagePath="" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\ToolsPack.String\ToolsPack.String.csproj" />
   </ItemGroup>
 </Project>

@@ -5,6 +5,9 @@ using N = NLog;
 
 namespace ToolsPack.NLog
 {
+    /// <summary>
+    /// DefaultJsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
+    /// </summary>
     public class JsonNetSerializer : N.IJsonConverter
     {
         private static readonly JsonSerializerSettings DefaultJsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore };

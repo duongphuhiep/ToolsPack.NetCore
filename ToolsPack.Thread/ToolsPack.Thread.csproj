@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.2</Version>
+    <Version>2.0.3</Version>
     <Description>
       Advance lock pattern
     </Description>
@@ -10,6 +10,7 @@
     <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Thread</PackageProjectUrl>
     <PackageIcon>toolspack-128.png</PackageIcon>
     <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore</RepositoryUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Authors>hiep</Authors>
   </PropertyGroup>
 

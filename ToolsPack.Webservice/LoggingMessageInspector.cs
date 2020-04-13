@@ -11,6 +11,9 @@ using ToolsPack.String;
 
 namespace ToolsPack.Webservice
 {
+    /// <summary>
+    /// Add log instruction to BeforeSendRequest and AfterReceiveReply
+    /// </summary>
     public class LoggingMessageInspector : IClientMessageInspector
     {
         public LoggingMessageInspector(ILogger logger, LogLevel level = LogLevel.Trace)
