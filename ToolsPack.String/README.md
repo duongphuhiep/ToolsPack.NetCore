@@ -94,8 +94,24 @@ string randomString = StringGenerator.CreateRandomString(5, "abcdefghijklmnpqrst
 Generate a random string of length 5 using random characters in `"abcdefghijklmnpqrstuvwxyz0123456789"`
 
 Remark:
- * A normal C# Guid.NewGuid() generates a length-32 string and up to 32^16 different ids (that is alot)
- * The above example generate only a length-5 string (much shorter) but up to 5^35 different ids (x2.4 time bigger than a normal Guid)
+
+A radom string is not suppose to replace the GUID because it got higher chance of colission. If you want a shorter Guid then check out the `ShortGuid` class
+
+## ShortGuid
+
+A normal GUID (or UUID) is a random 128-bit, the standard Microsoft Guid class format it in base-16 so a length-32 string.
+Why not format it in base-64 for a shorter (length-22) string? Here how to do it:
+
+```CSharp
+var g = Guid.NewGuid();
+
+var shortGuid = g.ToShortGuid();
+Assert.Equal(g, ShortGuid.Parse(shortGuid));
+
+var shortGuidUrlFriendly = g.ToShortGuid(true);
+Assert.Equal(g, ShortGuid.Parse(shortGuidUrlFriendly, true));
+```
+
 
 ## SqlServerConnectionStringBuilder
 
