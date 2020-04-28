@@ -36,7 +36,7 @@ namespace ToolsPack.Webservice
 
         public object BeforeSendRequest(ref Message request, IClientChannel channel)
         {
-            string id = StringGenerator.CreateRandomString(5, "abcdefghijklmnpqrstuvwxyz0123456789");
+            string id = StringGenerator.CreateRandomString(5, 0, "abcdefghijklmnpqrstuvwxyz0123456789");
             using (var buffer = request?.CreateBufferedCopy(int.MaxValue))
             {
                 var document = GetDocument(buffer.CreateMessage());
