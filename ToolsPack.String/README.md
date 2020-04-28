@@ -89,9 +89,11 @@ string message = DiacriticsRemover.RemoveDiacritics("où déjà aperçu la phénomène
 ## CreateRandomString
 
 ```CSharp
-string randomString = StringGenerator.CreateRandomString(5, "abcdefghijklmnpqrstuvwxyz0123456789");
+string randomString = StringGenerator.CreateRandomString(5, 0, "abcdefghijklmnpqrstuvwxyz0123456789");
 ```
-Generate a random string of length 5 using random characters in `"abcdefghijklmnpqrstuvwxyz0123456789"`
+- Generate a random string of length 5 using random characters in `"abcdefghijklmnpqrstuvwxyz0123456789"`
+- 0 is the length variable, 0-variable means that the length result is fix to 5.
+- CreateRandomString(5, 3) will result a string with length variable between (5 and 8)
 
 Remark:
 
