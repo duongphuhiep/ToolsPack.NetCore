@@ -13,6 +13,9 @@ namespace ToolsPack.String
     {
         public enum TimeUnit
         {
+            Day,
+            Hour,
+            Minute,
             MiliSecond,
             MicroSecond,
             Second
@@ -63,11 +66,25 @@ namespace ToolsPack.String
                 {
                     case TimeUnit.MicroSecond:
                         return (timeInSecond * 1000000.0).ToString("0", CultureInfo.InvariantCulture) + " mcs";
+                    case TimeUnit.MiliSecond:
+                        return (timeInSecond * 1000.0).ToString("0.##", CultureInfo.InvariantCulture) + " ms";
                     case TimeUnit.Second:
                         return (timeInSecond).ToString("0.##", CultureInfo.InvariantCulture) + " s";
-                    default:
-                        return (timeInSecond * 1000.0).ToString("0.##", CultureInfo.InvariantCulture) + " ms";
+                    case TimeUnit.Minute:
+                        return (timeInSecond / 60.0).ToString("0.#", CultureInfo.InvariantCulture) + " min";
+                    case TimeUnit.Hour:
+                        return (timeInSecond / 3600.0).ToString("0.#", CultureInfo.InvariantCulture) + " h";
+                    case TimeUnit.Day:
+                        return (timeInSecond / 86400.0).ToString("0.#", CultureInfo.InvariantCulture) + " days";
                 }
+            }
+            if (timeInSecond > 86400)
+            {
+                return (timeInSecond / 86400.0).ToString("0.#", CultureInfo.InvariantCulture) + " days";
+            }
+            if (timeInSecond > 3600)
+            {
+                return (timeInSecond / 3600.0).ToString("0.#", CultureInfo.InvariantCulture) + " h";
             }
             if (timeInSecond >= 60)
             {
