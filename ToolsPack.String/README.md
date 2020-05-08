@@ -97,7 +97,23 @@ string randomString = StringGenerator.CreateRandomString(5, 0, "abcdefghijklmnpq
 
 Remark:
 
-A radom string is not suppose to replace the GUID because it got higher chance of colission. If you want a shorter Guid then check out the `ShortGuid` class
+1. A radom string is not suppose to replace the GUID because it got higher chance of colission. If you want a shorter Guid then check out the `ShortGuid` class
+2. If you want to generate nice fake data such as Person name, Email, Product... then Checkout the the [Bogus](https://github.com/bchavez/Bogus) project. Example:
+
+```CSharp
+var walletGenerator = new Faker<Wallet>()
+    .RuleFor(o => o.Gender, f => (int)f.PickRandom<Gender>())
+    .RuleFor(o => o.FirstName, (f, o) => f.Name.FirstName((Gender)o.Gender))
+    .RuleFor(o => o.LastName, (f, o) => f.Name.LastName())
+    .RuleFor(o => o.Situation, f => f.Random.Int(0, 6))
+    .RuleFor(o => o.IsBlocked, f => f.PickRandomParam(true, false))
+    .RuleFor(o => o.Email, (f, o) => f.Internet.Email(o.FirstName, o.LastName))
+    .RuleFor(o => o.Balance, f => f.Random.Decimal(0, 10000))
+    .RuleFor(o => o.Name, (f, o) => o.FirstName.ToLower() + "." + o.LastName.ToLower() + "." + f.Random.String2(5))
+    .RuleFor(o => o.CreationDate, f => f.Date.Past(3))
+;
+var w = walletGenerator.Generate();
+```
 
 ## ShortGuid
 
@@ -114,12 +130,20 @@ var shortGuidUrlFriendly = g.ToShortGuid(true);
 Assert.Equal(g, ShortGuid.Parse(shortGuidUrlFriendly, true));
 ```
 
-
 ## SqlServerConnectionStringBuilder
 
 ```Csharp
 string connectionString = SqlServerConnectionStringBuilder.Build("localhost", "mydb", "root", "secretpassword");
 ```
+
+## UriCombine
+
+```Csharp
+Assert.Equal("http://www.my.domain/relative/path", UriCombine.Join("http://www.my.domain/", "relative/path").ToString());
+Assert.Equal("http://www.my.domain/absolute/path", UriCombine.Join("http://www.my.domain/something/other", "/absolute/path").ToString());
+```
+
+For more complex Uri manipulation, checkout the [Furl](https://flurl.dev/) project.
 
 ## Working with XmlDocument and XDocument
 
