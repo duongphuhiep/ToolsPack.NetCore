@@ -25,6 +25,7 @@ namespace ToolsPack.Log4net
 	///                Thread.Sleep(400);
 	///            }
 	/// </summary>
+	[Obsolete("Use ToolsPack.Logging.ElapsedTimeLogger instead")]
 	public sealed class ElapsedTimeWatcher : IDisposable
 	{
 		private bool _autoJumpContext = false;

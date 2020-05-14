@@ -24,11 +24,11 @@ namespace ToolsPack.String
         /// <summary>
         /// Use in log message, to display nicely the TimeSpan
         /// </summary>
-        public static string Display(this Stopwatch sw)
+        public static string Display(this Stopwatch sw, TimeUnit? timeUnit = null)
         {
             if (sw == null) throw new ArgumentNullException(nameof(sw));
             double r = (double)sw.ElapsedTicks / Stopwatch.Frequency;
-            return GetElapsedString(r);
+            return GetElapsedString(r, timeUnit);
         }
 
         /// <summary>
@@ -64,8 +64,6 @@ namespace ToolsPack.String
             {
                 switch (forceTimeUnit)
                 {
-                    case TimeUnit.MicroSecond:
-                        return (timeInSecond * 1000000.0).ToString("0", CultureInfo.InvariantCulture) + " mcs";
                     case TimeUnit.MiliSecond:
                         return (timeInSecond * 1000.0).ToString("0.##", CultureInfo.InvariantCulture) + " ms";
                     case TimeUnit.Second:
@@ -76,6 +74,8 @@ namespace ToolsPack.String
                         return (timeInSecond / 3600.0).ToString("0.#", CultureInfo.InvariantCulture) + " h";
                     case TimeUnit.Day:
                         return (timeInSecond / 86400.0).ToString("0.#", CultureInfo.InvariantCulture) + " days";
+                    default:
+                        return (timeInSecond * 1000000.0).ToString("0", CultureInfo.InvariantCulture) + " mcs";
                 }
             }
             if (timeInSecond > 86400)

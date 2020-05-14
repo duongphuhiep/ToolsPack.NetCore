@@ -1,61 +1,17 @@
-# ToolsPack.Log4net
+# ToolsPack.Logging
 
-Checkout also the `ToolsPack.NLog` package. I personally think that `NLog` is better than `Log4Net`..
-
-## LogQuickConfig
-
-In a Unit test project, or a temporary console application, you donnot have to configure the log4net.config any more.
-
-Call
-
-```CSharp
-LogQuickConfig.SetupConsole();
-```
-
-or
-
-```CSharp
-LogQuickConfig.SetupFile("my_small_app.log");
-```
-
-it will setup a typical log4net appender so that you can use them in your test application. Example:
-
-```CSharp
-[TestClass]
-public class ArrayDisplayerTests
-{
-	private static readonly ILog Log = LogManager.GetLogger(typeof (ArrayDisplayerTests));
-
-	[ClassInitialize]
-	public static void SetUp(TestContext testContext)
-	{
-		Log4NetQuickSetup.SetUpConsole();
-		//or Log4NetQuickSetup.SetUpFile("mytest.log");
-	}
-
-	[TestMethod]
-	public void DisplayTest()
-	{
-		Log.Info("it will display to the Console");
-		//or to the file if you use SetUpFile()
-	}
-}
-```
-
-See also [code-snippet to quickly configure log4net in a C# project](https://github.com/duongphuhiep/ToolsPack.Net/wiki/log4net)
-
-## ElapsedTimeWatcher <== Deprecated, use the `ToolsPack.Logging.ElapsedTimeLogger` instead
+## ElapsedTimeLogger
 
 Micro-benchmark a part of code to investigate on performance
 
 ```CSharp
 class MyCalculator
 {
-	private static readonly ILog Log = LogManager.GetLogger(typeof(MyCalculator));
+	private static readonly ILogger Log = loggerFactory.CreateLogger<ElapsedTimeLoggerTests>();
 
 	public void Process()
 	{
-		using (var etw = ElapsedTimeWatcher.Create(Log, "blockCodeName"))
+		using (var etw = ElapsedTimeLogger.Create(Log, "blockCodeName"))
 		{
 		    ...
 		    etw.Info("step 1");
@@ -85,7 +41,7 @@ class MyCalculator
 ### Auto Jump Log Level
 
 ```CSharp
-var etw = ElapsedTimeWatcher.Create(Log, "checkIntraday").InfoEnd().AutoJump(150, 250).AutoJumpLastLog(500, 1000)
+var etw = ElapsedTimeLogger.Create(Log, "checkIntraday").InfoEnd().AutoJump(150, 250).AutoJumpLastLog(500, 1000)
 ```
 
 - The log level will auto jump to INFO if the elapsed time exceeds 150 ms
@@ -96,7 +52,7 @@ var etw = ElapsedTimeWatcher.Create(Log, "checkIntraday").InfoEnd().AutoJump(150
 ### Customize Start Context and End context
 
 ```CSharp
-var etw = ElapsedTimeWatcher.Create(Log, "foo", "Start_context", "End_context");
+var etw = ElapsedTimeLogger.Create(Log, "foo", "Start_context", "End_context");
 ```
 
 will give
@@ -115,7 +71,7 @@ We often display the parameter of the functions in the "Start context". Example:
 public void process(string val, bool useCache)
 {
 	var context = string.Format("process(val={0}, useCache={1})", val, useCache);
-	using (var etw = ElapsedTimeWatcher.Create(Log, "process", context))
+	using (var etw = ElapsedTimeLogger.Create(Log, "process", context))
 	{
 	    ...
 	    etw.Info("step 1");

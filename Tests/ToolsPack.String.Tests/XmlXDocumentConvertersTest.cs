@@ -28,7 +28,7 @@ namespace ToolsPack.String.Tests
         [Fact]
         public void ConvertTest()
         {
-            var p = new paypal() {
+            var p = new paypal {
                 landingPage = "a",
                 addrOverride = "b"
             };

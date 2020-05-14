@@ -9,3 +9,4 @@ dotnet pack ToolsPack.Sql -o ./
 dotnet pack ToolsPack.String -o ./
 dotnet pack ToolsPack.Thread -o ./
 dotnet pack ToolsPack.Webservice -o ./
+dotnet pack ToolsPack.Logging -o ./

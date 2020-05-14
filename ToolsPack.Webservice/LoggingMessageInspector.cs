@@ -14,6 +14,7 @@ namespace ToolsPack.Webservice
     /// <summary>
     /// Add log instruction to BeforeSendRequest and AfterReceiveReply
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "<Pending>")]
     public class LoggingMessageInspector : IClientMessageInspector
     {
         public LoggingMessageInspector(ILogger logger, LogLevel level = LogLevel.Trace)
@@ -26,7 +27,7 @@ namespace ToolsPack.Webservice
 
         public void AfterReceiveReply(ref Message reply, object correlationState)
         {
-            using (var buffer = reply.CreateBufferedCopy(int.MaxValue))
+            using (var buffer = reply?.CreateBufferedCopy(int.MaxValue))
             {
                 var document = GetDocument(buffer.CreateMessage());
                 Logger.Log(LogLevel, "Response #{id} | {body}", correlationState, document.OuterXml);
@@ -47,7 +48,7 @@ namespace ToolsPack.Webservice
             }
         }
 
-        private XmlDocument GetDocument(Message request)
+        private static XmlDocument GetDocument(Message request)
         {
             XmlDocument document = new XmlDocument();
             using (MemoryStream memoryStream = new MemoryStream())

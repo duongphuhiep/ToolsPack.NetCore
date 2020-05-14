@@ -2,29 +2,27 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>3.0.3</Version>
+    <Version>1.0.0</Version>
     <Description>
-      Config log4net with one line of code, and other useful helper to log codes benchmark (elapsed time of operations)
+      Micro-benchmark logger (add elapsed time of operations to the log messages)
     </Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Log4net</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Logging</PackageProjectUrl>
     <PackageIcon>toolspack-128.png</PackageIcon>
-    <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Log4net</RepositoryUrl>
+    <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Logging</RepositoryUrl>
     <Authors>hiep</Authors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.1" />
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8">
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.4" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="..\icon\toolspack-128.png" Pack="true" PackagePath="" />
   </ItemGroup>
 

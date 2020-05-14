@@ -1,0 +1,19 @@
+﻿[*.cs]
+
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = silent
+
+# CC0105: You should use 'var' whenever possible.
+dotnet_diagnostic.CC0105.severity = none
+
+# CC0001: You should use 'var' whenever possible.
+dotnet_diagnostic.CC0001.severity = silent
+
+# CC0097: You have missing/unexistent parameters in Xml Docs
+dotnet_diagnostic.CC0097.severity = silent
+
+# CS1570: XML comment has badly formed XML
+dotnet_diagnostic.CS1570.severity = silent
+
+# CA1303: Do not pass literals as localized parameters
+dotnet_diagnostic.CA1303.severity = silent

@@ -29,6 +29,7 @@ namespace ToolsPack.Webservice.Tests
             });
         }
         [TestMethod()]
+        [Obsolete]
         public void CreateServiceProxyTest()
         {
             var svc = ServiceFactory.CreateServiceProxy<SampleWebServiceSoap>(new Uri(webserviceUrl));
@@ -38,10 +39,12 @@ namespace ToolsPack.Webservice.Tests
         public void LoggingWebserviceTest()
         {
             var log = loggerFactory.CreateLogger<SampleWebServiceSoap>();
-            var svc = new SampleWebServiceSoapClient(SampleWebServiceSoapClient.EndpointConfiguration.SampleWebServiceSoap, webserviceUrl);
-            svc.AddLog(log, LogLevel.Information);
-            log.LogInformation("Here the current time: {CurrentTime}", svc.GetCurrentTimeAsync().Result);
-            log.LogInformation("Here the sample object: {SampleObject}", svc.GetSampleObjectAsync(1).Result);
+            using (var svc = new SampleWebServiceSoapClient(SampleWebServiceSoapClient.EndpointConfiguration.SampleWebServiceSoap, webserviceUrl))
+            {
+                svc.AddLog(log, LogLevel.Information);
+                log.LogInformation("Here the current time: {CurrentTime}", svc.GetCurrentTimeAsync().Result);
+                log.LogInformation("Here the sample object: {SampleObject}", svc.GetSampleObjectAsync(1).Result);
+            }
         }
 
     }

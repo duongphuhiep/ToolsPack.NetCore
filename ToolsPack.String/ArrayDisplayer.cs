@@ -16,7 +16,9 @@ namespace ToolsPack.String
     /// </summary>
     public static class ArrayDisplayer
     {
+#pragma warning disable CA1034 // Nested types should not be visible
         public class ArrayFormat
+#pragma warning restore CA1034 // Nested types should not be visible
         {
             private readonly IEnumerable _arr;
             private int _maxItems = int.MaxValue;

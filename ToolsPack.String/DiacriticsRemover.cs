@@ -11,8 +11,6 @@ namespace ToolsPack.String
         /// <summary>
         /// Remove accent from string "Léo lacrève" => "Leo lacreve"
         /// </summary>
-        /// <param name="length">length of the random string</param>
-        /// <param name="chars">characters set</param>
         /// <returns></returns>
         public static string RemoveDiacritics(this string s)
         {

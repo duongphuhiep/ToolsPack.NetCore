@@ -27,7 +27,11 @@ namespace ToolsPack.Webservice
 
             binding.MaxReceivedMessageSize = maxReceivedMessageSize;
 
+#pragma warning disable CA2000 // Dispose objects before losing scope
+#pragma warning disable CC0022 // Should dispose object
             var factory = new ChannelFactory<T>(binding, endpoint);
+#pragma warning restore CC0022 // Should dispose object
+#pragma warning restore CA2000 // Dispose objects before losing scope
             return factory.CreateChannel();
         }
 
