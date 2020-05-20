@@ -83,7 +83,7 @@ Other supported hashing algorithms are:
 ## DiacriticsRemover
 
 ```CSharp
-string message = DiacriticsRemover.RemoveDiacritics("où déjà aperçu la phénomène"); //returns "ou deja apercu la phenomene"
+string message = DiacriticsRemover.RemoveDiacritics("oÃ¹ dÃ©jÃ  aperÃ§u la phÃ©nomÃ¨ne"); //returns "ou deja apercu la phenomene"
 ```
 
 ## CreateRandomString
@@ -171,4 +171,11 @@ var xDoc = XDocumentFactory.CreateDocFromXmlSerializer(o);
 Console.WriteLine(xmlDoc.ToXDocument().ToString());
 Console.WriteLine(xDoc.ToXmlDocument().OuterXml);
 ```
+
+## Tips: checkout also
+
+1. [Bogus](https://github.com/bchavez/Bogus): If you want to generate nice fake data such as Person name, Email, Product...
+
+2. [Humanizer](https://github.com/Humanizr/Humanizer): If you want to generate nice human readable string from strings, enums, dates, times, timespans, numbers and quantities...
+
 
