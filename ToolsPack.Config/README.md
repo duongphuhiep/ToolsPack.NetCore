@@ -48,7 +48,9 @@ Usage example in a **console** application:
 var builder = new ConfigurationBuilder()
 	.AddJsonFile(ConfigFileLocator.Find("appsettings.json")); //add package Microsoft.Extensions.Configuration.Json
 var configuration = builder.Build();
-var settings = configuration.GetValue<Settings>("App");
+
+Settings settings = new Settings();
+configuration.Bind("App", settings);
 ```
 
 

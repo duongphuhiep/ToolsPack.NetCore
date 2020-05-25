@@ -6,12 +6,11 @@ using System.IO;
 namespace ToolsPack.Config
 {
     /// <summary>
-    /// Read the app.config file from ConfigurationManager.AppSettings
+    /// Locate a config file. Example: ConfigFileLocator.Find("appsettings.json");
     /// </summary>
     public static class ConfigFileLocator
     {
         /// <summary>
-        /// Usage: ConfigFileLocator.Find("appsettings.json");
         /// Find a config file in certain susceptible locations:
         /// the current folder, Binary folder (RelativeSearchPath), BaseDirectory, AssemblyLocation..
         /// return full path to the config file or null if not found
