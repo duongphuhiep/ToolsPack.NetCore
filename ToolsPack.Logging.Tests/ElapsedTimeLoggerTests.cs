@@ -42,5 +42,29 @@ namespace ToolsPack.Logging.Tests
             }
             log.LogInformation("Normal log");
         }
+
+        [Fact()]
+        public void NullLogTest()
+        {
+            var log = loggerFactory.CreateLogger<ElapsedTimeLoggerTests>();
+            log.LogInformation("Normal log");
+            using (ElapsedTimeLogger etl = ElapsedTimeLogger.Create(null, "toto", "beginContext", "endContext", "  "))
+            {
+
+                log.LogDebug("Normal log");
+                Thread.Sleep(600);
+                etl.LogInformation("ETL log 10");
+                Thread.Sleep(20);
+
+                using (etl.BeginScope("foo"))
+                {
+                    etl.LogDebug("ETL log 20");
+                    Thread.Sleep(400);
+                    etl.LogWarning("ETL log 30");
+                    Thread.Sleep(500);
+                }
+            }
+            log.LogInformation("Normal log");
+        }
     }
 }

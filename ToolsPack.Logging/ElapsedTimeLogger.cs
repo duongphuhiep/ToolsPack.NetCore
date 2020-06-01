@@ -210,12 +210,12 @@ namespace ToolsPack.Logging
                 }
             }
 
-            _log.Log(logLevel, "End {0} : Total elapsed {1}", _endContext, _scopeSw.Display(_timeUnit));
+            _log?.Log(logLevel, "End {0} : Total elapsed {1}", _endContext, _scopeSw.Display(_timeUnit));
         }
 
         private void LogBeginMessage()
         {
-            _log.Log(_startLogLevel, "Begin {0}", _startContext);
+            _log?.Log(_startLogLevel, "Begin {0}", _startContext);
         }
 
         #region ILogger
@@ -231,7 +231,7 @@ namespace ToolsPack.Logging
         /// <param name="formatter">Function to create a System.String message of the state and exception.</param>
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
-            if (!_log.IsEnabled(logLevel))
+            if (!IsEnabled(logLevel))
             {
                 return;
             }
@@ -266,6 +266,7 @@ namespace ToolsPack.Logging
         /// <returns>true if enabled.</returns>
         public bool IsEnabled(LogLevel logLevel)
         {
+            if (_log == null) return false;
             return _log.IsEnabled(logLevel);
         }
 
@@ -277,7 +278,7 @@ namespace ToolsPack.Logging
         /// <returns>An System.IDisposable that ends the logical operation scope on dispose.</returns>
         public IDisposable BeginScope<TState>(TState state)
         {
-            return _log.BeginScope(state);
+            return _log?.BeginScope(state);
         }
 
         #endregion
