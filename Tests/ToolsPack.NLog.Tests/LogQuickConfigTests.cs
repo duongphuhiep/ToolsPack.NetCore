@@ -36,5 +36,30 @@ namespace ToolsPack.NLog.Tests
             nlog.Debug("debug nlog {someObject}", someObject);
             nlog.Info("info nlog {someObject}", someObject);
         }
+
+        [TestMethod()]
+        public void UseMicrosoftJsonTest()
+        {
+            var conf = LogQuickConfig.SetupFileAndConsole("./logs/LogQuickConfigTests.log");
+
+            loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder.AddNLog(conf);
+                builder.SetMinimumLevel(LogLevel.Trace);
+            });
+
+            var someObject = new { AboOl = true, aString = "string", AiNt = 12, anull = (string)null };
+
+            var mlog = loggerFactory.CreateLogger<LogQuickConfigTests>();
+
+            mlog.LogTrace("trace microsoft logger default = {@someObject}", someObject);
+
+            LogQuickConfig.UseMicrosoftJson();
+            mlog.LogTrace("trace microsoft logger msjson  = {@someObject}", someObject);
+
+            LogQuickConfig.UseNewtonsoftJson();
+            mlog.LogTrace("trace microsoft logger newton  = {@someObject}", someObject);
+
+        }
     }
 }

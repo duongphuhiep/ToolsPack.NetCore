@@ -3,6 +3,7 @@ using System;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using N = NLog;
 
 namespace ToolsPack.NLog
@@ -17,6 +18,7 @@ namespace ToolsPack.NLog
         /// JsonConvert.DefaultSettings = () => DefaultJsonSerializerSettings;
         /// </summary>
         public static readonly JsonSerializerSettings DefaultJsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore, Formatting = Formatting.Indented };
+        public static readonly JsonSerializerOptions DefaultJsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true, MaxDepth = 10, IgnoreNullValues = true };
 
         /// <summary>
         /// The default messages layout
@@ -29,41 +31,37 @@ namespace ToolsPack.NLog
         /// <summary>
         /// Setup NLog to write to file
         /// </summary>
-        public static N.Config.LoggingConfiguration SetupFile(string filePath, string pattern = defaultPattern, JsonSerializerSettings jsonSerializerSettings = null)
+        public static N.Config.LoggingConfiguration SetupFile(string filePath, string pattern = defaultPattern)
         {
             N.Config.LoggingConfiguration config = CreateConfigFile(filePath, pattern);
-            return ApplyConfig(config, jsonSerializerSettings);
+            return ApplyConfig(config);
         }
 
         /// <summary>
         /// Setup NLog to write to console
         /// </summary>
-        public static N.Config.LoggingConfiguration SetupConsole(string pattern = defaultPatternConsole, JsonSerializerSettings jsonSerializerSettings = null)
+        public static N.Config.LoggingConfiguration SetupConsole(string pattern = defaultPatternConsole)
         {
             N.Config.LoggingConfiguration config = CreateConfigConsole(pattern);
-            return ApplyConfig(config, jsonSerializerSettings);
+            return ApplyConfig(config);
         }
 
         /// <summary>
         /// Setup NLog to write to both file and console
         /// </summary>
-        public static N.Config.LoggingConfiguration SetupFileAndConsole(string filePath, string pattern = defaultPattern, JsonSerializerSettings jsonSerializerSettings = null)
+        public static N.Config.LoggingConfiguration SetupFileAndConsole(string filePath, string pattern = defaultPattern)
         {
             N.Config.LoggingConfiguration config = CreateConfigFileAndConsole(filePath, pattern);
-            return ApplyConfig(config, jsonSerializerSettings);
+            return ApplyConfig(config);
         }
 
         /// <summary>
         /// Apply config and set the default json serializer
         /// </summary>
-        private static N.Config.LoggingConfiguration ApplyConfig(N.Config.LoggingConfiguration config, JsonSerializerSettings jsonSerializerSettings)
+        private static N.Config.LoggingConfiguration ApplyConfig(N.Config.LoggingConfiguration config)
         {
             // Apply config
             N.LogManager.Configuration = config;
-
-            //make NLog use Newtonsoft with the given jsonSerializerSettings to serialize object for structured logging
-            UseNewtonsoftJson(jsonSerializerSettings);
-
             return config;
         }
 
@@ -72,13 +70,29 @@ namespace ToolsPack.NLog
         /// </summary>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public static JsonNetSerializer UseNewtonsoftJson(JsonSerializerSettings settings=null)
+        public static NewtonsoftJsonSerializer UseNewtonsoftJson(JsonSerializerSettings settings=null)
         {
             if (settings == null)
             {
                 settings = DefaultJsonSerializerSettings;
             }
-            var serializer = new JsonNetSerializer(settings);
+            var serializer = new NewtonsoftJsonSerializer(settings);
+            N.Config.ConfigurationItemFactory.Default.JsonConverter = serializer;
+            return serializer;
+        }
+
+        /// <summary>
+        /// make NLog use System.Text.Json with the given settings to serialize objects (structured logging)
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public static MicrosoftJsonSerializer UseMicrosoftJson(JsonSerializerOptions options = null)
+        {
+            if (options == null)
+            {
+                options = DefaultJsonSerializerOptions;
+            }
+            var serializer = new MicrosoftJsonSerializer(options);
             N.Config.ConfigurationItemFactory.Default.JsonConverter = serializer;
             return serializer;
         }

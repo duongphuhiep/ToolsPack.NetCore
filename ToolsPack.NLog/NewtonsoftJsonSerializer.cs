@@ -8,18 +8,18 @@ namespace ToolsPack.NLog
     /// <summary>
     /// DefaultJsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
     /// </summary>
-    public class JsonNetSerializer : N.IJsonConverter
+    public class NewtonsoftJsonSerializer : N.IJsonConverter
     {
         private static readonly JsonSerializerSettings DefaultJsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore };
 
         private readonly JsonSerializerSettings _settings;
 
-        public JsonNetSerializer()
+        public NewtonsoftJsonSerializer()
         {
             _settings = DefaultJsonSerializerSettings;
         }
 
-        public JsonNetSerializer(JsonSerializerSettings settings)
+        public NewtonsoftJsonSerializer(JsonSerializerSettings settings)
         {
             _settings = settings;
         }

@@ -10,7 +10,7 @@ JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings {
     ReferenceLoopHandling = ReferenceLoopHandling.Ignore, 
     Formatting=Formatting.Indented 
 };
-NLog.Config.ConfigurationItemFactory.Default.JsonConverter = new ToolsPack.NLog.JsonNetSerializer(jsonSerializerSettings);
+NLog.Config.ConfigurationItemFactory.Default.JsonConverter = new ToolsPack.NLog.NewtonsoftJsonSerializer(jsonSerializerSettings);
 ```
 
 Shortcut:
@@ -18,6 +18,15 @@ Shortcut:
 ```csharp
 LogQuickConfig.UseNewtonsoftJson()
 ```
+
+Update:
+
+You can also use the new `System.Text.Json` serializer.
+
+```csharp
+LogQuickConfig.UseMicrosoftJson()
+```
+
 
 In unit test and for most basic logging needs:
 
@@ -47,7 +56,8 @@ You can use `NLog` to create one: https://stackoverflow.com/a/60859465/347051
 ```csharp
 private static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
 {
-    builder.AddNLog();
+    builder.AddNLog(LogQuickConfig.SetupFileAndConsole("./log/app.log"));
+    //LogQuickConfig.UseMicrosoftJson();
 });
 private static readonly ILogger<Program> log = loggerFactory.CreateLogger<Program>();
 
