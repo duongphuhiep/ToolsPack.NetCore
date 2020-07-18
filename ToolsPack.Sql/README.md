@@ -1,6 +1,10 @@
 # ToolsPack.Sql
 
-Avoid redundancy of pure ADO.NET code
+This package helps to avoid redundancy when writing ADO.NET codes. It is very tiny and battle tested in production since several years. There won't be any evolution on this package because the ADO.NET interface have been stable for years.
+
+Tips: For a more serious ADO.NET helper: check out the [Dapper](https://github.com/StackExchange/Dapper) project. It will help to shorten the ADO.NET codes writing evens more!
+
+---
 
 - http://www.blackbeltcoder.com/Articles/ado/an-ado-net-sql-helper-class
 - I've made an improvement so that we can declare the length of VarChar parameters. [It is recommended to always declare length of the VarChar parameters](http://blogs.msdn.com/b/psssql/archive/2010/10/05/query-performance-and-plan-cache-issues-when-parameter-length-not-specified-correctly.aspx)
