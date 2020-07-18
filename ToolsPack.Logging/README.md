@@ -2,7 +2,7 @@
 
 ## ElapsedTimeLogger
 
-Micro-benchmark a part of code to investigate on performance
+Micro-benchmark a part of code to investigate on performance. This is a normal `ILogger` or more precisely a decorator to a ILogger, when you use it to log a message it will "decorate" the message with the duration (elapsed time) since the previous logged message.
 
 ```CSharp
 class MyCalculator
@@ -14,11 +14,11 @@ class MyCalculator
 		using (var etw = ElapsedTimeLogger.Create(Log, "blockCodeName"))
 		{
 		    ...
-		    etw.Info("step 1");
+		    etw.LogInformation("step 1");
 		    ...
-		    etw.Debug("step 2");
+		    etw.LogDebug("step 2");
 			...
-		    etw.Info("Step 3)");
+		    etw.LogInformation("Step 3)");
 		    ...
 		} //"sum up log" is displayed here
 	}
@@ -74,11 +74,11 @@ public void process(string val, bool useCache)
 	using (var etw = ElapsedTimeLogger.Create(Log, "process", context))
 	{
 	    ...
-	    etw.Info("step 1");
+	    etw.LogInformation("step 1");
 	    ...
-	    etw.DebugFormat("step 2");
+	    etw.LogDebug("step 2");
 		...
-	    etw.Info("Step 3)");
+	    etw.LogInformation("Step 3)");
 	    ...
 	} //"sum up log" is displayed here
 }
@@ -93,3 +93,8 @@ will give
 22:57:00,259 [INFO ] process - 114036 mcs - Step 3)
 22:57:00,452 [INFO ] End process(val=Lorem ipsum, useCache=true) : Total elapsed 585436 mcs
 ```
+
+## Other benchmark library
+
+* If you want to optimize a particular static (and stateless) function, checkout [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet) project. See [video tutorial here](https://www.youtube.com/watch?v=EWmufbVF2A4). (Unlike other project, the `ElapsedTimeLogger` is just a `ILogger` so it fits to be injected to any production application) 
+* https://miniprofiler.com/dotnet/
