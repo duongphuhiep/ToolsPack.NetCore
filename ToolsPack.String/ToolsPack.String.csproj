@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.1.0</Version>
+    <Version>2.1.1</Version>
     <Description>Various string utils</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.String</PackageProjectUrl>

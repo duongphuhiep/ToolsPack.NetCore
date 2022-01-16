@@ -63,10 +63,12 @@ ArrayDisplayer.WordEllipsis("123 567 90", 5, "..."); //gives "123 567..."
 string signature = Utf8SealCalculator.HMACSHA256("payload", "secret", Utf8SealCalculator.ToHex);
 ```
 * Convert the payload string and the secret string to **byte[] tables** with a **Utf-8 encoder**
+  * If the secret or the payload represents a "hexString" (for eg.: "1a94f6c5a9") then you will have to declare `secretIsHexString = true` or `payloadIsHexString = true` so that they will be treated as HexString or else they will be treated as normal text string by default.
 * Use the secret byte[] table to hash the payload byte[] table with the **HMACSHA256 algorithm**
 * the third parameter convert the hash result back to string. You can use for example:
   * `Utf8SealCalculator.ToHex`: format the hash result from byte[] to hexa value string
   * `Convert.ToBase64String`: format the hash result from byte[] to a base64 string
+
 
 The result string is usually used as a seal or a signature to authenticate the payload content. 
 

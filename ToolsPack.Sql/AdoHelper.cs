@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ToolsPack.Sql
@@ -33,7 +30,7 @@ namespace ToolsPack.Sql
     public class AdoHelper : IDisposable
     {
         // Internal members
-        private string _connString = null;
+        private readonly string _connString = null;
         private SqlConnection _conn = null;
         private SqlTransaction _trans = null;
         private bool _disposed = false;
@@ -104,8 +101,10 @@ namespace ToolsPack.Sql
             {
                 if (args[i] is string && i + 1 < L)
                 {
-                    SqlParameter param = new SqlParameter();
-                    param.ParameterName = (string)args[i];
+                    SqlParameter param = new SqlParameter
+                    {
+                        ParameterName = (string)args[i]
+                    };
 
                     var v = args[++i];
 

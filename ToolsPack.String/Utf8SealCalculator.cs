@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Globalization;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -13,80 +13,85 @@ namespace ToolsPack.String
     {
         public static readonly UTF8Encoding UTF8 = new UTF8Encoding();
 
+        private static byte[] ConvertToBytesArray(string content, bool contentIsHexString)
+        {
+            return contentIsHexString ? HexStringToByteArray(content) : UTF8.GetBytes(content);
+        }
+
         [Obsolete("CA5350 Do Not Use Weak Cryptographic Algorithms")]
-        public static string HMACSHA1(string payload, string secret, Func<byte[], string> hashToStringFunc)
+        public static string HMACSHA1(string payload, string secret, Func<byte[], string> outputBytesArrayToStringFunc, bool secretIsHexString = false, bool payloadIsHexString = false)
         {
-            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
-            using (var alg = new HMACSHA1(UTF8.GetBytes(secret)))
+            if (outputBytesArrayToStringFunc == null) throw new ArgumentNullException(nameof(outputBytesArrayToStringFunc));
+            using (var alg = new HMACSHA1(ConvertToBytesArray(secret, secretIsHexString)))
             {
-                var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return hashToStringFunc(sha);
+                var sha = alg.ComputeHash(ConvertToBytesArray(payload, payloadIsHexString));
+                return outputBytesArrayToStringFunc(sha);
             }
         }
-        public static string HMACSHA256(string payload, string secret, Func<byte[], string> hashToStringFunc)
+        public static string HMACSHA256(string payload, string secret, Func<byte[], string> outputBytesArrayToStringFunc, bool secretIsHexString = false, bool payloadIsHexString = false)
         {
-            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
-            using (var alg = new HMACSHA256(UTF8.GetBytes(secret)))
+            if (outputBytesArrayToStringFunc == null) throw new ArgumentNullException(nameof(outputBytesArrayToStringFunc));
+            using (var alg = new HMACSHA256(ConvertToBytesArray(secret, secretIsHexString)))
             {
-                var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return hashToStringFunc(sha);
+                var sha = alg.ComputeHash(ConvertToBytesArray(payload, payloadIsHexString));
+                return outputBytesArrayToStringFunc(sha);
             }
         }
-        public static string HMACSHA384(string payload, string secret, Func<byte[], string> hashToStringFunc)
+        public static string HMACSHA384(string payload, string secret, Func<byte[], string> outputBytesArrayToStringFunc, bool secretIsHexString = false, bool payloadIsHexString = false)
         {
-            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
-            using (var alg = new HMACSHA384(UTF8.GetBytes(secret)))
+            if (outputBytesArrayToStringFunc == null) throw new ArgumentNullException(nameof(outputBytesArrayToStringFunc));
+            using (var alg = new HMACSHA384(ConvertToBytesArray(secret, secretIsHexString)))
             {
-                var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return hashToStringFunc(sha);
+                var sha = alg.ComputeHash(ConvertToBytesArray(payload, payloadIsHexString));
+                return outputBytesArrayToStringFunc(sha);
             }
         }
-        public static string HMACSHA512(string payload, string secret, Func<byte[], string> hashToStringFunc)
+        public static string HMACSHA512(string payload, string secret, Func<byte[], string> outputBytesArrayToStringFunc, bool secretIsHexString = false, bool payloadIsHexString = false)
         {
-            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
-            using (var alg = new HMACSHA512(UTF8.GetBytes(secret)))
+            if (outputBytesArrayToStringFunc == null) throw new ArgumentNullException(nameof(outputBytesArrayToStringFunc));
+            using (var alg = new HMACSHA512(ConvertToBytesArray(secret, secretIsHexString)))
             {
-                var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return hashToStringFunc(sha);
+                var sha = alg.ComputeHash(ConvertToBytesArray(payload, payloadIsHexString));
+                return outputBytesArrayToStringFunc(sha);
             }
         }
 
         [Obsolete("CA5350 Do Not Use Weak Cryptographic Algorithms")]
-        public static string SHA1Managed(string payload, Func<byte[], string> hashToStringFunc)
+        public static string SHA1Managed(string payload, Func<byte[], string> outputBytesArrayToStringFunc, bool payloadIsHexString = false)
         {
-            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
+            if (outputBytesArrayToStringFunc == null) throw new ArgumentNullException(nameof(outputBytesArrayToStringFunc));
             using (var alg = new SHA1Managed())
             {
-                var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return hashToStringFunc(sha);
+                var sha = alg.ComputeHash(ConvertToBytesArray(payload, payloadIsHexString));
+                return outputBytesArrayToStringFunc(sha);
             }
         }
 
-        public static string SHA256Managed(string payload, Func<byte[], string> hashToStringFunc)
+        public static string SHA256Managed(string payload, Func<byte[], string> outputBytesArrayToStringFunc, bool payloadIsHexString = false)
         {
-            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
+            if (outputBytesArrayToStringFunc == null) throw new ArgumentNullException(nameof(outputBytesArrayToStringFunc));
             using (var alg = new SHA256Managed())
             {
-                var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return hashToStringFunc(sha);
+                var sha = alg.ComputeHash(ConvertToBytesArray(payload, payloadIsHexString));
+                return outputBytesArrayToStringFunc(sha);
             }
         }
-        public static string SHA384Managed(string payload, Func<byte[], string> hashToStringFunc)
+        public static string SHA384Managed(string payload, Func<byte[], string> outputBytesArrayToStringFunc, bool payloadIsHexString = false)
         {
-            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
+            if (outputBytesArrayToStringFunc == null) throw new ArgumentNullException(nameof(outputBytesArrayToStringFunc));
             using (var alg = new SHA384Managed())
             {
-                var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return hashToStringFunc(sha);
+                var sha = alg.ComputeHash(ConvertToBytesArray(payload, payloadIsHexString));
+                return outputBytesArrayToStringFunc(sha);
             }
         }
-        public static string SHA512Managed(string payload, Func<byte[], string> hashToStringFunc)
+        public static string SHA512Managed(string payload, Func<byte[], string> outputBytesArrayToStringFunc, bool payloadIsHexString = false)
         {
-            if (hashToStringFunc == null) throw new ArgumentNullException(nameof(hashToStringFunc));
+            if (outputBytesArrayToStringFunc == null) throw new ArgumentNullException(nameof(outputBytesArrayToStringFunc));
             using (var alg = new SHA512Managed())
             {
-                var sha = alg.ComputeHash(UTF8.GetBytes(payload));
-                return hashToStringFunc(sha);
+                var sha = alg.ComputeHash(ConvertToBytesArray(payload, payloadIsHexString));
+                return outputBytesArrayToStringFunc(sha);
             }
         }
 
@@ -102,6 +107,15 @@ namespace ToolsPack.String
                 hex.AppendFormat(CultureInfo.InvariantCulture, "{0:x2}", b);
             }
             return hex.ToString();
+        }
+
+        public static byte[] HexStringToByteArray(string hexString)
+        {
+            if (hexString == null) return null;
+            return Enumerable.Range(0, hexString.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hexString.Substring(x, 2), 16))
+                             .ToArray();
         }
     }
 }
