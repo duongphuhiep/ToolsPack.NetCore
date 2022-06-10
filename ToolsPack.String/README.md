@@ -131,7 +131,11 @@ Assert.Equal(g, ShortGuid.Parse(shortGuid));
 var shortGuidUrlFriendly = g.ToShortGuid(true);
 Assert.Equal(g, ShortGuid.Parse(shortGuidUrlFriendly, true));
 ```
-**Note:** if the ShortGuid (length-22) is still too long, you can create a even shorter unique id with [hashid](https://hashids.org/net/). Youtube is using this popular technique to create short + unique id for their videos. [Checkout this video](https://youtu.be/tSuwe7FowzE)
+**Note:** 
+
+1. if the ShortGuid (length-22) is still too long, you can create a even shorter unique id with [hashid](https://hashids.org/net/). Youtube is using this popular technique to create short + unique id for their videos. [Checkout this video](https://youtu.be/tSuwe7FowzE)
+
+2. Use the [NewId](https://github.com/phatboyg/NewId) library if you want to generate a sequential (sortable) GUID. It will also help to reduce the [MS Sql Server index fragmentation](https://andrewlock.net/generating-sortable-guids-using-newid/)
 
 ## SqlServerConnectionStringBuilder
 
