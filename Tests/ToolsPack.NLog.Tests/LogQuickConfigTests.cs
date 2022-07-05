@@ -1,9 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ToolsPack.NLog;
 using N = NLog;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 
@@ -12,29 +8,29 @@ namespace ToolsPack.NLog.Tests
     [TestClass()]
     public class LogQuickConfigTests
     {
-        private N.ILogger nlog = N.LogManager.GetCurrentClassLogger();
-        private ILoggerFactory loggerFactory;
+        private readonly N.ILogger _nlog = N.LogManager.GetCurrentClassLogger();
+        private ILoggerFactory _loggerFactory;
 
         [TestMethod()]
         public void SetupFileAndConsoleTest()
         {
             var conf = LogQuickConfig.SetupFileAndConsole("./logs/LogQuickConfigTests.log");
-            loggerFactory = LoggerFactory.Create(builder =>
+            _loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder.AddNLog(conf);
                 builder.SetMinimumLevel(LogLevel.Trace);
             });
 
-            var someObject = new { abool = true, astring = "string", aint = 12 };
+            var someObject = new {abool = true, astring = "string", aint = 12};
 
-            var mlog = loggerFactory.CreateLogger<LogQuickConfigTests>();
-            mlog.LogTrace("trace microsoft logger {someObject}", someObject);
-            mlog.LogDebug("debug microsoft logger {someObject}", someObject);
-            mlog.LogInformation("info microsoft logger {someObject}", someObject);
+            var mlog = _loggerFactory.CreateLogger<LogQuickConfigTests>();
+            mlog.LogTrace("trace microsoft logger {SomeObject}", someObject);
+            mlog.LogDebug("debug microsoft logger {SomeObject}", someObject);
+            mlog.LogInformation("info microsoft logger {SomeObject}", someObject);
 
-            nlog.Trace("trace nlog {someObject}", someObject);
-            nlog.Debug("debug nlog {someObject}", someObject);
-            nlog.Info("info nlog {someObject}", someObject);
+            _nlog.Trace("trace nlog {SomeObject}", someObject);
+            _nlog.Debug("debug nlog {SomeObject}", someObject);
+            _nlog.Info("info nlog {SomeObject}", someObject);
         }
 
         [TestMethod()]
@@ -42,24 +38,23 @@ namespace ToolsPack.NLog.Tests
         {
             var conf = LogQuickConfig.SetupFileAndConsole("./logs/LogQuickConfigTests.log");
 
-            loggerFactory = LoggerFactory.Create(builder =>
+            _loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder.AddNLog(conf);
                 builder.SetMinimumLevel(LogLevel.Trace);
             });
 
-            var someObject = new { AboOl = true, aString = "string", AiNt = 12, anull = (string)null };
+            var someObject = new {AboOl = true, aString = "string", AiNt = 12, anull = (string) null};
 
-            var mlog = loggerFactory.CreateLogger<LogQuickConfigTests>();
+            var mlog = _loggerFactory.CreateLogger<LogQuickConfigTests>();
 
-            mlog.LogTrace("trace microsoft logger default = {@someObject}", someObject);
+            mlog.LogTrace("trace microsoft logger default = {@SomeObject}", someObject);
 
             LogQuickConfig.UseMicrosoftJson();
-            mlog.LogTrace("trace microsoft logger msjson  = {@someObject}", someObject);
+            mlog.LogTrace("trace microsoft logger msjson  = {@SomeObject}", someObject);
 
             LogQuickConfig.UseNewtonsoftJson();
-            mlog.LogTrace("trace microsoft logger newton  = {@someObject}", someObject);
-
+            mlog.LogTrace("trace microsoft logger newton  = {@SomeObject}", someObject);
         }
     }
 }

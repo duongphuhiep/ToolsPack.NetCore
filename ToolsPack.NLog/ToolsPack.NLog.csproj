@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0</Version>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>default</LangVersion>
+    <PackageVersion>3.0.0</PackageVersion>
     <Description>
       Format the structured logs with `Newtonsoft.Json`
     </Description>
@@ -17,7 +18,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="NLog" Version="4.7.0" />
-    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+    <PackageReference Include="NLog" Version="5.0.1" />
+    <PackageReference Include="System.Text.Json" Version="6.0.5" />
   </ItemGroup>
 </Project>

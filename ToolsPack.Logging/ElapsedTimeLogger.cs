@@ -150,7 +150,7 @@ namespace ToolsPack.Logging
         #endregion
 
         /// <summary>
-        /// restart scop stopwatch
+        /// restart scope stopwatch
         /// </summary>
         public void RestartScopeStopwatch()
         {
@@ -252,7 +252,7 @@ namespace ToolsPack.Logging
             }
             else
             {
-                _log.Log(logLevel, eventId, state, exception, formatter);
+                _log.Log(logLevel, eventId, state, exception, null);
             }
             
             _unitarySw.Reset();
@@ -286,17 +286,11 @@ namespace ToolsPack.Logging
         /// <summary>
         /// Total elapsed from birth
         /// </summary>
-        public long TotalElapsedMilliseconds
-        {
-            get { return _scopeSw.ElapsedMilliseconds; }
-        }
+        public long TotalElapsedMilliseconds => _scopeSw.ElapsedMilliseconds;
 
         /// <summary>
         /// Current unitary elapsed
         /// </summary>
-        public long ElapsedMilliseconds
-        {
-            get { return _unitarySw.ElapsedMilliseconds; }
-        }
+        public long ElapsedMilliseconds => _unitarySw.ElapsedMilliseconds;
     }
 }
