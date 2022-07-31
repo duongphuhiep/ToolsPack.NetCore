@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <LangVersion>default</LangVersion>
-    <PackageVersion>3.0.0</PackageVersion>
+    <PackageVersion>3.0.1</PackageVersion>
     <Description>Various string utils</Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.String</PackageProjectUrl>

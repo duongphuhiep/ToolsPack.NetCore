@@ -82,6 +82,16 @@ Other supported hashing algorithms are:
 * SHA384
 * SHA512
 
+## Asymmetric Encryption RSA
+
+The symmetric encryption is straightforward in the .NET SDK. But the asymmetric encryption is a little more complex.
+
+If you got lost in the [Microsoft Docs RSA class](https://docs.microsoft.com/en-us/dotnet/standard/security/encrypting-data), then
+ the sample codes in [RsaEncryptionTest.cs](https://github.com/duongphuhiep/ToolsPack.NetCore/blob/master/Tests/ToolsPack.String.Tests/RsaEncryptionTest.cs) should cover most of your needs:
+
+* How to generate a Private Key and Public Key (using C# or OpenSsl).
+* How to use the public key to encrypt, and the Private key to decrypt a string payload.
+
 ## DiacriticsRemover
 
 ```CSharp
