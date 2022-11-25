@@ -2,7 +2,7 @@ using Microsoft.Data.SqlClient;
 using System;
 using System.ComponentModel;
 
-namespace Toolspack.Msql
+namespace ToolsPack.Msql
 {
     /// <summary>
     /// Helper class for SqlDataReader to retrieve a nullable values in without type checking.
