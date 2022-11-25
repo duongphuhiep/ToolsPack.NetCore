@@ -10,6 +10,7 @@
     <ProjectReference Include="..\..\ToolsPack.Config\ToolsPack.Config.csproj" />
     <ProjectReference Include="..\..\ToolsPack.Log4net\ToolsPack.Log4net.csproj" />
     <ProjectReference Include="..\..\ToolsPack.Logging\ToolsPack.Logging.csproj" />
+    <ProjectReference Include="..\..\ToolsPack.Msql\ToolsPack.Msql.csproj" />
     <ProjectReference Include="..\..\ToolsPack.NLog\ToolsPack.NLog.csproj" />
     <ProjectReference Include="..\..\ToolsPack.Samba\ToolsPack.Samba.csproj" />
     <ProjectReference Include="..\..\ToolsPack.Sql\ToolsPack.Sql.csproj" />
