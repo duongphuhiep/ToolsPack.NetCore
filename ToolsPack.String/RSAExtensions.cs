@@ -20,7 +20,6 @@
 // 
 
 using System;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -89,6 +88,8 @@ namespace ToolsPack.String
         //     }
         // }
 
+#if NETSTANDARD2_1_OR_GREATER || NET
+
         /// <summary>
         /// Export public key to PEM format
         /// </summary>
@@ -121,6 +122,7 @@ namespace ToolsPack.String
 
             return buffer.ToString();
         }
+#endif
     }
 
     public enum RsaPublicKeyFormat
@@ -135,4 +137,5 @@ namespace ToolsPack.String
         /// </summary>
         SubjectPublicKeyInfo
     }
+
 }

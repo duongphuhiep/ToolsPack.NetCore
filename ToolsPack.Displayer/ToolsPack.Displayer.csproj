@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;net5.0;netstandard2.0;netstandard2.1</TargetFrameworks>
     <LangVersion>default</LangVersion>
-    <PackageVersion>3.0.0</PackageVersion>
+    <PackageVersion>3.0.1</PackageVersion>
     <Description>
       Deprecated! Use ToolsPack.String instead. Display nicely array and stopwatch object in a log files
     </Description>

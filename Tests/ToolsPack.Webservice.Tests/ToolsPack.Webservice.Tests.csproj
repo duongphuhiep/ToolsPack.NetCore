@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <LangVersion>default</LangVersion>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.10" />
-    <PackageReference Include="coverlet.collector" Version="3.1.2">
+    <PackageReference Include="coverlet.collector" Version="3.2.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.ServiceModel.Http" Version="4.9.0" />
-    <PackageReference Include="System.ServiceModel.Primitives" Version="4.9.0" />
-    <PackageReference Include="System.ServiceModel.Security" Version="4.9.0" />
-    <PackageReference Include="NLog.Extensions.Logging" Version="5.0.1" />
+    <PackageReference Include="System.ServiceModel.Http" Version="4.10.0" />
+    <PackageReference Include="System.ServiceModel.Primitives" Version="4.10.0" />
+    <PackageReference Include="System.ServiceModel.Security" Version="4.10.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ToolsPack.NLog\ToolsPack.NLog.csproj" />
@@ -29,7 +29,7 @@
     <Folder Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.ServiceModel.Duplex" Version="4.9.0" />
-    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.9.0" />
+    <PackageReference Include="System.ServiceModel.Duplex" Version="4.10.0" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="4.10.0" />
   </ItemGroup>
 </Project>
