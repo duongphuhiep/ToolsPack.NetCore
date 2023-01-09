@@ -189,6 +189,11 @@ Console.WriteLine(xmlDoc.ToXDocument().ToString());
 Console.WriteLine(xDoc.ToXmlDocument().OuterXml);
 ```
 
+## Useful regex
+
+* latin characters with accent `^([a-zA-Z0-9]|[À-Ö]|[Ø-ö]|[ø-ǿ]|[Ȁ-ʯ]|[-ͯ ]|[Ḁ-ỿ])+$`
+* latin characters with accent + cyrillique: `^([a-zA-Z0-9]|[À-Ö]|[Ø-ö]|[ø-ǿ]|[Ȁ-ʯ]|[-ͯ ]|[Ḁ-ỿ]|[\u0430-\u044f])+$`
+
 ## Tips: checkout also
 
 1. [Bogus](https://github.com/bchavez/Bogus): If you want to generate nice fake data such as Person name, Email, Product...
