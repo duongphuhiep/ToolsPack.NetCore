@@ -8,9 +8,9 @@
       Config log4net with one line of code, and other useful helper to log codes benchmark (elapsed time of operations)
         </Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Log4net</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/src/ToolsPack.Log4net</PackageProjectUrl>
         <PackageIcon>toolspack-128.png</PackageIcon>
-        <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Log4net</RepositoryUrl>
+        <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/src/ToolsPack.Log4net</RepositoryUrl>
         <Authors>hiep</Authors>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
@@ -22,7 +22,7 @@
 
     <ItemGroup>
         <None Include="..\.editorconfig" Link=".editorconfig" />
-        <None Include="..\icon\toolspack-128.png" Pack="true" PackagePath="" />
+        <None Include="..\..\icon\toolspack-128.png" Pack="true" PackagePath="" />
     </ItemGroup>
 
     <ItemGroup>

@@ -4,21 +4,23 @@
         <TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>default</LangVersion>
         <PackageVersion>3.0.2</PackageVersion>
-        <Description>Helper to Read app.config file</Description>
+        <Description>
+      Advance lock pattern.
+        </Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Config</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/src/ToolsPack.Thread</PackageProjectUrl>
         <PackageIcon>toolspack-128.png</PackageIcon>
         <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore</RepositoryUrl>
-        <Authors>hiep</Authors>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Authors>hiep</Authors>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+        <PackageReference Include="System.Threading.Channels" Version="8.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="..\icon\toolspack-128.png" Pack="true" PackagePath="" />
+        <None Include="..\.editorconfig" Link=".editorconfig" />
+        <None Include="..\..\icon\toolspack-128.png" Pack="true" PackagePath="" />
     </ItemGroup>
-
 </Project>

@@ -8,7 +8,7 @@
       Deprecated! Use ToolsPack.String instead. Display nicely array and stopwatch object in a log files
     </Description>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Displayer</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/src/ToolsPack.Displayer</PackageProjectUrl>
     <PackageIcon>toolspack-128.png</PackageIcon>
     <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore</RepositoryUrl>
     <Authors>hiep</Authors>
@@ -22,6 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\icon\toolspack-128.png" Pack="true" PackagePath=""/>
+    <None Include="..\..\icon\toolspack-128.png" Pack="true" PackagePath=""/>
   </ItemGroup>
 </Project>

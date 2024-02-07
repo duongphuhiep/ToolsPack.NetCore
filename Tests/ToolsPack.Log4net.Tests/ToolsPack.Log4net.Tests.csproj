@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <ProjectReference Include="..\..\ToolsPack.Log4net\ToolsPack.Log4net.csproj" />
+        <ProjectReference Include="..\..\src\ToolsPack.Log4net\ToolsPack.Log4net.csproj" />
     </ItemGroup>
 
     <ItemGroup>

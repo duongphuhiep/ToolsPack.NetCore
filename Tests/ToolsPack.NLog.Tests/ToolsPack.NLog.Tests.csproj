@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\ToolsPack.NLog\ToolsPack.NLog.csproj" />
+    <ProjectReference Include="..\..\src\ToolsPack.NLog\ToolsPack.NLog.csproj" />
   </ItemGroup>
 
 </Project>
