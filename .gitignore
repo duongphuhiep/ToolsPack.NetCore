@@ -192,3 +192,5 @@ ModelManifest.xml
 push-nupkg.bat
 .vs
 /.idea/
+
+.fake

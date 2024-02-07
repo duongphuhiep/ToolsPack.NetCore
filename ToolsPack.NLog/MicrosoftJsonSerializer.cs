@@ -1,6 +1,6 @@
-﻿using System.Text.Json;
 using System;
 using System.Text;
+using System.Text.Json;
 using N = NLog;
 
 namespace ToolsPack.NLog
@@ -10,7 +10,12 @@ namespace ToolsPack.NLog
     /// </summary>
     public class MicrosoftJsonSerializer : N.IJsonConverter
     {
-        private static readonly JsonSerializerOptions DefaultJsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true, MaxDepth=10, IgnoreNullValues = true };
+        private static readonly JsonSerializerOptions DefaultJsonSerializerOptions = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            MaxDepth = 10,
+            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+        };
 
         private readonly JsonSerializerOptions _options;
 

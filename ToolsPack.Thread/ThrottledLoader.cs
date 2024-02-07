@@ -1,13 +1,13 @@
 using System;
-using System.Threading.Tasks;
 using System.Threading.Channels;
+using System.Threading.Tasks;
 
 namespace ToolsPack.Thread
 {
     /// <summary>
     /// A generic loader with zero argument
     /// </summary>
-    public delegate T Loader0<T>();
+    public delegate T Loader0<out T>();
 
     /// <summary>
     /// Decorator the Loader0 with throttling.
@@ -33,7 +33,7 @@ namespace ToolsPack.Thread
         private T lastValue;
         private long lastUpdateTicks;
         private readonly long expiryInTick;
-        object locker = new object();
+        private readonly object locker = new object();
 
         private bool expired => lastValue == null || (DateTime.Now.Ticks - lastUpdateTicks) > expiryInTick;
 
@@ -45,9 +45,9 @@ namespace ToolsPack.Thread
         {
             if (expired)
             {
-                lock (locker) 
+                lock (locker)
                 {
-                    if (expired) 
+                    if (expired)
                     {
                         lastValue = core();
                         lastUpdateTicks = DateTime.Now.Ticks;
@@ -107,16 +107,16 @@ namespace ToolsPack.Thread
         {
             if (expired)
             {
-                try  
+                try
                 {
                     await locker.Writer.WriteAsync(true).ConfigureAwait(false); //acquire the log
-                    if (expired) 
+                    if (expired)
                     {
-                        lastValue = await core().ConfigureAwait(false); 
+                        lastValue = await core().ConfigureAwait(false);
                         lastUpdateTicks = DateTime.Now.Ticks;
                     }
                 }
-                finally 
+                finally
                 {
                     await locker.Reader.ReadAsync().ConfigureAwait(false); //unlock
                 }

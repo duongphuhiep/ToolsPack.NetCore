@@ -1,7 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+using Newtonsoft.Json;
+using NLog;
 using System.Globalization;
-using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using N = NLog;
@@ -18,7 +17,7 @@ namespace ToolsPack.NLog
         /// JsonConvert.DefaultSettings = () => DefaultJsonSerializerSettings;
         /// </summary>
         public static readonly JsonSerializerSettings DefaultJsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore, ReferenceLoopHandling = ReferenceLoopHandling.Ignore, Formatting = Formatting.Indented };
-        public static readonly JsonSerializerOptions DefaultJsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true, MaxDepth = 10, IgnoreNullValues = true };
+        public static readonly JsonSerializerOptions DefaultJsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true, MaxDepth = 10, DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull };
 
         /// <summary>
         /// The default messages layout
@@ -70,14 +69,14 @@ namespace ToolsPack.NLog
         /// </summary>
         /// <param name="settings"></param>
         /// <returns></returns>
-        public static NewtonsoftJsonSerializer UseNewtonsoftJson(JsonSerializerSettings settings=null)
+        public static NewtonsoftJsonSerializer UseNewtonsoftJson(JsonSerializerSettings settings = null)
         {
             if (settings == null)
             {
                 settings = DefaultJsonSerializerSettings;
             }
             var serializer = new NewtonsoftJsonSerializer(settings);
-            N.Config.ConfigurationItemFactory.Default.JsonConverter = serializer;
+            N.LogManager.Setup().SetupSerialization(s => s.RegisterJsonConverter(serializer));
             return serializer;
         }
 
@@ -93,7 +92,7 @@ namespace ToolsPack.NLog
                 options = DefaultJsonSerializerOptions;
             }
             var serializer = new MicrosoftJsonSerializer(options);
-            N.Config.ConfigurationItemFactory.Default.JsonConverter = serializer;
+            N.LogManager.Setup().SetupSerialization(s => s.RegisterJsonConverter(serializer));
             return serializer;
         }
 

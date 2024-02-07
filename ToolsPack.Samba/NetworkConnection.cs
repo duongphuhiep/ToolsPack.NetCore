@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+using Microsoft.Extensions.Logging;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
@@ -105,7 +104,7 @@ namespace ToolsPack.Samba
             Log?.Log(logLevel, $"Disconnect remote disk #{connId} {ctx}");
             Stopwatch sw = Stopwatch.StartNew();
             var result = WNetCancelConnection2(_networkName, flag, force);
-            
+
             if (result != 0)
             {
                 var win32error = new Win32Exception(result);
@@ -115,7 +114,7 @@ namespace ToolsPack.Samba
             }
             else
             {
-                Log?.Log(logLevel,$"Success disconnect remote disk #{connId}. Elapsed: {sw.ElapsedMilliseconds} ms");
+                Log?.Log(logLevel, $"Success disconnect remote disk #{connId}. Elapsed: {sw.ElapsedMilliseconds} ms");
             }
         }
 
@@ -136,7 +135,7 @@ namespace ToolsPack.Samba
 #pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
     }
 
-    public enum ResourceScope : int
+    public enum ResourceScope
     {
         Connected = 1,
         GlobalNetwork,
@@ -145,7 +144,7 @@ namespace ToolsPack.Samba
         Context
     };
 
-    public enum ResourceType : int
+    public enum ResourceType
     {
         Any = 0,
         Disk = 1,
@@ -153,7 +152,7 @@ namespace ToolsPack.Samba
         Reserved = 8,
     };
 
-    public enum ResourceDisplaytype : int
+    public enum ResourceDisplaytype
     {
         Generic = 0x0,
         Domain = 0x01,

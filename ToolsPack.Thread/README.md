@@ -40,20 +40,6 @@ var result = await tlo.GetValue(); // select_from_database at most once every 0.
 for (1..10000) { result = await tlo.GetValueAsync(); }  //GOOD: select_from_database only once every 0.5s
 ```
 
-## TimedLock
-
-https://github.com/Haacked/TimedLock
-
-```CSharp
-using(TimedLock.Lock(obj, TimeSpan.FromSeconds(10)))
-{
-    //Thread safe operations
-}
-```
-
-- The "synchronized code" will wait for other lock on `obj` free.
-- `TimeOutException` if the lock acquiring is longer than 10 sec
-
 ## NamedLocker
 
 ```CSharp

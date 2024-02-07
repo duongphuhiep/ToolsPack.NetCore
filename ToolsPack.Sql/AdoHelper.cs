@@ -212,7 +212,7 @@ namespace ToolsPack.Sql
         /// <summary>
         /// Executes a query that returns a single value
         /// </summary>
-        /// <param name="proc">Name of stored proceduret</param>
+        /// <param name="qry">Name of stored proceduret</param>
         /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
         /// <returns>Value of first column and first row of the results</returns>
         public object ExecScalarProc(string qry, params object[] args)
@@ -225,7 +225,7 @@ namespace ToolsPack.Sql
         /// <summary>
         /// Executes a query that returns a single value
         /// </summary>
-        /// <param name="proc">Name of stored proceduret</param>
+        /// <param name="qry">Name of stored proceduret</param>
         /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
         /// <returns>Value of first column and first row of the results</returns>
         public async Task<object> ExecScalarProcAsync(string qry, params object[] args)
@@ -266,7 +266,7 @@ namespace ToolsPack.Sql
         /// <summary>
         /// Executes a stored procedure and returns the results as a SqlDataReader
         /// </summary>
-        /// <param name="proc">Name of stored proceduret</param>
+        /// <param name="qry">Name of stored proceduret</param>
         /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
         /// <returns>Results as a SqlDataReader</returns>
         public SqlDataReader ExecDataReaderProc(string qry, params object[] args)
@@ -299,7 +299,7 @@ namespace ToolsPack.Sql
         /// <summary>
         /// Executes a stored procedure and returns the results as a Data Set
         /// </summary>
-        /// <param name="proc">Name of stored proceduret</param>
+        /// <param name="qry">Name of stored proceduret</param>
         /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
         /// <returns>Results as a DataSet</returns>
         public DataSet ExecDataSetProc(string qry, params object[] args)
@@ -369,14 +369,11 @@ namespace ToolsPack.Sql
             if (!_disposed)
             {
                 // Need to dispose managed resources if being called manually
-                if (disposing)
+                if (disposing && _conn != null)
                 {
-                    if (_conn != null)
-                    {
-                        Rollback();
-                        _conn.Dispose();
-                        _conn = null;
-                    }
+                    Rollback();
+                    _conn.Dispose();
+                    _conn = null;
                 }
                 _disposed = true;
             }

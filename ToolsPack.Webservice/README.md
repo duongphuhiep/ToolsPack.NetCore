@@ -11,6 +11,7 @@ svc.AddLog(logger, LogLevel.Trace); //shortcut for svc.Endpoint.EndpointBehavior
 ```
 
 if Raw requests are logged on the TRACE level then in order to see them, make sure that the min log level is set to `Trace`
+
 ```Csharp
 LoggerFactory loggerFactory = LoggerFactory.Create(builder =>
 {
@@ -21,12 +22,15 @@ LoggerFactory loggerFactory = LoggerFactory.Create(builder =>
 ## Use Case
 
 1. Generate a WebService consumer (SDK)
-```
+
+```sh
 dotnet tool install --global dotnet-svcutil
 dotnet-svcutil http://localhost/someSoapService.asmx?wsdl
 ```
+
 or use the `svcutil.exe` of the "Developer Command Prompt for Visual Studio"
-```
+
+```sh
 svcutil http://localhost/someSoapService.asmx?wsdl /o:C:\ ... \generated\SomeSoapService.cs /sc /n:*,MyApp.SoapServiceClient
 ```
 
@@ -48,7 +52,9 @@ var resu = svc.SomeMethodService(new SomeMethodRequest {
     someParam = "Hello",
 });
 ```
+
 Today the `ServiceFactory` is no longer neccessary, I recommend that you create the client directly
-```
+
+```Csharp
 var svc = new SomeWebServiceClient(...); //create the service 
 ```

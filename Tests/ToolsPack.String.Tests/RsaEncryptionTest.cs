@@ -1,9 +1,9 @@
+using Org.BouncyCastle.Utilities.IO.Pem;
 using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Org.BouncyCastle.Utilities.IO.Pem;
 using Xunit;
 using Xunit.Abstractions;
 using PemWriter = Org.BouncyCastle.OpenSsl.PemWriter;
@@ -38,7 +38,7 @@ public class RsaEncryptionTest
         using (var rsa = RSA.Create())
         {
             //read public key from the PEM file
-            var publicKeyPem = await File.ReadAllTextAsync("./sample-keys-openssl/public.pem").ConfigureAwait(false);
+            var publicKeyPem = await File.ReadAllTextAsync("./sample-keys-openssl/public.pem").ConfigureAwait(true);
             rsa.ImportFromPem(publicKeyPem);
 
             //use the public key to encrypt the payload
@@ -49,19 +49,19 @@ public class RsaEncryptionTest
         //Display the payload after encrypted (if you are curious to see what it looks like..)
         _testOutputHelper.WriteLine("the encrypted payload in Base64 format: " + Convert.ToBase64String(encryptedPayload));
         _testOutputHelper.WriteLine("the encrypted payload in Hex format: " + Utf8SealCalculator.ToHex(encryptedPayload));
-        
+
         //Decrypt the payload with private key
         using (var rsa = RSA.Create())
         {
             //read private key from the PEM file
-            rsa.ImportFromPem(await File.ReadAllTextAsync("./sample-keys-openssl/private.pem").ConfigureAwait(false));
+            rsa.ImportFromPem(await File.ReadAllTextAsync("./sample-keys-openssl/private.pem").ConfigureAwait(true));
 
             //use the private key to decrypt the payload
             Assert.Equal(payload,
                 (new UTF8Encoding()).GetString(rsa.Decrypt(encryptedPayload, padding)));
         }
     }
-    
+
     /// <summary>
     /// Complete test scenario: in this example we will generate the private and public key ourself.
     /// * Generate a pair of public key and private key
@@ -83,11 +83,11 @@ public class RsaEncryptionTest
         {
             //export public key to file in the PEM format (text format make it easier to share)
             await File.WriteAllTextAsync("./public.pem", rsa.ExportToPem(RsaPublicKeyFormat.RsaPublicKey))
-                .ConfigureAwait(false);
-            
+                .ConfigureAwait(true);
+
             //export private key to file in the PKCS8 format
             var privateKeyPkcs8 = rsa.ExportPkcs8PrivateKey();
-            await File.WriteAllBytesAsync("./private.pkcs8", privateKeyPkcs8).ConfigureAwait(false);
+            await File.WriteAllBytesAsync("./private.pkcs8", privateKeyPkcs8).ConfigureAwait(true);
 
             //export private key to file in the PEM format
             /*
@@ -112,7 +112,7 @@ public class RsaEncryptionTest
         using (var rsa = RSA.Create())
         {
             //read public key from the PEM file
-            var publicKeyPem = await File.ReadAllTextAsync("./public.pem").ConfigureAwait(false);
+            var publicKeyPem = await File.ReadAllTextAsync("./public.pem").ConfigureAwait(true);
             rsa.ImportFromPem(publicKeyPem);
 
             //use the public key to encrypt the payload
@@ -124,14 +124,14 @@ public class RsaEncryptionTest
         using (var rsa = RSA.Create())
         {
             //read private key from the PEM file
-            rsa.ImportFromPem(await File.ReadAllTextAsync("./private.pem").ConfigureAwait(false));
+            rsa.ImportFromPem(await File.ReadAllTextAsync("./private.pem").ConfigureAwait(true));
 
             //use the private key to decrypt the payload
             Assert.Equal(payload,
                 (new UTF8Encoding()).GetString(rsa.Decrypt(encryptedPayload, padding)));
 
             //read private key from the PKCS8 file
-            rsa.ImportPkcs8PrivateKey(await File.ReadAllBytesAsync("./private.pkcs8").ConfigureAwait(false), out _);
+            rsa.ImportPkcs8PrivateKey(await File.ReadAllBytesAsync("./private.pkcs8").ConfigureAwait(true), out _);
 
             //use the private key to decrypt the payload
             Assert.Equal(payload,

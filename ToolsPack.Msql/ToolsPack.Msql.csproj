@@ -1,23 +1,23 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>net7.0;net6.0;net5.0;netstandard2.0;netstandard2.1</TargetFrameworks>
-    <LangVersion>default</LangVersion>
-    <PackageVersion>3.0.1</PackageVersion>
-    <Description>Avoid codes redudency from using pure ADO.net API.</Description>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Msql</PackageProjectUrl>
-    <PackageIcon>toolspack-128.png</PackageIcon>
-    <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore</RepositoryUrl>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <Authors>hiep</Authors>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFrameworks>net8.0;net7.0;net6.0;net5.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <LangVersion>default</LangVersion>
+        <PackageVersion>3.0.2</PackageVersion>
+        <Description>Avoid codes redudency from using pure ADO.net API.</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/ToolsPack.Msql</PackageProjectUrl>
+        <PackageIcon>toolspack-128.png</PackageIcon>
+        <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore</RepositoryUrl>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Authors>hiep</Authors>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-    <None Include="..\icon\toolspack-128.png" Pack="true" PackagePath="" />
-  </ItemGroup>
+    <ItemGroup>
+        <None Include="..\.editorconfig" Link=".editorconfig" />
+        <None Include="..\icon\toolspack-128.png" Pack="true" PackagePath="" />
+    </ItemGroup>
 </Project>
