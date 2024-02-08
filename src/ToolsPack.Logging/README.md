@@ -94,7 +94,168 @@ will give
 22:57:00,452 [INFO ] End process(val=Lorem ipsum, useCache=true) : Total elapsed 585436 mcs
 ```
 
-## Other benchmark library
+### Other benchmark library
 
 * If you want to optimize a particular static (and stateless) function, checkout [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet) project. See [video tutorial here](https://www.youtube.com/watch?v=EWmufbVF2A4). (Unlike other project, the `ElapsedTimeLogger` is just a `ILogger` so it fits to be injected to any production application) 
 * https://miniprofiler.com/dotnet/
+
+## MockLogger
+
+Your test is executing some application codes which log certain messages via the `Microsoft.Extensions.Logging` library.
+Once the application codes finished, you want to Assert (or to Verify) that some messages are logged as expected.
+
+The `MockLogger` allows you to "spy" on the log events happening during the application execution: 
+
+1) Use a Mock library (such as Moq, NSubstitue..) to instantiate a `MockLogger`. For eg:
+
+```CSharp
+MockLogger _mocklogger = Substitute.For<MockLogger>();
+```
+
+2) Ask your application codes to use the `MockLogger` by providing (or by injecting) it to your Application codes, for eg:
+
+```CSharp
+var diContainer = new ServiceCollection();
+diContainer.AddLogging(builder =>
+{
+    builder.AddMockLogger(_mocklogger);
+});
+```
+
+3) Then use your Mock library to spy (`NSubstitue.Received()`, `Moq.Verify`..) on the `IsLogged` hooks of the `MockLogger`. For eg:
+
+```CSharp
+_mocklogger.Received().IsLogged(
+    Arg.Is(LogLevel.Error),
+    Arg.Any<EventId>(),
+    Arg.Is<Exception?>(ex => ex.Message == "some exception"),
+    Arg.Is<string>(s => s.Contains("some error on Greeting")));
+```
+
+
+Checkout the [`MockLoggerTests.cs`](../../tests/ToolsPack.Logging.Tests\MockLoggerTests.cs) for full demonstration.
+
+### Basic usages
+
+```Csharp
+//Act
+_mocklogger.LogInformation("haha");
+_mocklogger.LogError(new Exception("some exception"), "some error on {method}", "Greeting");
+
+//Assert
+_mocklogger.Received().IsLogged(
+    Arg.Is(LogLevel.Information),
+    Arg.Any<EventId>(),
+    Arg.Any<Exception?>(),
+    Arg.Is("haha"));
+
+_mocklogger.Received().IsLogged(
+    Arg.Is(LogLevel.Error),
+    Arg.Any<EventId>(),
+    Arg.Is<Exception?>(ex => ex.Message == "some exception"),
+    Arg.Is<string>(s => s.Contains("some error on Greeting")));
+
+```
+
+### Same Basic usages for High performance logging
+
+```Csharp
+//Logging definition
+
+[LoggerMessage(EventId = 0, Level = LogLevel.Information, Message = "Send request {message}")]
+public static partial void LogSendRequestInfo(this ILogger logger, string message);
+
+[LoggerMessage(EventId = 1, Level = LogLevel.Error, Message = "Received something wrong")]
+public static partial void LogGetResponseError(this ILogger logger, Exception ex);
+
+//High performance logging
+
+_mocklogger.LogSendRequestInfo("toto");
+_mocklogger.LogGetResponseError(new Exception("Failed to do thing"));
+
+//Assert the log content
+
+_mocklogger.Received().IsLogged(
+    Arg.Is(LogLevel.Information),
+    Arg.Any<EventId>(),
+    Arg.Any<Exception?>(),
+    Arg.Is("Send request toto"));
+
+_mocklogger.Received().IsLogged(
+    Arg.Is(LogLevel.Error),
+    Arg.Any<EventId>(),
+    Arg.Is<Exception?>(ex => ex.Message == "Failed to do thing"),
+    Arg.Is<string>(s => s.Contains("Received something wrong")));
+```
+
+### Log structuring
+
+In log structuring, a log item is usually a list of objects (key-value) rather than just a string.
+
+Your application codes might also generate many log items with the same text message but with different objects
+in the log structure. In this case, Asserting (verifying) the log text message is not very interesting, you usually want
+to spy on the log structure instead.
+
+```Csharp
+//Logging definition
+
+[LoggerMessage(EventId = 2, Level = LogLevel.Information, Message = "The person {person} odered {order}")]
+public static partial void LogStructuringSampleInfo(this ILogger logger, SomePersonObject person, SomeOrderObject order);
+
+//High performance logging, it will generate a structured log which contains 2 objects
+
+_mocklogger.LogStructuringSampleInfo(new SomePersonObject("Hiep", 18), new SomeOrderObject("#1", 30.5));
+
+//Assert the log content
+
+using LogState = IReadOnlyList<KeyValuePair<string, object?>>;
+
+_mocklogger.Received().IsLogged(
+    Arg.Is(LogLevel.Information),
+    Arg.Any<EventId>(),
+    Arg.Any<Exception?>(),
+    Arg.Is<string>(msg => Regex.IsMatch(msg, "The person .* odered .*")),
+    Arg.Is<LogState>(state => AssertLogStructuring(state)));
+
+//verify that the "person" and "order" objects in the log item got the expected values
+private static bool AssertLogStructuring(LogState state)
+{
+    var person = (from s in state
+                    where s.Key == "person"
+                    select s.Value as SomePersonObject).First();
+
+    var order = (from s in state
+                    where s.Key == "order"
+                    select s.Value as SomeOrderObject).First();
+
+    return person.Name == "Hiep" && person.Age == 18 && order.Id == "#1" && order.Amount == 30.5;
+}
+```
+
+### Use MockLogger to spy on other loggers used by your application codes
+
+You have to add the MockLogger to the logging pipeline of your application, so that it can "monitor" all log events generated by your application codes:
+
+```CSharp
+//let's say you have a service provider similar to the one in your ASP.NET app
+var diContainer = new ServiceCollection();
+diContainer.AddLogging(builder =>
+{
+    //add the MockLogger to the logging pipeline
+    builder.AddMockLogger(_mocklogger);
+});
+var services = diContainer.BuildServiceProvider();
+
+//let's say your application is using this logger (which is not our MockLogger)
+ILogger<MyApp> someAppLogger = services.GetRequiredService<ILogger<MyApp>>();
+
+//your application logged something with this logger
+someAppLogger.LogInformation("haha");
+
+//Assert that application logged the expected message whatever the logger is used
+_mocklogger.Received().IsLogged(
+    Arg.Is(LogLevel.Information),
+    Arg.Any<EventId>(),
+    Arg.Any<Exception?>(),
+    Arg.Is("haha"));
+```

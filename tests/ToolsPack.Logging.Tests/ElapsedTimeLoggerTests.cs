@@ -1,12 +1,8 @@
-﻿using Xunit;
-using ToolsPack.Logging;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using ToolsPack.NLog;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using System.Threading;
+using ToolsPack.NLog;
+using Xunit;
 
 namespace ToolsPack.Logging.Tests
 {
@@ -26,7 +22,7 @@ namespace ToolsPack.Logging.Tests
             log.LogInformation("Normal log");
             using (ElapsedTimeLogger etl = ElapsedTimeLogger.Create(log, "toto", "beginContext", "endContext", "  "))
             {
-                
+
                 log.LogDebug("Normal log");
                 Thread.Sleep(600);
                 etl.LogInformation("ETL log 10");
