@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>default</LangVersion>
-        <PackageVersion>3.0.2</PackageVersion>
+        <PackageVersion>3.1.0</PackageVersion>
         <Description>
       Format the structured logs with `Newtonsoft.Json`
         </Description>
@@ -12,9 +12,11 @@
         <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/src/ToolsPack.ToolsPack.NLog</RepositoryUrl>
         <Authors>hiep</Authors>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
     <ItemGroup>
         <None Include="..\..\icon\toolspack-128.png" Pack="true" PackagePath="" />
+        <None Include="README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

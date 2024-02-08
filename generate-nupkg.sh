@@ -1,5 +1,5 @@
 dotnet build
-rm *.nupkg
+del *.nupkg
 dotnet pack src/ToolsPack.Config -o ./
 dotnet pack src/ToolsPack.Displayer -o ./
 dotnet pack src/ToolsPack.Log4net -o ./
