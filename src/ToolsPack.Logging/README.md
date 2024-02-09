@@ -7,21 +7,21 @@ Micro-benchmark a part of code to investigate on performance. This is a normal `
 ```CSharp
 class MyCalculator
 {
-	private static readonly ILogger Log = loggerFactory.CreateLogger<ElapsedTimeLoggerTests>();
+    private static readonly ILogger Log = loggerFactory.CreateLogger<ElapsedTimeLoggerTests>();
 
-	public void Process()
-	{
-		using (var etw = ElapsedTimeLogger.Create(Log, "blockCodeName"))
-		{
-		    ...
-		    etw.LogInformation("step 1");
-		    ...
-		    etw.LogDebug("step 2");
-			...
-		    etw.LogInformation("Step 3)");
-		    ...
-		} //"sum up log" is displayed here
-	}
+    public void Process()
+    {
+        using (var etw = ElapsedTimeLogger.Create(Log, "blockCodeName"))
+        {
+            ...
+            etw.LogInformation("step 1");
+            ...
+            etw.LogDebug("step 2");
+            ...
+            etw.LogInformation("Step 3)");
+            ...
+        } //"sum up log" is displayed here
+    }
 }
 ```
 
@@ -30,7 +30,7 @@ class MyCalculator
 - Each log message will display the elapsed time (in micro-second) since the last log message.
 - A **sum up log** will display the total elapsed time (in micro-second) when the `etw` object is disposed.
 
-```
+```text
 22:56:59,866 [DEBUG] Begin blockCodeName
 22:56:59,970 [INFO ] blockCodeName - 102350 mcs - step 1
 22:57:00,144 [DEBUG] blockCodeName - 173295 mcs - step 2
@@ -57,7 +57,7 @@ var etw = ElapsedTimeLogger.Create(Log, "foo", "Start_context", "End_context");
 
 will give
 
-```
+```text
 22:56:59,866 [DEBUG] Begin Start_context
 22:56:59,970 [INFO ] foo - 102350 mcs - step 1
 22:57:00,144 [DEBUG] foo - 173295 mcs - step 2
@@ -70,23 +70,23 @@ We often display the parameter of the functions in the "Start context". Example:
 ```CSharp
 public void process(string val, bool useCache)
 {
-	var context = string.Format("process(val={0}, useCache={1})", val, useCache);
-	using (var etw = ElapsedTimeLogger.Create(Log, "process", context))
-	{
-	    ...
-	    etw.LogInformation("step 1");
-	    ...
-	    etw.LogDebug("step 2");
-		...
-	    etw.LogInformation("Step 3)");
-	    ...
-	} //"sum up log" is displayed here
+    var context = string.Format("process(val={0}, useCache={1})", val, useCache);
+    using (var etw = ElapsedTimeLogger.Create(Log, "process", context))
+    {
+        ...
+        etw.LogInformation("step 1");
+        ...
+        etw.LogDebug("step 2");
+        ...
+        etw.LogInformation("Step 3)");
+        ...
+    } //"sum up log" is displayed here
 }
 ```
 
 will give
 
-```
+```text
 22:56:59,866 [DEBUG] Begin process(val=Lorem ipsum, useCache=true)
 22:56:59,970 [INFO ] process - 102350 mcs - step 1
 22:57:00,144 [DEBUG] process - 173295 mcs - step 2
@@ -96,15 +96,17 @@ will give
 
 ### Other benchmark library
 
-* If you want to optimize a particular static (and stateless) function, checkout [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet) project. See [video tutorial here](https://www.youtube.com/watch?v=EWmufbVF2A4). (Unlike other project, the `ElapsedTimeLogger` is just a `ILogger` so it fits to be injected to any production application) 
-* https://miniprofiler.com/dotnet/
+- If you want to optimize a particular static (and stateless) function, checkout [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet) project. See [video tutorial here](https://www.youtube.com/watch?v=EWmufbVF2A4). (Unlike other project, the `ElapsedTimeLogger` is just a `ILogger` so it fits to be injected to any production application)
+- <https://miniprofiler.com/dotnet/>
 
 ## MockLogger
 
 Your test is executing some application codes which log certain messages via the `Microsoft.Extensions.Logging` library.
 Once the application codes finished, you want to Assert (or to Verify) that some messages are logged as expected.
 
-The `MockLogger` allows you to "spy" on the log events happening during the application execution: 
+The `MockLogger` allows you to "spy" on the log events happening during the application execution. Checkout the [`MockLoggerTests.cs`](../../tests/ToolsPack.Logging.Tests/MockLoggerTests.cs) for full demonstration.
+
+Here how it works:
 
 1) Use a Mock library (such as Moq, NSubstitue..) to instantiate a `MockLogger`. For eg:
 
@@ -131,9 +133,6 @@ _mocklogger.Received().IsLogged(
     Arg.Is<Exception?>(ex => ex.Message == "some exception"),
     Arg.Is<string>(s => s.Contains("some error on Greeting")));
 ```
-
-
-Checkout the [`MockLoggerTests.cs`](../../tests/ToolsPack.Logging.Tests\MockLoggerTests.cs) for full demonstration.
 
 ### Basic usages
 

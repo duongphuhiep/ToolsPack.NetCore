@@ -41,3 +41,4 @@ public abstract class MockLogger : ILogger
     public abstract void IsLogged(LogLevel logLevel, EventId eventId, Exception? exception, string formattedMessage, LogState? state);
 }
 
+public abstract class MockLogger<T> : MockLogger { }

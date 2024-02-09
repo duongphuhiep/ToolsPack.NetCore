@@ -40,24 +40,22 @@ namespace ToolsPack.Logging
         private readonly ILogger _log;
         private readonly Stopwatch _scopeSw;
         private readonly Stopwatch _unitarySw;
-        private readonly string _scopeId;
-        private readonly string _startContext;
-        private readonly string _endContext;
-        
-        private ElapsedTimeLogger(ILogger log, string scopeId, string startContext, string endContext, string spaceBeforeLog)
+        private readonly string? _scopeId;
+        private readonly string? _startContext;
+        private readonly string? _endContext;
+
+        private ElapsedTimeLogger(ILogger log, string scopeId, string? startContext, string? endContext, string? spaceBeforeLog)
         {
             _log = log;
 
             if (string.IsNullOrEmpty(spaceBeforeLog))
             {
-                //_scopeId = "  " + scopeId;
                 _scopeId = scopeId;
                 _startContext = startContext;
                 _endContext = endContext;
             }
             else
             {
-                //_scopeId = spaceBeforeLog + "  " + scopeId;
                 _scopeId = spaceBeforeLog + scopeId;
                 _startContext = spaceBeforeLog + startContext;
                 _endContext = spaceBeforeLog + endContext;
@@ -79,8 +77,8 @@ namespace ToolsPack.Logging
         /// <param name="endContext"></param>
         /// <param name="spaceBeforeLog"></param>
         /// <returns></returns>
-        public static ElapsedTimeLogger Create(ILogger log, string scopeId, string beginContext = null, string endContext = null,
-            string spaceBeforeLog = null)
+        public static ElapsedTimeLogger Create(ILogger log, string scopeId, string? beginContext = null, string endContext? = null,
+            string? spaceBeforeLog = null)
         {
             if (string.IsNullOrEmpty(beginContext))
             {
@@ -88,7 +86,7 @@ namespace ToolsPack.Logging
             }
             if (string.IsNullOrEmpty(endContext))
             {
-                endContext = beginContext!=null && beginContext.Length < 256 ? beginContext : scopeId;
+                endContext = beginContext != null && beginContext.Length < 256 ? beginContext : scopeId;
             }
             return new ElapsedTimeLogger(log, scopeId, beginContext, endContext, spaceBeforeLog);
         }
@@ -254,9 +252,9 @@ namespace ToolsPack.Logging
             {
                 _log.Log(logLevel, eventId, state, exception, null);
             }
-            
+
             _unitarySw.Reset();
-            _unitarySw.Start();            
+            _unitarySw.Start();
         }
 
         /// <summary>
