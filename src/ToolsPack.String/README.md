@@ -11,7 +11,7 @@ arr.Display().SeparatedBy("; ").MaxItems(4)
 
 gives
 
-```
+```text
 { item1; item2; item3; item4; ..and 996 (of 1000) more }
 ```
 
@@ -24,7 +24,7 @@ arr.Display().MaxItems(4).MaxItemLength(10)
 
 gives
 
-```
+```text
 { [[Lorem...]], item2, item3, item4, ..and 996 (of 1000) more }
 ```
 
@@ -62,35 +62,36 @@ ArrayDisplayer.WordEllipsis("123 567 90", 5, "..."); //gives "123 567..."
 ```CSharp
 string signature = Utf8SealCalculator.HMACSHA256("payload", "secret", Utf8SealCalculator.ToHex);
 ```
-* Convert the payload string and the secret string to **byte[] tables** with a **Utf-8 encoder**
-  * If the secret or the payload represents a "hexString" (for eg.: "1a94f6c5a9") then you will have to declare `secretIsHexString = true` or `payloadIsHexString = true` so that they will be treated as HexString or else they will be treated as normal text string by default.
-* Use the secret byte[] table to hash the payload byte[] table with the **HMACSHA256 algorithm**
-* the third parameter convert the hash result back to string. You can use for example:
-  * `Utf8SealCalculator.ToHex`: format the hash result from byte[] to hexa value string
-  * `Convert.ToBase64String`: format the hash result from byte[] to a base64 string
 
+- Convert the payload string and the secret string to **byte[] tables** with a **Utf-8 encoder**
+  - If the secret or the payload represents a "hexString" (for eg.: "1a94f6c5a9") then you will have to declare `secretIsHexString = true` or `payloadIsHexString = true` so that they will be treated as HexString or else they will be treated as normal text string by default.
+- Use the secret byte[] table to hash the payload byte[] table with the **HMACSHA256 algorithm**
+- the third parameter convert the hash result back to string. You can use for example:
+  - `Utf8SealCalculator.ToHex`: format the hash result from byte[] to hexa value string
+  - `Convert.ToBase64String`: format the hash result from byte[] to a base64 string
 
-The result string is usually used as a seal or a signature to authenticate the payload content. 
+The result string is usually used as a seal or a signature to authenticate the payload content.
 
 Other supported hashing algorithms are:
-* HMACSHA1 (not secure)
-* HMACSHA256
-* HMACSHA384
-* HMACSHA512
-* SHA1 (not secure)
-* SHA256
-* SHA384
-* SHA512
+
+- HMACSHA1 (not secure)
+- HMACSHA256
+- HMACSHA384
+- HMACSHA512
+- SHA1 (not secure)
+- SHA256
+- SHA384
+- SHA512
 
 ## Asymmetric Encryption RSA
 
 The symmetric encryption is straightforward in the .NET SDK. But the asymmetric encryption is a little more complex.
 
 If you got lost in the [Microsoft Docs RSA class](https://docs.microsoft.com/en-us/dotnet/standard/security/encrypting-data), then
- the sample codes in [RsaEncryptionTest.cs](https://github.com/duongphuhiep/ToolsPack.NetCore/blob/master/Tests/ToolsPack.String.Tests/RsaEncryptionTest.cs) should cover most of your needs:
+ the sample codes in [RsaEncryptionTest.cs](../../tests/ToolsPack.String.Tests/RsaEncryptionTest.cs) should cover most of your needs:
 
-* How to generate a Private Key and Public Key (using C# or OpenSsl).
-* How to use the public key to encrypt, and the Private key to decrypt a string payload.
+- How to generate a Private Key and Public Key (using C# or OpenSsl).
+- How to use the public key to encrypt, and the Private key to decrypt a string payload.
 
 ## DiacriticsRemover
 
@@ -103,13 +104,14 @@ string message = DiacriticsRemover.RemoveDiacritics("où déjà aperçu la phén
 ```CSharp
 string randomString = StringGenerator.CreateRandomString(5, 0, "abcdefghijklmnpqrstuvwxyz0123456789");
 ```
+
 - Generate a random string of length 5 using random characters in `"abcdefghijklmnpqrstuvwxyz0123456789"`
 - 0 is the length variable, 0-variable means that the length result is fix to 5.
 - CreateRandomString(5, 3) will result a string with length variable between (5 and 8)
 
 Remark:
 
-1. A radom string is not suppose to replace the GUID because it got higher chance of colission. If you want a shorter Guid then check out the `ShortGuid` class
+1. A random string is not suppose to replace the GUID because it got higher chance of colission. If you want a shorter Guid then check out the `ShortGuid` class
 2. If you want to generate nice fake data such as Person name, Email, Product... then Checkout the the [Bogus](https://github.com/bchavez/Bogus) project. Example:
 
 ```CSharp
@@ -141,11 +143,15 @@ Assert.Equal(g, ShortGuid.Parse(shortGuid));
 var shortGuidUrlFriendly = g.ToShortGuid(true);
 Assert.Equal(g, ShortGuid.Parse(shortGuidUrlFriendly, true));
 ```
-**Note:** 
 
-1. if the ShortGuid (length-22) is still too long, you can create a even shorter unique id with [hashid](https://hashids.org/net/). Youtube is using this popular technique to create short + unique id for their videos. [Checkout this video](https://youtu.be/tSuwe7FowzE)
+**Note:**
 
-2. Use the [NewId](https://github.com/phatboyg/NewId) library if you want to generate a sequential (sortable) GUID. It will also help to reduce the [MS Sql Server index fragmentation](https://andrewlock.net/generating-sortable-guids-using-newid/)
+1. if the ShortGuid (length-22) is still too long, you can create a even shorter unique id with [Sqids](https://sqids.org/dotnet). Youtube is using this popular technique to create short + unique id for their videos. [Checkout this video](https://youtu.be/tSuwe7FowzE)
+
+2. Consider to use the a ULID (Universally Unique Lexicographically Sortable Identifier) instead of UUID library if you want to generate a sequential (sortable) GUID.
+
+- It will help to reduce the [MS Sql Server index fragmentation](https://andrewlock.net/generating-sortable-guids-using-newid/)
+- [NewId](https://github.com/phatboyg/NewId)  
 
 ## SqlServerConnectionStringBuilder
 
@@ -164,7 +170,7 @@ For more complex Uri manipulation, checkout the [Furl](https://flurl.dev/) proje
 
 ## Working with XmlDocument and XDocument
 
-* `XDocument` is recommended over the old `XmlDocument`
+- `XDocument` is recommended over the old `XmlDocument`
 
 Serialize a object to a `XDocument`
 
@@ -191,13 +197,11 @@ Console.WriteLine(xDoc.ToXmlDocument().OuterXml);
 
 ## Useful regex
 
-* latin characters with accent `^([a-zA-Z0-9]|[À-Ö]|[Ø-ö]|[ø-ǿ]|[Ȁ-ʯ]|[-ͯ ]|[Ḁ-ỿ])+$`
-* latin characters with accent + cyrillique: `^([a-zA-Z0-9]|[À-Ö]|[Ø-ö]|[ø-ǿ]|[Ȁ-ʯ]|[-ͯ ]|[Ḁ-ỿ]|[\u0430-\u044f])+$`
+- latin characters with accent `^([a-zA-Z0-9]|[À-Ö]|[Ø-ö]|[ø-ǿ]|[Ȁ-ʯ]|[-ͯ ]|[Ḁ-ỿ])+$`
+- latin characters with accent + cyrillique: `^([a-zA-Z0-9]|[À-Ö]|[Ø-ö]|[ø-ǿ]|[Ȁ-ʯ]|[-ͯ ]|[Ḁ-ỿ]|[\u0430-\u044f])+$`
 
 ## Tips: checkout also
 
 1. [Bogus](https://github.com/bchavez/Bogus): If you want to generate nice fake data such as Person name, Email, Product...
 
 2. [Humanizer](https://github.com/Humanizr/Humanizer): If you want to generate nice human readable string from strings, enums, dates, times, timespans, numbers and quantities...
-
-

@@ -86,7 +86,7 @@ namespace Payment.Tests
 
 ### Console Output
 
-```
+```text
 11:37:17,379 [INFO ] Init test [CallDboTests:24]
 11:37:17,402 [DEBUG] Begin MakeQuery [CallDboTests:0]
 11:37:17,695 [DEBUG] MakeQuery - 288412 mcs - Database connect OK, Data Source=192.168.0.1;Initial Catalog=toto;User ID=dev_user;Password=papapapap; [CallDboTests:0]

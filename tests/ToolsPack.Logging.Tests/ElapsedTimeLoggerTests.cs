@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using System.Threading;
+using System.Threading.Tasks;
 using ToolsPack.NLog;
 using Xunit;
 
@@ -16,7 +17,7 @@ namespace ToolsPack.Logging.Tests
         });
 
         [Fact()]
-        public void LogTest()
+        public async Task LogTest()
         {
             var log = loggerFactory.CreateLogger<ElapsedTimeLoggerTests>();
             log.LogInformation("Normal log");
@@ -24,23 +25,23 @@ namespace ToolsPack.Logging.Tests
             {
 
                 log.LogDebug("Normal log");
-                Thread.Sleep(600);
+                await Task.Delay(600).ConfigureAwait(true);
                 etl.LogInformation("ETL log 10");
-                Thread.Sleep(20);
+                await Task.Delay(20).ConfigureAwait(true);
 
                 using (etl.BeginScope("foo"))
                 {
                     etl.LogDebug("ETL log 20");
-                    Thread.Sleep(400);
+                    await Task.Delay(400).ConfigureAwait(true);
                     etl.LogWarning("ETL log 30");
-                    Thread.Sleep(500);
+                    await Task.Delay(500).ConfigureAwait(true);
                 }
             }
             log.LogInformation("Normal log");
         }
 
         [Fact()]
-        public void NullLogTest()
+        public async Task NullLogTest()
         {
             var log = loggerFactory.CreateLogger<ElapsedTimeLoggerTests>();
             log.LogInformation("Normal log");
@@ -48,16 +49,16 @@ namespace ToolsPack.Logging.Tests
             {
 
                 log.LogDebug("Normal log");
-                Thread.Sleep(600);
+                await Task.Delay(600).ConfigureAwait(true);
                 etl.LogInformation("ETL log 10");
-                Thread.Sleep(20);
+                await Task.Delay(20).ConfigureAwait(true);
 
                 using (etl.BeginScope("foo"))
                 {
                     etl.LogDebug("ETL log 20");
-                    Thread.Sleep(400);
+                    await Task.Delay(400).ConfigureAwait(true);
                     etl.LogWarning("ETL log 30");
-                    Thread.Sleep(500);
+                    await Task.Delay(500).ConfigureAwait(true);
                 }
             }
             log.LogInformation("Normal log");

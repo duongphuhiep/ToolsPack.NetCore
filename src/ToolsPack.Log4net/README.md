@@ -24,21 +24,21 @@ it will setup a typical log4net appender so that you can use them in your test a
 [TestClass]
 public class ArrayDisplayerTests
 {
-	private static readonly ILog Log = LogManager.GetLogger(typeof (ArrayDisplayerTests));
+    private static readonly ILog Log = LogManager.GetLogger(typeof (ArrayDisplayerTests));
 
-	[ClassInitialize]
-	public static void SetUp(TestContext testContext)
-	{
-		Log4NetQuickSetup.SetUpConsole();
-		//or Log4NetQuickSetup.SetUpFile("mytest.log");
-	}
+    [ClassInitialize]
+    public static void SetUp(TestContext testContext)
+    {
+        Log4NetQuickSetup.SetUpConsole();
+        //or Log4NetQuickSetup.SetUpFile("mytest.log");
+    }
 
-	[TestMethod]
-	public void DisplayTest()
-	{
-		Log.Info("it will display to the Console");
-		//or to the file if you use SetUpFile()
-	}
+    [TestMethod]
+    public void DisplayTest()
+    {
+        Log.Info("it will display to the Console");
+        //or to the file if you use SetUpFile()
+    }
 }
 ```
 
@@ -51,21 +51,21 @@ Micro-benchmark a part of code to investigate on performance
 ```CSharp
 class MyCalculator
 {
-	private static readonly ILog Log = LogManager.GetLogger(typeof(MyCalculator));
+    private static readonly ILog Log = LogManager.GetLogger(typeof(MyCalculator));
 
-	public void Process()
-	{
-		using (var etw = ElapsedTimeWatcher.Create(Log, "blockCodeName"))
-		{
-		    ...
-		    etw.Info("step 1");
-		    ...
-		    etw.Debug("step 2");
-			...
-		    etw.Info("Step 3)");
-		    ...
-		} //"sum up log" is displayed here
-	}
+    public void Process()
+    {
+        using (var etw = ElapsedTimeWatcher.Create(Log, "blockCodeName"))
+        {
+            ...
+            etw.Info("step 1");
+            ...
+            etw.Debug("step 2");
+            ...
+            etw.Info("Step 3)");
+            ...
+        } //"sum up log" is displayed here
+    }
 }
 ```
 
@@ -74,7 +74,7 @@ class MyCalculator
 - Each log message will display the elapsed time (in micro-second) since the last log message.
 - A **sum up log** will display the total elapsed time (in micro-second) when the `etw` object is disposed.
 
-```
+```text
 22:56:59,866 [DEBUG] Begin blockCodeName
 22:56:59,970 [INFO ] blockCodeName - 102350 mcs - step 1
 22:57:00,144 [DEBUG] blockCodeName - 173295 mcs - step 2
@@ -101,7 +101,7 @@ var etw = ElapsedTimeWatcher.Create(Log, "foo", "Start_context", "End_context");
 
 will give
 
-```
+```text
 22:56:59,866 [DEBUG] Begin Start_context
 22:56:59,970 [INFO ] foo - 102350 mcs - step 1
 22:57:00,144 [DEBUG] foo - 173295 mcs - step 2
@@ -114,23 +114,23 @@ We often display the parameter of the functions in the "Start context". Example:
 ```CSharp
 public void process(string val, bool useCache)
 {
-	var context = string.Format("process(val={0}, useCache={1})", val, useCache);
-	using (var etw = ElapsedTimeWatcher.Create(Log, "process", context))
-	{
-	    ...
-	    etw.Info("step 1");
-	    ...
-	    etw.DebugFormat("step 2");
-		...
-	    etw.Info("Step 3)");
-	    ...
-	} //"sum up log" is displayed here
+    var context = string.Format("process(val={0}, useCache={1})", val, useCache);
+    using (var etw = ElapsedTimeWatcher.Create(Log, "process", context))
+    {
+        ...
+        etw.Info("step 1");
+        ...
+        etw.DebugFormat("step 2");
+        ...
+        etw.Info("Step 3)");
+        ...
+    } //"sum up log" is displayed here
 }
 ```
 
 will give
 
-```
+```text
 22:56:59,866 [DEBUG] Begin process(val=Lorem ipsum, useCache=true)
 22:56:59,970 [INFO ] process - 102350 mcs - step 1
 22:57:00,144 [DEBUG] process - 173295 mcs - step 2

@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
 using ToolsPack.String;
@@ -40,24 +40,22 @@ namespace ToolsPack.Logging
         private readonly ILogger _log;
         private readonly Stopwatch _scopeSw;
         private readonly Stopwatch _unitarySw;
-        private readonly string _scopeId;
-        private readonly string _startContext;
-        private readonly string _endContext;
-        
-        private ElapsedTimeLogger(ILogger log, string scopeId, string startContext, string endContext, string spaceBeforeLog)
+        private readonly string? _scopeId;
+        private readonly string? _startContext;
+        private readonly string? _endContext;
+
+        private ElapsedTimeLogger(ILogger log, string scopeId, string? startContext, string? endContext, string? spaceBeforeLog)
         {
             _log = log;
 
             if (string.IsNullOrEmpty(spaceBeforeLog))
             {
-                //_scopeId = "  " + scopeId;
                 _scopeId = scopeId;
                 _startContext = startContext;
                 _endContext = endContext;
             }
             else
             {
-                //_scopeId = spaceBeforeLog + "  " + scopeId;
                 _scopeId = spaceBeforeLog + scopeId;
                 _startContext = spaceBeforeLog + startContext;
                 _endContext = spaceBeforeLog + endContext;
@@ -71,16 +69,16 @@ namespace ToolsPack.Logging
         #region Fluent API
 
         /// <summary>
-        /// 
+        /// Decorate (or wrap) the log (input argument) to be a ElapsedTimeLogger
         /// </summary>
-        /// <param name="log"></param>
-        /// <param name="scopeId"></param>
-        /// <param name="beginContext"></param>
-        /// <param name="endContext"></param>
-        /// <param name="spaceBeforeLog"></param>
+        /// <param name="log">the log to be wrap</param>
+        /// <param name="scopeId">the prefix of all log message</param>
+        /// <param name="beginContext">message log when the logger is created</param>
+        /// <param name="endContext">message log when the logger is disposed</param>
+        /// <param name="spaceBeforeLog">the margin</param>
         /// <returns></returns>
-        public static ElapsedTimeLogger Create(ILogger log, string scopeId, string beginContext = null, string endContext = null,
-            string spaceBeforeLog = null)
+        public static ElapsedTimeLogger Create(ILogger log, string scopeId, string? beginContext = null, string? endContext = null,
+            string? spaceBeforeLog = null)
         {
             if (string.IsNullOrEmpty(beginContext))
             {
@@ -88,7 +86,7 @@ namespace ToolsPack.Logging
             }
             if (string.IsNullOrEmpty(endContext))
             {
-                endContext = beginContext!=null && beginContext.Length < 256 ? beginContext : scopeId;
+                endContext = beginContext != null && beginContext.Length < 256 ? beginContext : scopeId;
             }
             return new ElapsedTimeLogger(log, scopeId, beginContext, endContext, spaceBeforeLog);
         }
@@ -127,7 +125,7 @@ namespace ToolsPack.Logging
         }
 
         /// <summary>
-        /// 
+        /// The log level on start
         /// </summary>
         /// <param name="level"></param>
         /// <returns></returns>
@@ -136,6 +134,7 @@ namespace ToolsPack.Logging
             _startLogLevel = level;
             return this;
         }
+
         /// <summary>
         /// force a TimeUnit for the benchmark, if not set
         /// </summary>
@@ -150,7 +149,7 @@ namespace ToolsPack.Logging
         #endregion
 
         /// <summary>
-        /// restart scope stopwatch
+        /// restart the internal scope stopwatch
         /// </summary>
         public void RestartScopeStopwatch()
         {
@@ -229,7 +228,7 @@ namespace ToolsPack.Logging
         /// <param name="state">The entry to be written. Can be also an object.</param>
         /// <param name="exception">The exception related to this entry.</param>
         /// <param name="formatter">Function to create a System.String message of the state and exception.</param>
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
         {
             if (!IsEnabled(logLevel))
             {
@@ -252,11 +251,11 @@ namespace ToolsPack.Logging
             }
             else
             {
-                _log.Log(logLevel, eventId, state, exception, null);
+                _log.Log(logLevel, eventId, state, exception, (s, e) => $"logstate: {s}, logException: {e}");
             }
-            
+
             _unitarySw.Reset();
-            _unitarySw.Start();            
+            _unitarySw.Start();
         }
 
         /// <summary>
@@ -276,10 +275,7 @@ namespace ToolsPack.Logging
         /// <typeparam name="TState">The type of the state to begin scope for.</typeparam>
         /// <param name="state">The identifier for the scope.</param>
         /// <returns>An System.IDisposable that ends the logical operation scope on dispose.</returns>
-        public IDisposable BeginScope<TState>(TState state)
-        {
-            return _log?.BeginScope(state);
-        }
+        public IDisposable? BeginScope<TState>(TState state) where TState : notnull => _log?.BeginScope(state);
 
         #endregion
 

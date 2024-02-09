@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>default</LangVersion>
-        <PackageVersion>3.1.0</PackageVersion>
+        <PackageVersion>3.1.1</PackageVersion>
         <Description>
             Micro-benchmark logger: add elapsed time of operations to the log messages, MockLogger
         </Description>

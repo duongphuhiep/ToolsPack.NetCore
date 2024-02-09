@@ -9,11 +9,11 @@ Example `app.config` of your application
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
-	<appSettings>
-		<add key="connectionString" value="Server=localhost;Database=foo"/>
-		<add key="activePingService" value="true"/>
-		<add key="pollIteration" value="100"/>
-	</appSettings>
+    <appSettings>
+        <add key="connectionString" value="Server=localhost;Database=foo"/>
+        <add key="activePingService" value="true"/>
+        <add key="pollIteration" value="100"/>
+    </appSettings>
 </configuration>
 ```
 
@@ -44,13 +44,12 @@ Locate a configuration file in certain susceptible locations:
 Return the full path to the configuration file or null if not found
 
 Usage example in a **console** application:
+
 ```CSharp
 var builder = new ConfigurationBuilder()
-	.AddJsonFile(ConfigFileLocator.Find("appsettings.json")); //add package Microsoft.Extensions.Configuration.Json
+    .AddJsonFile(ConfigFileLocator.Find("appsettings.json")); //add package Microsoft.Extensions.Configuration.Json
 var configuration = builder.Build();
 
 Settings settings = new Settings();
 configuration.Bind("App", settings);
 ```
-
-

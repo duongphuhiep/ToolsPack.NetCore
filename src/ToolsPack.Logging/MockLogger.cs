@@ -16,7 +16,7 @@ public abstract class MockLogger : ILogger
 
     public bool IsEnabled(LogLevel logLevel) => true;
 
-    public abstract IDisposable BeginScope<TState>(TState state);
+    public abstract IDisposable? BeginScope<TState>(TState state) where TState : notnull;
 
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
@@ -41,3 +41,4 @@ public abstract class MockLogger : ILogger
     public abstract void IsLogged(LogLevel logLevel, EventId eventId, Exception? exception, string formattedMessage, LogState? state);
 }
 
+public abstract class MockLogger<T> : MockLogger, ILogger<T> { }

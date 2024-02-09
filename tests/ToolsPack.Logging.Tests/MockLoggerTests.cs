@@ -20,7 +20,6 @@ public class MockLoggerTests
     /// Demontrate how to use mock logger to spy on normal log message
     /// </summary>
     [Fact]
-
     public void MockLoggerBasicTest()
     {
         //Act: make some normal & high performence logging 
@@ -111,5 +110,12 @@ public class MockLoggerTests
             Arg.Any<EventId>(),
             Arg.Any<Exception?>(),
             Arg.Is("haha"));
+    }
+
+    [Fact]
+    public void CreateMockGenericTest()
+    {
+        ILogger<MockLoggerTests> logger = Substitute.For<MockLogger<MockLoggerTests>>();
+        logger.LogSendRequestInfo("toto");
     }
 }

@@ -46,7 +46,7 @@ for (1..10000) { result = await tlo.GetValueAsync(); }  //GOOD: select_from_data
 static readonly NamedLocker<string> CustomerLocker = new NamedLocker<string>();
 customerLocker.RunWithLock("Peter.Buy", () =>
 {
-	//synchronized code
+    //synchronized code
 }
 ```
 
@@ -59,7 +59,7 @@ static readonly MultiNamedTimedLocker<string> CustomerLocker = new MultiNamedTim
 
 using (customerLocker.Lock(new[] {"peter", "david"}, 100))
 {
-	//synchronized code
+    //synchronized code
 }
 ```
 

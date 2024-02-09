@@ -27,17 +27,20 @@ You can also use the new `System.Text.Json` serializer.
 LogQuickConfig.UseMicrosoftJson()
 ```
 
-
 In unit test and for most basic logging needs:
 
 ```csharp
 LogQuickConfig.SetupConsole();
 ```
+
 or
+
 ```csharp
 LogQuickConfig.SetupFile("./log/app.log");
 ```
+
 or
+
 ```csharp
 LogQuickConfig.SetupFileAndConsole("./log/app.log");
 ```
@@ -50,8 +53,8 @@ log.Info("{@request}", req); //structured logging
 
 ```
 
-Some library (APS.NET Core) require a `Microsoft.Extensions.Logging.ILogger` for logging. 
-You can use `NLog` to create one: https://stackoverflow.com/a/60859465/347051
+Some library (APS.NET Core) require a `Microsoft.Extensions.Logging.ILogger` for logging.
+You can use `NLog` to create one: <https://stackoverflow.com/a/60859465/347051>
 
 ```csharp
 private static readonly ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
