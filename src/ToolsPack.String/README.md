@@ -115,6 +115,7 @@ Remark:
 2. If you want to generate nice fake data such as Person name, Email, Product... then Checkout the the [Bogus](https://github.com/bchavez/Bogus) project. Example:
 
 ```CSharp
+// Generate random object (which looks "real")
 var walletGenerator = new Faker<Wallet>()
     .RuleFor(o => o.Gender, f => (int)f.PickRandom<Gender>())
     .RuleFor(o => o.FirstName, (f, o) => f.Name.FirstName((Gender)o.Gender))
@@ -127,6 +128,11 @@ var walletGenerator = new Faker<Wallet>()
     .RuleFor(o => o.CreationDate, f => f.Date.Past(3))
 ;
 var w = walletGenerator.Generate();
+
+// Generate random string (same as what the ToolsPack)
+
+var faker = new Faker();
+var randomString = faker.Random.String2(minLength: 3, maxLength: 10, chars "abcdefghijklmnopqrstuvwxyz"); 
 ```
 
 ## ShortGuid
