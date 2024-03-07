@@ -104,7 +104,9 @@ will give
 Your test is executing some application codes which log certain messages via the `Microsoft.Extensions.Logging` library.
 Once the application codes finished, you want to Assert (or to Verify) that some messages are logged as expected.
 
-The `MockLogger` allows you to "spy" on the log events happening during the application execution. Checkout the [`MockLoggerTests.cs`](../../tests/ToolsPack.Logging.Tests/MockLoggerTests.cs) for full demonstration.
+The `MockLogger` allows you to "spy" on the log events happening during the application execution. It can be added to your logging pipeline along with others real loggers of your application (Serilog, NLog...)
+
+Checkout the [`MockLoggerTests.cs`](../../tests/ToolsPack.Logging.Tests/MockLoggerTests.cs) for full demonstration.
 
 Here how it works:
 
@@ -121,6 +123,15 @@ var diContainer = new ServiceCollection();
 diContainer.AddLogging(builder =>
 {
     builder.AddMockLogger(_mocklogger);
+    
+    //you can apply specific filters for MockLogger
+    builder
+        .AddFilter<MockLoggerProvider>("System", LogLevel.Error)
+        .AddFilter<MockLoggerProvider>("Microsoft", LogLevel.Error)
+        .AddFilter<MockLoggerProvider>("App.Metrics", LogLevel.Error);
+        
+    //or else it will follows the global filters
+    builder.AddFilter(null, LogLevel.Trace);
 });
 ```
 
@@ -133,6 +144,8 @@ _mocklogger.Received().IsLogged(
     Arg.Is<Exception?>(ex => ex.Message == "some exception"),
     Arg.Is<string>(s => s.Contains("some error on Greeting")));
 ```
+
+If the mockLogger is unable to capture the log message then check the config (or default config) of the filters.
 
 ### Basic usages
 
@@ -156,7 +169,7 @@ _mocklogger.Received().IsLogged(
 
 ```
 
-### Same Basic usages for High performance logging
+### Basic usages for High performance logging
 
 ```Csharp
 //Logging definition
@@ -257,4 +270,33 @@ _mocklogger.Received().IsLogged(
     Arg.Any<EventId>(),
     Arg.Any<Exception?>(),
     Arg.Is("haha"));
+```
+
+### Use MockLogger side by side with other loggers (Serilog for example)
+
+```CSharp
+//config serilog
+var serilogLogger = new LoggerConfiguration()
+    .MinimumLevel.Verbose(); //serilog can see all the log events
+    .WriteTo.Seq("http://localhost:5304/")
+    .WriteTo.TestOutput(testOutputHelper)
+    .WriteTo.File("app.log")
+    .CreateLogger()
+
+//create mockLogger with NSubstitute
+var mockLogger = Substitute.For<MockLogger>();
+
+//mix Serilog and mockLogger together
+var loggerFactory = LoggerFactory.Create(builder => {
+    builder
+        .AddSerilog(serilogLogger) 
+        .AddMockLogger(mockLogger)
+
+        //Make mockLogger receive  all log events, similar to serilog
+        .AddFilter(null, LogLevel.Trace); 
+});
+
+//Log something:
+var logger = loggerFactory.CreateLogger();
+logger.LogInformation("hello");
 ```
