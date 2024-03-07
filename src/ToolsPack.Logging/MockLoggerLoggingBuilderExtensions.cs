@@ -1,9 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using System;
 
 namespace ToolsPack.Logging.Testing;
 
-public static class MockLoggerLoggingBuilderExtensions
+public static partial class MockLoggerLoggingBuilderExtensions
 {
     /// <summary>
     /// Add MockLogger to the logging pipeline.
@@ -23,26 +23,6 @@ public static class MockLoggerLoggingBuilderExtensions
             throw new ArgumentNullException(nameof(logger));
         }
         builder.AddProvider(new MockLoggerProvider(logger));
-        builder.AddFilter<MockLoggerProvider>(null, LogLevel.Trace);
         return builder;
     }
-
-    sealed class MockLoggerProvider : ILoggerProvider
-    {
-        private readonly MockLogger logger;
-
-        public MockLoggerProvider(MockLogger logger)
-        {
-            this.logger = logger;
-        }
-        public ILogger CreateLogger(string categoryName)
-        {
-            return logger;
-        }
-
-        public void Dispose()
-        {
-        }
-    }
 }
-
