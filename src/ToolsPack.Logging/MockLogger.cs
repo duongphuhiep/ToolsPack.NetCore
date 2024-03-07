@@ -35,7 +35,7 @@ public abstract class MockLogger : ILogger
     public abstract void IsLogged(LogLevel logLevel, EventId eventId, Exception? exception, string formattedMessage);
 
     /// <summary>
-    /// This hook is (pratically) invoked on all log events but there is no guarantee. In case of structured logging, we can spy/verify on
+    /// This hook is (pratically) invoked on all log events although there is no guarantee. In case of structured logging, we can spy/verify on
     /// the state argument which exposes all the logging components.
     /// </summary>
     public abstract void IsLogged(LogLevel logLevel, EventId eventId, Exception? exception, string formattedMessage, LogState? state);
