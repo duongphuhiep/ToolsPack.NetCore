@@ -272,7 +272,9 @@ _mocklogger.Received().IsLogged(
     Arg.Is("haha"));
 ```
 
-### Use MockLogger side by side with other loggers (Serilog for example)
+### Use MockLogger in XUnit side by side with real loggers (Serilog for example)
+
+Checkout full codes in [SampleUnitTest.cs](../../tests/ToolsPack.Logging.Tests/SampleUnitTest.cs)
 
 ```CSharp
 //config serilog
