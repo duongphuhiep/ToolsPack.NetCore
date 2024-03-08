@@ -274,7 +274,9 @@ _mocklogger.Received().IsLogged(
 
 ### Use MockLogger in XUnit side by side with real loggers (Serilog for example)
 
-Checkout full codes in [SampleUnitTest.cs](../../tests/ToolsPack.Logging.Tests/SampleUnitTest.cs)
+Checkout full codes in [SampleUnitTest.cs](../../tests/ToolsPack.Logging.Tests/SampleUnitTest.cs).
+
+The example got [a nice Helper](../../tests/ToolsPack.Logging.Tests/TestOutputMockLogging.cs) to configure logging on the stack XUnit, NSubstitute..
 
 ```CSharp
 //config serilog
@@ -302,3 +304,11 @@ var loggerFactory = LoggerFactory.Create(builder => {
 var logger = loggerFactory.CreateLogger();
 logger.LogInformation("hello");
 ```
+
+Note: To display the Xunit's Tests Output on the command line:
+
+```sh
+dotnet test --logger "console;verbosity=detailed":
+```
+
+[More info](https://xunit.net/docs/capturing-output)
