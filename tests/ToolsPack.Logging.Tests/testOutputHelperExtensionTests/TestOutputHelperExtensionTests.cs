@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 
 namespace ToolsPack.Logging.Tests
 {
-    public class SampleUnitTest : IDisposable, IClassFixture<SampleFixture>
+    public class TestOutputHelperExtensionTests : IDisposable, IClassFixture<WithMessageSinkFixture>
     {
         private static readonly string MSG_SETUP = "setup unit test";
         private static readonly string MSG_TEARDOWN = "teardown unit test";
@@ -16,10 +16,11 @@ namespace ToolsPack.Logging.Tests
         private readonly MockLogger _mockLogger;
         private readonly ILogger _logger;
 
-        public SampleUnitTest(ITestOutputHelper testOutputHelper)
+        public TestOutputHelperExtensionTests(WithMessageSinkFixture sampleFixture, ITestOutputHelper testOutputHelper)
         {
-            testOutputHelper.CreateLoggerFactoryAndMockLogger(out _loggerFactory, out _mockLogger);
-            _logger = _loggerFactory.CreateLogger<SampleUnitTest>();
+            _mockLogger = Substitute.For<MockLogger>();
+            _loggerFactory = testOutputHelper.CreateLoggerFactory(_mockLogger);
+            _logger = _loggerFactory.CreateLogger<TestOutputHelperExtensionTests>();
 
             _logger.LogInformation(MSG_SETUP);
         }

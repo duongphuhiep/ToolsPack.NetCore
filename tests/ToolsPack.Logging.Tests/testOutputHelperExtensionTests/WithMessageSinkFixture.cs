@@ -4,11 +4,11 @@ using Xunit.Sdk;
 
 namespace ToolsPack.Logging.Tests
 {
-    public class SampleFixture : IDisposable
+    public class WithMessageSinkFixture : IDisposable
     {
         private readonly IMessageSink _diagnosticMessageSink;
 
-        public SampleFixture(IMessageSink diagnosticMessageSink)
+        public WithMessageSinkFixture(IMessageSink diagnosticMessageSink)
         {
             _diagnosticMessageSink = diagnosticMessageSink;
             _diagnosticMessageSink.OnMessage(new DiagnosticMessage("start sample fixture"));
