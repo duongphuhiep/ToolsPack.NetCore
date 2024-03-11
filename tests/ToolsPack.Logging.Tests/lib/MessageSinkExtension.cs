@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using NSubstitute;
 using Serilog;
 using Serilog.Extensions.Logging;
 using ToolsPack.Logging.Testing;
@@ -12,47 +11,39 @@ namespace ToolsPack.Logging.Tests;
 /// Helper to configure logging to the TestOutput, Seq and MockLogger.
 /// You can start a Seq server on localhost with help of the `docker-compose.yaml` file in this project
 /// </summary>
-public static class TestOutputMockLogging
+public static class MessageSinkExtension
 {
+    const string DefaultOutputTemplateConst = "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj}  //[{SourceContext}]{NewLine}{Exception}";
+
+    public static readonly string DefaultOutputTemplate = DefaultOutputTemplateConst;
+
     /// <summary>
     /// Create a new Logger factory which will log
     /// - to the TestOutput
     /// - to the given MockLogger (optional)
     /// - and to Seq localhost:5341 (only in debug mode).
     /// </summary>
-    public static ILoggerFactory CreateLoggerFactory(this ITestOutputHelper testOutputHelper, MockLogger? mockLogger = null)
+    public static ILoggerFactory CreateLoggerFactory(this IMessageSink messageSink, MockLogger? mockLogger = null, string outputTemplate = DefaultOutputTemplateConst)
     {
-        var serilogLogger = CreateSerilogLogger(testOutputHelper);
+        var serilogLogger = messageSink.CreateSerilogLogger(outputTemplate);
         return LoggerFactory.Create(builder => builder.BuildTestLogging(serilogLogger, mockLogger));
-    }
-
-    /// <summary>
-    /// Create a "combo" Logger factory and a NSubstitute's MockLogger. The Logger factory will log
-    /// - to the TestOutput
-    /// - to the MockLogger
-    /// - and to Seq localhost:5341 (only in debug mode).
-    /// </summary>
-    public static void CreateLoggerFactoryAndMockLogger(this ITestOutputHelper testOutputHelper, out ILoggerFactory loggerFactory, out MockLogger mockLogger)
-    {
-        mockLogger = Substitute.For<MockLogger>();
-        loggerFactory = testOutputHelper.CreateLoggerFactory(mockLogger);
     }
 
     /// <summary>
     /// Inject TestOutput, Seq (debug only) and MockLogger (optional) to the application logging
     /// </summary>
-    public static IServiceCollection AddTestLogging(this IServiceCollection service, ITestOutputHelper testOutputHelper, MockLogger? mockLogger = null)
+    public static IServiceCollection AddTestLogging(this IServiceCollection service, IMessageSink messageSink, MockLogger? mockLogger = null, string outputTemplate = DefaultOutputTemplateConst)
     {
-        var serilogLogger = CreateSerilogLogger(testOutputHelper);
+        var serilogLogger = CreateSerilogLogger(messageSink, outputTemplate);
         service.AddLogging(builder => builder.BuildTestLogging(serilogLogger, mockLogger));
         return service;
     }
 
-    private static Serilog.Core.Logger CreateSerilogLogger(ITestOutputHelper testOutputHelper)
+    private static Serilog.Core.Logger CreateSerilogLogger(this IMessageSink messageSink, string outputTemplate)
     {
         var serilogLogger = new LoggerConfiguration()
                    .MinimumLevel.Verbose()
-                   .WriteTo.TestOutput(testOutputHelper)
+                   .WriteTo.TestOutput(messageSink, outputTemplate: outputTemplate)
 #if DEBUG
                    .WriteTo.Seq("http://localhost:5341/")
 #endif
@@ -87,30 +78,18 @@ public static class TestOutputMockLogging
     /// - to the given MockLogger (optional)
     /// - and to Seq localhost:5341 (only in debug mode).
     /// </summary>
-    public static ILoggerFactory CreateLoggerFactory<T>(this ITestOutputHelper testOutputHelper, MockLogger<T>? mockLogger = null)
+    public static ILoggerFactory CreateLoggerFactory<T>(this IMessageSink messageSink, MockLogger<T>? mockLogger = null, string outputTemplate = DefaultOutputTemplateConst)
     {
-        var serilogLogger = CreateSerilogLogger(testOutputHelper);
+        var serilogLogger = CreateSerilogLogger(messageSink, outputTemplate);
         return LoggerFactory.Create(builder => builder.BuildTestLogging(serilogLogger, mockLogger));
-    }
-
-    /// <summary>
-    /// Create a "combo" Logger factory and a NSubstitute's MockLogger. The Logger factory will log
-    /// - to the TestOutput
-    /// - to the MockLogger
-    /// - and to Seq localhost:5341 (only in debug mode).
-    /// </summary>
-    public static void CreateLoggerFactoryAndMockLogger<T>(this ITestOutputHelper testOutputHelper, out ILoggerFactory loggerFactory, out MockLogger<T> mockLogger)
-    {
-        mockLogger = Substitute.For<MockLogger<T>>();
-        loggerFactory = testOutputHelper.CreateLoggerFactory(mockLogger);
     }
 
     /// <summary>
     /// Inject TestOutput, Seq (debug only) and MockLogger (optional) to the application logging
     /// </summary>
-    public static IServiceCollection AddTestLogging<T>(this IServiceCollection service, ITestOutputHelper testOutputHelper, MockLogger<T>? mockLogger = null)
+    public static IServiceCollection AddTestLogging<T>(this IServiceCollection service, IMessageSink messageSink, MockLogger<T>? mockLogger = null, string outputTemplate = DefaultOutputTemplateConst)
     {
-        var serilogLogger = CreateSerilogLogger(testOutputHelper);
+        var serilogLogger = CreateSerilogLogger(messageSink, outputTemplate);
         service.AddLogging(builder => builder.BuildTestLogging(serilogLogger, mockLogger));
         return service;
     }
