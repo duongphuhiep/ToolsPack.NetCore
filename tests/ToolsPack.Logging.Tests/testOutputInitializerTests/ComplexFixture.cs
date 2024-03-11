@@ -2,7 +2,6 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Extensions.Logging;
 using System;
-using ToolsPack.Logging.Tests.lib;
 using Xunit.Abstractions;
 
 namespace ToolsPack.Logging.Tests

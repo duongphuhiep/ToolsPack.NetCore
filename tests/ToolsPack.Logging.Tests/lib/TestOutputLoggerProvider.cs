@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Logging;
 
-namespace ToolsPack.Logging.Tests.lib;
+namespace ToolsPack.Logging.Tests;
 
 /// <summary>
 /// The provider for TestOutputLogger
