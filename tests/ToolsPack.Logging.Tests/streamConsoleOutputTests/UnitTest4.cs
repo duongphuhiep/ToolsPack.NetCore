@@ -5,19 +5,18 @@ using Xunit.Abstractions;
 
 namespace ToolsPack.Logging.Tests;
 
-public class Tests : IDisposable
+public class UnitTest4 : IDisposable, IClassFixture<Fixture41>
 {
     private ILoggerFactory _loggerFactory;
     private ILogger _logger;
-    public Tests(ITestOutputHelper testOutputHelper)
+    public UnitTest4(ITestOutputHelper testOutputHelper)
     {
-        new TestOutputTextWriter(testOutputHelper);
-
+        StreamConsole.Setup(testOutputHelper);
         _loggerFactory = LoggerFactory.Create(builder =>
             builder.SetMinimumLevel(LogLevel.Debug)
             .AddConsole()
         );
-        _logger = _loggerFactory.CreateLogger<Tests>();
+        _logger = _loggerFactory.CreateLogger<UnitTest4>();
         _logger.LogInformation("Setup");
     }
 
@@ -26,10 +25,10 @@ public class Tests : IDisposable
         _logger.LogInformation("TearDown");
     }
 
-    [Fact]
+    [Fact(Skip = "This is a failed experiment")]
     public void Test1()
     {
         Console.Write("oOoOoO");
-        _logger.LogInformation("Test1");
+        _logger.LogInformation("UnitTest4");
     }
 }

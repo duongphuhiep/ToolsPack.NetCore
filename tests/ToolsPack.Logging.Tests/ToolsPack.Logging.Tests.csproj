@@ -22,6 +22,10 @@
         <PackageReference Include="Serilog.Sinks.Seq" Version="7.0.0" />
         <PackageReference Include="Serilog.Sinks.XUnit" Version="3.0.5" />
         <PackageReference Include="xunit" Version="2.7.0" />
+        <PackageReference Include="xunit.runner.console" Version="2.7.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -35,6 +39,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Update=".RunSettings">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
       <None Update="xunit.runner.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>

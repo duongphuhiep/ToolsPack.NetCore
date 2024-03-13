@@ -38,17 +38,17 @@ namespace ToolsPack.Logging.Tests
                 builder.AddFilter("App.Telemetry", LogLevel.Error);
             });
             _logger = _loggerFactory.CreateLogger<ComplexFixture>();
-            _logger.LogInformation("Fixture fixture started");
+            _logger.LogInformation("ComplexFixture started");
         }
 
         public void Dispose()
         {
-            _logger.LogInformation("Fixture fixture finished");
+            _logger.LogInformation("ComplexFixture finished");
         }
 
         public void LogFromFixture(string message)
         {
-            _logger.LogInformation("Fixture scope: " + message);
+            _logger.LogInformation("ComplexFixture: " + message);
         }
     }
 }
