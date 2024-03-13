@@ -35,7 +35,7 @@ namespace ToolsPack.Logging.Tests
         public void ExecuteMyUnitTest(string executionMessage)
         {
             _logger.LogInformation("UnitTest scope: " + executionMessage);
-            _complexFixture.LogFromFixture("hello 21: " + executionMessage);
+            _complexFixture.LogFromFixture("Fixture scope: " + executionMessage);
         }
     }
 }
