@@ -40,7 +40,7 @@ var result = await tlo.GetValue(); // select_from_database at most once every 0.
 for (1..10000) { result = await tlo.GetValueAsync(); }  //GOOD: select_from_database only once every 0.5s
 ```
 
-## NamedLocker
+## NamedLocker - deprecated use [DistributedLock](https://github.com/madelson/DistributedLock) instead
 
 ```CSharp
 static readonly NamedLocker<string> CustomerLocker = new NamedLocker<string>();
@@ -52,7 +52,7 @@ customerLocker.RunWithLock("Peter.Buy", () =>
 
 - The "synchronized code" will wait for other "Peter.Buy"` key free.
 
-## MultiNamedTimedLocker
+## MultiNamedTimedLocker - deprecated use [DistributedLock](https://github.com/madelson/DistributedLock) instead
 
 ```CSharp
 static readonly MultiNamedTimedLocker<string> CustomerLocker = new MultiNamedTimedLocker<string>();

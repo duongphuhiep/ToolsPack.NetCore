@@ -10,10 +10,11 @@ using LogState = System.Collections.Generic.IReadOnlyList<System.Collections.Gen
 /// The MockLogger provides abstracted IsLogged hooks which are invoked for every log events.
 /// A MockLogger is usually instantiated by a Mock library (such as Moq, NSubstitute..).
 /// So that unit tests can spy (or verify) on the IsLogged hooks in order to Assert the log content.
+/// 
+/// Other alternative is the FakeLogger in the package [Microsoft.Extensions.Diagnostics.Testing]
 /// </summary>
 public abstract class MockLogger : ILogger
 {
-
     public bool IsEnabled(LogLevel logLevel) => true;
 
     public abstract IDisposable BeginScope<TState>(TState state);

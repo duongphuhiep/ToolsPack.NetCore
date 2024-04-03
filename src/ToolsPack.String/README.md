@@ -174,6 +174,13 @@ Assert.Equal("http://www.my.domain/absolute/path", UriCombine.Join("http://www.m
 
 For more complex Uri manipulation, checkout the [Furl](https://flurl.dev/) project.
 
+## JoinNonEmpty
+
+```Csharp
+Assert.Equal("a, c , b", StringExt.JoinNonEmpty(", ", "a", null, "c ", string.Empty, "b"));
+Assert.Equal("a,c ,b", StringExt.JoinNonEmpty(',', new[] { "a", null, string.Empty, "c ", "b" }));
+```
+
 ## Working with XmlDocument and XDocument
 
 - `XDocument` is recommended over the old `XmlDocument`
