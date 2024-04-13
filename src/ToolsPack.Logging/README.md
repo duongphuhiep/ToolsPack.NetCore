@@ -12,7 +12,9 @@ There are 2 ways allowing you to "spy" on the log events happening during the ap
   
 Both can be added to your logging pipeline along with others real loggers of your application (Serilog, NLog...)
 
-Here how it works:
+`FakeLogger` give you access to the collection of all log events so you can check whatever you wanted. `MockLogger` is suistable only for simple use cases which you interested in only certain log events, verify if they are logged or not? 
+
+Here how `MockLogger` works:
 
 **Step 1:** Use a Mock library (such as Moq, NSubstitue..) to instantiate a `MockLogger`. For eg:
 
