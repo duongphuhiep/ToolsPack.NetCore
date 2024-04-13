@@ -5,9 +5,12 @@
 Your test is executing some application codes which log certain messages via the `Microsoft.Extensions.Logging` library.
 Once the application codes finished, you want to Assert (or to Verify) that some messages are logged as expected.
 
-The `MockLogger` allows you to "spy" on the log events happening during the application execution. It can be added to your logging pipeline along with others real loggers of your application (Serilog, NLog...)
+There are 2 ways allowing you to "spy" on the log events happening during the application execution:
 
-Checkout the [`MockLoggerTests.cs`](../../tests/ToolsPack.Logging.Tests/mockLoggerTests/MockLoggerTests.cs) for full demonstration.
+  * Use `FakeLogger` in the [Microsoft.Extensions.Diagnostics.Testing](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.Testing) nuget package. Checkout [the FakeLogger example](../../tests/ToolsPack.Logging.Tests/fakeLoggerTests/FakeLoggerTests.cs).
+  * Use `MockLogger` of this [ToolsPack.Logging](https://www.nuget.org/packages/ToolsPack.Logging) nuget package. Checkout the [`MockLoggerTests.cs`](../../tests/ToolsPack.Logging.Tests/mockLoggerTests/MockLoggerTests.cs) for full demonstration.
+  
+Both can be added to your logging pipeline along with others real loggers of your application (Serilog, NLog...)
 
 Here how it works:
 
