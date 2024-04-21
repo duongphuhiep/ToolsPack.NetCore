@@ -5,14 +5,13 @@
 Your test is executing some application codes which log certain messages via the `Microsoft.Extensions.Logging` library.
 Once the application codes finished, you want to Assert (or to Verify) that some messages are logged as expected.
 
-There are 2 ways allowing you to "spy" on the log events happening during the application execution:
+There are several ways allowing you to "spy" on the log events happening during the application execution:
 
   * Use `FakeLogger` in the [Microsoft.Extensions.Diagnostics.Testing](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.Testing) nuget package. Checkout [the FakeLogger example](../../tests/ToolsPack.Logging.Tests/fakeLoggerTests/FakeLoggerTests.cs).
-  * Use `MockLogger` of this [ToolsPack.Logging](https://www.nuget.org/packages/ToolsPack.Logging) nuget package. Checkout the [`MockLoggerTests.cs`](../../tests/ToolsPack.Logging.Tests/mockLoggerTests/MockLoggerTests.cs) for full demonstration.
+  * Use the [`Meziantou.Extensions.Logging.InMemory` package](https://www.meziantou.net/how-to-test-the-logs-from-ilogger-in-dotnet.htm)
+  * Use `MockLogger` of this [ToolsPack.Logging](https://www.nuget.org/packages/ToolsPack.Logging) nuget package. Checkout the [`MockLoggerTests.cs`](../../tests/ToolsPack.Logging.Tests/mockLoggerTests/MockLoggerTests.cs) for demonstration.
   
-Both can be added to your logging pipeline along with others real loggers of your application (Serilog, NLog...)
-
-`FakeLogger` give you access to the collection of all log events so you can check whatever you wanted. `MockLogger` is suistable only for simple use cases which you interested in only certain log events, verify if they are logged or not? 
+While `FakeLogger` give you access to the collection of all log events so you can check whatever you wanted. `MockLogger` is suistable only for simple use cases which you interested in only certain log events, verify if they are logged or not? 
 
 Here how `MockLogger` works:
 
