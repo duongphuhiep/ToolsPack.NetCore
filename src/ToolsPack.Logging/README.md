@@ -220,9 +220,9 @@ dotnet test --logger "console;verbosity=detailed":
 
 ### Display logs of XUnit's extensibility classes (`IClassFixture`, `ITestCaseOrderer`...) in the Test console
 
-The XUnit test console (`ITestOutputHelper`) is only avaible for unit tests. If the logs messages in XUnit's extensibility classes (IClassFixture, ITestCaseOrderer...) won't show up in the test console.
+The XUnit test console (`ITestOutputHelper`) is only available for unit tests. If the logs messages in XUnit's extensibility classes (`IClassFixture`, `ITestCaseOrderer`...) won't show up in the test console.
 
-But there is some way to make it happening (although not perfect): checkout example in [`SampleUnitTest21.cs`](../../tests/ToolsPack.Logging.Tests/testOutputInitializerTests/SampleUnitTest21.cs).
+But there is a way to make it happening: checkout [`this Tutorial`](../../tests/LogFixtureMartinCostello/README.md).
 
 ## ElapsedTimeLogger
 
@@ -249,10 +249,10 @@ class MyCalculator
 }
 ```
 
-- The `etw` wrap the usual logger `Log`, we use `etw` to log message instead of the usual `Log`
-- the `blockCodeName` is repeated in the start of each log message, so that we can filter log message by "blockCodeName"
-- Each log message will display the elapsed time (in micro-second) since the last log message.
-- A **sum up log** will display the total elapsed time (in micro-second) when the `etw` object is disposed.
+* The `etw` wrap the usual logger `Log`, we use `etw` to log message instead of the usual `Log`
+* the `blockCodeName` is repeated in the start of each log message, so that we can filter log message by "blockCodeName"
+* Each log message will display the elapsed time (in micro-second) since the last log message.
+* A **sum up log** will display the total elapsed time (in micro-second) when the `etw` object is disposed.
 
 ```text
 22:56:59,866 [DEBUG] Begin blockCodeName
@@ -268,10 +268,10 @@ class MyCalculator
 var etw = ElapsedTimeLogger.Create(Log, "checkIntraday").InfoEnd().AutoJump(150, 250).AutoJumpLastLog(500, 1000)
 ```
 
-- The log level will auto jump to INFO if the elapsed time exceeds 150 ms
-- The log level will auto jump to WARN if the elapsed time exceeds 250 ms
-- The above **sum up log** will switch to INFO if the total elapsed time exceeds 500 ms
-- The above **sum up log** will switch to WARN if the total elapsed time exceeds 1 sec
+* The log level will auto jump to INFO if the elapsed time exceeds 150 ms
+* The log level will auto jump to WARN if the elapsed time exceeds 250 ms
+* The above **sum up log** will switch to INFO if the total elapsed time exceeds 500 ms
+* The above **sum up log** will switch to WARN if the total elapsed time exceeds 1 sec
 
 ### Customize Start Context and End context
 
@@ -320,5 +320,5 @@ will give
 
 ### Other benchmark library
 
-- If you want to optimize a particular static (and stateless) function, checkout [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet) project. See [video tutorial here](https://www.youtube.com/watch?v=EWmufbVF2A4). (Unlike other project, the `ElapsedTimeLogger` is just a `ILogger` so it fits to be injected to any production application)
-- <https://miniprofiler.com/dotnet/>
+* If you want to optimize a particular static (and stateless) function, checkout [BenchmarkDotNet](https://github.com/dotnet/BenchmarkDotNet) project. See [video tutorial here](https://www.youtube.com/watch?v=EWmufbVF2A4). (Unlike other project, the `ElapsedTimeLogger` is just a `ILogger` so it fits to be injected to any production application)
+* <https://miniprofiler.com/dotnet/>
