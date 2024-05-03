@@ -8,6 +8,8 @@ It is difficult to see all these logs, because xUnit considers them as diagnosti
 
 This example project shows a solution to this problem. Both logs messages of the fixture (diagnostics messages) and of the Tests will be sent to the Tests Output.
 
+![result](https://github.com/duongphuhiep/ToolsPack.NetCore/assets/1638594/43533d7a-e6ee-4c8d-9523-94e0440e91f6)
+
 ## How it works?
 
 The fixture class has to implement `ITestOutputHelperAccessor` interface.
@@ -15,6 +17,3 @@ The fixture class has to implement `ITestOutputHelperAccessor` interface.
 
 The tests classes have to "give" their `ITestOutputHelper` to the fixture class.
 ![test](https://github.com/duongphuhiep/ToolsPack.NetCore/assets/1638594/d0a96c3a-258c-44ff-b058-cd21f2fd9d39)
-
-as a result, the Fixture will sent log messages to the given Test Output:
-![result](https://github.com/duongphuhiep/ToolsPack.NetCore/assets/1638594/43533d7a-e6ee-4c8d-9523-94e0440e91f6)
