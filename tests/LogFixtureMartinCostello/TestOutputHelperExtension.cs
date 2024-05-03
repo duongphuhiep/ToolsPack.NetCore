@@ -6,7 +6,7 @@ using Xunit.Abstractions;
 namespace ToolsPack.Logging.TestingTools;
 
 /// <summary>
-/// Helper to configure logging to the TestOutput, Seq, and Console.
+/// Helper to configure logging to the TestOutput, Seq.
 /// You can start a Seq server on localhost with help of the `docker-compose.yaml` file in this project
 /// </summary>
 public static class TestOutputHelperExtension
@@ -19,7 +19,7 @@ public static class TestOutputHelperExtension
         builder.ClearProviders();
 
         builder.AddSeq();
-        builder.AddConsole();
+        //builder.AddConsole(); //<= it won't help, nothing will be output to the Console
         builder.AddFilter(null, LogLevel.Trace);
         builder.AddFilter("Microsoft", LogLevel.Error);
         builder.AddFilter("System", LogLevel.Error);
@@ -32,46 +32,67 @@ public static class TestOutputHelperExtension
     /// Create a new Logger factory which will log
     /// - to the TestOutput
     /// - and to Seq localhost:5341.
-    /// - and to Console
     /// </summary>
-    public static ILoggerFactory CreateLoggerFactory(this ITestOutputHelper testOutputHelper)
-        => LoggerFactory.Create(builder => builder.BuildTestLogging(testOutputHelper));
+    public static ILoggerFactory CreateLoggerFactory(this ITestOutputHelper testOutputHelper, Action<XUnitLoggerOptions>? options = null)
+        => LoggerFactory.Create(builder => builder.BuildTestLogging(testOutputHelper, options));
 
     /// <summary>
-    /// Inject TestOutput, Seq and Console to the current application logging pipeline. It will override other log configs.
+    /// Inject TestOutput, Seq to the current application logging pipeline. It will override other log configs.
     /// </summary>
-    public static IServiceCollection AddTestLogging(this IServiceCollection service, ITestOutputHelper testOutputHelper)
-        => service.AddLogging(builder => builder.BuildTestLogging(testOutputHelper));
+    public static IServiceCollection AddTestLogging(this IServiceCollection service, ITestOutputHelper testOutputHelper, Action<XUnitLoggerOptions>? options = null)
+        => service.AddLogging(builder => builder.BuildTestLogging(testOutputHelper, options));
 
     /// <summary>
     /// Create a new Logger factory which will log
     /// - to the TestOutput
     /// - and to Seq localhost:5341.
-    /// - and to Console
     /// </summary>
-    public static ILoggerFactory CreateLoggerFactory(this IMessageSink messageSink, ITestOutputHelperAccessor? testOutputHelperAccessor = null)
-        => LoggerFactory.Create(builder => builder.BuildTestLogging(messageSink, testOutputHelperAccessor));
+    public static ILoggerFactory CreateLoggerFactory(this IMessageSink messageSink, ITestOutputHelperAccessor? testOutputHelperAccessor = null, Action<XUnitLoggerOptions>? options = null)
+        => LoggerFactory.Create(builder => builder.BuildTestLogging(messageSink, testOutputHelperAccessor, options));
 
     /// <summary>
-    /// Inject TestOutput, Seq and Console to the current application logging pipeline. It will override other log configs.
+    /// Inject TestOutput, Seq to the current application logging pipeline. It will override other log configs.
     /// </summary>
-    public static IServiceCollection AddTestLogging(this IServiceCollection service, IMessageSink messageSink, ITestOutputHelperAccessor? testOutputHelperAccessor = null)
-        => service.AddLogging(builder => builder.BuildTestLogging(messageSink, testOutputHelperAccessor));
+    public static IServiceCollection AddTestLogging(this IServiceCollection service, IMessageSink messageSink, ITestOutputHelperAccessor? testOutputHelperAccessor = null, Action<XUnitLoggerOptions>? options = null)
+        => service.AddLogging(builder => builder.BuildTestLogging(messageSink, testOutputHelperAccessor, options));
 
-    private static ILoggingBuilder BuildTestLogging(this ILoggingBuilder builder, IMessageSink messageSink, ITestOutputHelperAccessor? testOutputHelperAccessor)
+    private static ILoggingBuilder BuildTestLogging(this ILoggingBuilder builder, IMessageSink messageSink, ITestOutputHelperAccessor? testOutputHelperAccessor, Action<XUnitLoggerOptions>? options)
     {
-        builder
-            .BuildTestLogging()
-            .AddXUnit(messageSink);
+        builder.BuildTestLogging();
+        if (options is null)
+        {
+            builder.AddXUnit(messageSink);
+        }
+        else
+        {
+            builder.AddXUnit(messageSink, options);
+        }
         if (testOutputHelperAccessor is not null)
         {
-            builder.AddXUnit(testOutputHelperAccessor);
+            if (options is null)
+            {
+                builder.AddXUnit(testOutputHelperAccessor);
+            }
+            else
+            {
+                builder.AddXUnit(testOutputHelperAccessor, options);
+            }
         }
         return builder;
     }
 
-    private static ILoggingBuilder BuildTestLogging(this ILoggingBuilder builder, ITestOutputHelper testOutputHelper)
-        => builder
-            .BuildTestLogging()
-            .AddXUnit(testOutputHelper);
+    private static ILoggingBuilder BuildTestLogging(this ILoggingBuilder builder, ITestOutputHelper testOutputHelper, Action<XUnitLoggerOptions>? options)
+    {
+        builder.BuildTestLogging();
+        if (options is null)
+        {
+            builder.AddXUnit(testOutputHelper);
+        }
+        else
+        {
+            builder.AddXUnit(testOutputHelper, options);
+        }
+
+        return builder;
+    }
 }

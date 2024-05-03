@@ -11,10 +11,16 @@ public class MyFixture : IDisposable, ITestOutputHelperAccessor
     public ILoggerFactory LoggerFactory { get; private set; }
     public ITestOutputHelper? OutputHelper { get; set; }
 
+    private readonly IDisposable? _fixtureScope;
+
     public MyFixture(IMessageSink diagnosticMessageSink)
     {
-        LoggerFactory = diagnosticMessageSink.CreateLoggerFactory(this);
+        LoggerFactory = diagnosticMessageSink.CreateLoggerFactory(this, opt =>
+        {
+            opt.IncludeScopes = true;
+        });
         _logger = LoggerFactory.CreateLogger<MyFixture>();
+        _fixtureScope = _logger.BeginScope("My fixture scope");
         _logger.LogInformation("Start MyFixture, we won't see this diagnostic messages in the Test Output");
     }
 
@@ -26,5 +32,6 @@ public class MyFixture : IDisposable, ITestOutputHelperAccessor
     public void Dispose()
     {
         _logger.LogInformation("End MyFixture, we won't see this diagnostic messages in the Test Output");
+        _fixtureScope?.Dispose();
     }
 }
