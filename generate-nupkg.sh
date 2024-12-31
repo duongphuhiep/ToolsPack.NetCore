@@ -11,3 +11,4 @@ dotnet pack src/ToolsPack.String -o ./
 dotnet pack src/ToolsPack.Thread -o ./
 dotnet pack src/ToolsPack.Webservice -o ./
 dotnet pack src/ToolsPack.Logging -o ./
+dotnet pack src/ToolsPack.Logging.Otlp -o ./

@@ -8,22 +8,25 @@ namespace ToolsPack.Logging
 {
     /// <summary>
     /// Micro benchmark a block of code, add elapsed time in each log message and the total elapsed time of the code block
+    /// <example>
+    /// <code>
+    /// private static readonly ILogger Log = LogManager.GetLogger(typeof(MyClass));
     /// 
-    ///            private static readonly ILogger Log = LogManager.GetLogger(typeof(MyClass));
+    /// using (var etw = ElapsedTimeWatcher.Create(Log, "checkIntraday"))
+    /// {
+    ///     Thread.Sleep(100);
+    ///     etw.LogDebug("step 1");
     /// 
-    ///            using (var etw = ElapsedTimeWatcher.Create(Log, "checkIntraday"))
-    ///            {
-    ///                Thread.Sleep(100);
-    ///                etw.LogDebug("step 1");
+    ///     Thread.Sleep(200);
+    ///     etw.LogDebug"step 2");
     /// 
-    ///                Thread.Sleep(200);
-    ///                etw.LogDebug"step 2");
+    ///     Thread.Sleep(300);
+    ///     etw.LogInformation("final step)");
     /// 
-    ///                Thread.Sleep(300);
-    ///                etw.LogInformation("final step)");
-    /// 
-    ///                Thread.Sleep(400);
-    ///            }
+    ///     Thread.Sleep(400);
+    /// }
+    /// </code>
+    /// </example>
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1303:Do not pass literals as localized parameters", Justification = "Localization is fixed US-EN")]
     public sealed class ElapsedTimeLogger : IDisposable, ILogger
@@ -209,12 +212,12 @@ namespace ToolsPack.Logging
                 }
             }
 
-            _log?.Log(logLevel, "End {0} : Total elapsed {1}", _endContext, _scopeSw.Display(_timeUnit));
+            _log.Log(logLevel, "End {EndContext} : Total elapsed {TotalElapsed}", _endContext, _scopeSw.Display(_timeUnit));
         }
 
         private void LogBeginMessage()
         {
-            _log?.Log(_startLogLevel, "Begin {0}", _startContext);
+            _log.Log(_startLogLevel, "Begin {StartContext}", _startContext);
         }
 
         #region ILogger

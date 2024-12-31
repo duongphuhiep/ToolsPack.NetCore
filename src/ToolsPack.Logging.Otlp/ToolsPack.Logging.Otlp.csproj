@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net8.0;net7.0;net6.0</TargetFrameworks>
+        <LangVersion>default</LangVersion>
+        <PackageVersion>1.0.0</PackageVersion>
+        <Description>
+            OTLP logging Json exporter
+        </Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/src/ToolsPack.Logging.Otlp</PackageProjectUrl>
+        <PackageIcon>toolspack-128.png</PackageIcon>
+        <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/src/ToolsPack.Logging.Otlp</RepositoryUrl>
+        <Authors>hiep</Authors>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="OpenTelemetry" Version="[1.10.0,)"/>
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="..\..\icon\toolspack-128.png" Pack="true" PackagePath=""/>
+        <None Include="README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+</Project>

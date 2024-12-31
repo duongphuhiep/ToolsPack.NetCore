@@ -17,7 +17,7 @@ public class MockLoggerTests
     private readonly MockLogger _logger = Substitute.For<MockLogger>();
 
     /// <summary>
-    /// Demontrate how to use mock logger to spy on normal log message
+    /// Example how to use mock logger to spy on normal log message
     /// </summary>
     [Fact]
     public void MockLoggerBasicTest()
