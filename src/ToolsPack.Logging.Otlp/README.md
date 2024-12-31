@@ -3,17 +3,18 @@
 In the current .NET OLTP (v1.10.0) implementation, the [
 `LogRecord` class](https://github.com/open-telemetry/opentelemetry-dotnet/blob/86c1d8c/src/OpenTelemetry/Logs/LogRecord.cs)
 is not serializable.
-It contains a lot of interesting information, mixing with other logics. IMO, actual implementation of this class should
-rather be called `LogRecordKitchenSink` than `LogRecord`.
+It contains a lot of interesting OpenTelemetry information, mixing with other logics.
+IMO, actual implementation of this class should rather be called `LogRecordKitchenSink` than `LogRecord`.
 
-This nuget library provides a mapping of the `LogRecord` "kitchen sink" object to a serializable `LogRecordDto` object.
+This nuget library provides a mapping of the `LogRecord` "kitchen sink" object to a serializable [
+`LogRecordDto`](./LogRecordDto.cs) object:
+Checkout the [`LogRecordConverter`](./LogRecordConverter.cs) class.
 It should facilitate you to develop your own custom exporter (File, Console...).
 
-The library also provides simple implementation of Console and File exporter.
+The library also provides simple implementation of [Console](JsonConsoleLogsExporter.cs)
+and [File exporter](./JsonFileLogsExporter.cs) which will format the telemetry log records to json.
 
-## Usage
-
-### Log to Console
+## Log to Console
 
 ```C#
 using System.Diagnostics;
@@ -81,7 +82,7 @@ using (activitySource.StartActivity())
 */
 ```
 
-### Log to file
+## Log to file
 
 ```C#
 using Microsoft.Extensions.Logging;
