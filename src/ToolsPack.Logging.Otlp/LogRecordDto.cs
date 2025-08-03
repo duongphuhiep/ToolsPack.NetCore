@@ -11,8 +11,8 @@ namespace ToolsPack.Logging.Otlp;
 public record LogRecordDto
 {
     public DateTime Timestamp { get; init; }
-    public string TraceId { get; init; }
-    public string SpanId { get; init; }
+    public string? TraceId { get; init; }
+    public string? SpanId { get; init; }
     public ActivityTraceFlags TraceFlags { get; init; }
     public string? CategoryName { get; init; }
     public LogLevel Severity { get; init; }

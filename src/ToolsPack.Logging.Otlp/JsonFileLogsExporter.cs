@@ -52,6 +52,7 @@ public class JsonFileLogsExporter : BaseExporter<LogRecord>
     {
         if (batch.Count == 0) return ExportResult.Success;
         var resourceJson = ComputeResourceJson();
+        if (resourceJson is null) return ExportResult.Success;
         StringBuilder sb = new();
         foreach (var record in batch)
         {

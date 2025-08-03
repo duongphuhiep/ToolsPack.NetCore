@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text.Json.Nodes;
 using OpenTelemetry.Logs;
+using MyOtelAttributesNullable = System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string, object?>>;
 
 namespace ToolsPack.Logging.Otlp;
 
@@ -17,7 +18,7 @@ public static class LogRecordConverter
     /// <param name="attachedResource">the parent resource</param>
     /// <param name="unknownValueTypeBehavior">Define what to do if unable to convert the value</param>
     /// <returns></returns>
-    public static LogRecordDto Convert(this LogRecord record, JsonObject? attachedResource,
+    public static LogRecordDto Convert(this LogRecord record, JsonObject attachedResource,
         UnknownValueTypeBehavior unknownValueTypeBehavior)
     {
         var dto = new LogRecordDto
@@ -30,12 +31,11 @@ public static class LogRecordConverter
             Severity = record.LogLevel,
             FormattedMessage = record.FormattedMessage,
             Body = record.Body,
-            Attributes = record.Attributes.ConvertToJsonObject(unknownValueTypeBehavior),
+            Attributes = record.Attributes?.ConvertToJsonObject(unknownValueTypeBehavior),
             EventId = record.EventId,
             Exception = record.Exception,
             Resource = attachedResource
         };
-
         record.ForEachScope((logRecordScopes, jsonArray) =>
         {
             var jsonObject = logRecordScopes.ConvertToJsonObject(unknownValueTypeBehavior);
@@ -51,10 +51,9 @@ public static class LogRecordConverter
     /// <param name="attributes">collection of KeyValue Pair</param>
     /// <param name="unknownValueTypeBehavior">Define what to do if unable to convert the value</param>
     /// <returns></returns>
-    public static JsonObject? ConvertToJsonObject(this IEnumerable<KeyValuePair<string, object?>>? attributes,
+    public static JsonObject ConvertToJsonObject(this MyOtelAttributesNullable attributes,
         UnknownValueTypeBehavior unknownValueTypeBehavior)
     {
-        if (attributes is null) return null;
         var jsonObject = new JsonObject();
 
         foreach (var attribute in attributes)
@@ -77,7 +76,7 @@ public static class LogRecordConverter
 
         return jsonObject;
     }
-
+    
     /// <summary>
     ///     Convert a LogRecordScope to a JsonObject
     /// </summary>

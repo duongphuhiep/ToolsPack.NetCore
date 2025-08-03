@@ -97,10 +97,10 @@ public class ShadowTextWriter : TextWriter
     public override void Write(StringBuilder? value)
     {
         shadown.Write(value);
-        _origin.WriteLine(value?.ToString());
+        _origin.WriteLine(value?.ToString() ?? "");
     }
 
-    public override void Write([StringSyntax("CompositeFormat")] string format, params object?[] arg)
+    public override void Write([StringSyntax("CompositeFormat")] string format, params object[] arg)
     {
         shadown.Write(format, arg);
         _origin.WriteLine(format, arg);

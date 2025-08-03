@@ -42,6 +42,7 @@ public class JsonConsoleLogsExporter : BaseExporter<LogRecord>
     public override ExportResult Export(in Batch<LogRecord> batch)
     {
         var resourceJson = ComputeResourceJson();
+        if (resourceJson is null) return ExportResult.Success;
         foreach (var record in batch)
         {
             var recordDto = record.Convert(resourceJson, _options.UnknownValueTypeBehavior);
