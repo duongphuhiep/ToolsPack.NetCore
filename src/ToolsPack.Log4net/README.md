@@ -1,3 +1,8 @@
+
+# This package is obsolete. Use the [ToolsPack.Logging](../ToolsPack.Logging) package instead.
+
+--
+
 # ToolsPack.Log4net
 
 Checkout also the `ToolsPack.NLog` package. I personally think that `NLog` is better than `Log4Net`..

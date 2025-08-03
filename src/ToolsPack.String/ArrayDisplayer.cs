@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using EllipsisFunc = System.Func<string, int, string?, string>;
+
 namespace ToolsPack.String
 {
     /// <summary>
@@ -24,7 +26,7 @@ namespace ToolsPack.String
             private int _maxItems = int.MaxValue;
             private int _typicalLength = int.MaxValue;
             private string _separator = ", ";
-            private Func<string, int, string, string> _ellipsis = null;
+            private EllipsisFunc? _ellipsis = null;
             private int _maxItemLength = int.MaxValue;
 
             public ArrayFormat(IEnumerable arr)
@@ -75,7 +77,7 @@ namespace ToolsPack.String
             /// - WordEllipsis
             /// - WordEllipsisStrictLength
             /// </summary>
-            public ArrayFormat MaxItemLength(int maxItemLength, Func<string, int, string, string> ellipsis)
+            public ArrayFormat MaxItemLength(int maxItemLength, EllipsisFunc ellipsis)
             {
                 _maxItemLength = maxItemLength;
                 _ellipsis = ellipsis;
@@ -111,7 +113,7 @@ namespace ToolsPack.String
         /// With maxItemLength = 10: the item "Lorem ipsum dolor sit amet" is displayed as "[[Lorem ipsu...]]".
         /// </summary>
         public static string DisplayMaxItem(IEnumerable arr, int maxItemsToDisplay = int.MaxValue, string separator = ", ",
-            Func<string, int, string, string> ellipsisFunc = null,
+            EllipsisFunc? ellipsisFunc = null,
             int maxItemLength = 255)
         {
             if (arr == null)
@@ -121,7 +123,7 @@ namespace ToolsPack.String
 
             var e = arr.GetEnumerator();
 
-            object item1 = null;
+            object? item1 = null;
             bool hasItem1 = e.MoveNext();
             if (hasItem1)
             {
@@ -134,7 +136,7 @@ namespace ToolsPack.String
             }
             string item1ToString = Display(item1, maxItemLength, ellipsisFunc);
 
-            object item2 = null;
+            object? item2 = null;
             bool hasItem2 = e.MoveNext();
             if (hasItem2)
             {
@@ -222,7 +224,7 @@ namespace ToolsPack.String
         /// With maxItemLength = 10: the item "Lorem ipsum dolor sit amet" is displayed as "[[Lorem ipsu...]]".
         /// </summary>
         public static string DisplayMaxLength(IEnumerable arr, int typicalLength = int.MaxValue, string separator = ", ",
-            Func<string, int, string, string> ellipsisFunc = null, int maxItemLength = 255)
+            EllipsisFunc? ellipsisFunc = null, int maxItemLength = 255)
         {
             if (arr == null)
             {
@@ -231,7 +233,7 @@ namespace ToolsPack.String
 
             var e = arr.GetEnumerator();
 
-            object item1 = null;
+            object? item1 = null;
             bool hasItem1 = e.MoveNext();
             if (hasItem1)
             {
@@ -242,9 +244,9 @@ namespace ToolsPack.String
                 //arr is empty
                 return "{}";
             }
-            string item1ToString = Display(item1, maxItemLength, ellipsisFunc);
+            string? item1ToString = Display(item1, maxItemLength, ellipsisFunc);
 
-            object item2 = null;
+            object? item2 = null;
             bool hasItem2 = e.MoveNext();
             if (hasItem2)
             {
@@ -312,14 +314,14 @@ namespace ToolsPack.String
         #region Convenient signatures
 
         public static string DisplayMaxItem(IEnumerable arr, string separator = ", ", int maxItemsToDisplay = int.MaxValue,
-            Func<string, int, string, string> ellipsisFunc = null,
+            EllipsisFunc? ellipsisFunc = null,
             int maxItemLength = 255)
         {
             return DisplayMaxItem(arr, maxItemsToDisplay, separator, ellipsisFunc, maxItemLength);
         }
 
         public static string DisplayMaxLength(IEnumerable arr, string separator = ", ", int typicalLength = int.MaxValue,
-            Func<string, int, string, string> ellipsisFunc = null, int maxItemLength = 255)
+            EllipsisFunc? ellipsisFunc = null, int maxItemLength = 255)
         {
             return DisplayMaxLength(arr, typicalLength, separator, ellipsisFunc, maxItemLength);
         }
@@ -329,12 +331,12 @@ namespace ToolsPack.String
         /// <summary>
         /// Display a dictionary, it is not recommended to use on big dictionary
         /// </summary>
-        public static string Display<TK, TV>(this Dictionary<TK, TV> dict, string separator = ", ")
+        public static string Display<TK, TV>(this Dictionary<TK, TV> dict, string separator = ", ") where TK : notnull
         {
             return "{ " + string.Join(separator, dict.Select(x => x.Key + " -> " + x.Value).ToArray()) + " }";
         }
 
-        private static string Display(object o, int maxLength, Func<string, int, string, string> ellipsisFunc)
+        private static string Display(object? o, int maxLength, EllipsisFunc? ellipsisFunc)
         {
             if (o == null)
             {
@@ -342,11 +344,11 @@ namespace ToolsPack.String
             }
             if (ellipsisFunc == null)
             {
-                return o.ToString();
+                return (o?.ToString()) ?? string.Empty;
             }
 
-            string s = o.ToString();
-            string e = ellipsisFunc(s, maxLength, "...");
+            var s = o?.ToString() ?? string.Empty;;
+            var e = ellipsisFunc(s, maxLength, "...");
             if (e.Length != s.Length)
             {
                 return "[[" + e + "]]";
@@ -355,9 +357,9 @@ namespace ToolsPack.String
             return s;
         }
 
-        public static string DefaultEllipsis(string text, int length, string ellipsis)
+        public static string DefaultEllipsis(string? text, int length, string? ellipsis)
         {
-            if (text == null) return null;
+            if (text == null) return string.Empty;
             if (ellipsis == null) throw new ArgumentNullException(nameof(ellipsis));
             if (length <= 0)
             {
@@ -387,7 +389,7 @@ namespace ToolsPack.String
         /// 11 : Lorem ipsum...
         /// 12 : Lorem ipsum dolor...
         /// </summary>
-        public static string WordEllipsis(string text, int length, string ellipsis)
+        public static string? WordEllipsis(string? text, int length, string ellipsis)
         {
             if (text == null) return null;
             if (ellipsis == null) throw new ArgumentNullException(nameof(ellipsis));
@@ -424,9 +426,9 @@ namespace ToolsPack.String
         /// 18 : Lorem ipsum...
         /// 19 : Lorem ipsum..
         /// </summary>
-        public static string WordEllipsisStrictLength(string text, int maxLength, string ellipsis)
+        public static string WordEllipsisStrictLength(string? text, int maxLength, string ellipsis)
         {
-            if (text == null) return null;
+            if (text == null) return string.Empty;
             if (ellipsis == null) throw new ArgumentNullException(nameof(ellipsis));
 
             string result;

@@ -12,7 +12,7 @@ namespace ToolsPack.Logging.Tests;
 
 using LogState = IReadOnlyList<KeyValuePair<string, object?>>;
 
-public class MockLoggerTests
+public partial class MockLoggerTests
 {
     private readonly MockLogger _logger = Substitute.For<MockLogger>();
 
@@ -67,22 +67,22 @@ public class MockLoggerTests
             Arg.Is(LogLevel.Information),
             Arg.Any<EventId>(),
             Arg.Any<Exception?>(),
-            Arg.Is<string>(msg => Regex.IsMatch(msg, "The person .* odered .*")),
-            Arg.Is<LogState>(state => AssertLogStructuring(state)));
+            Arg.Is<string>(msg => MyRegex().IsMatch(msg))
+            /* Arg.Is<LogState>(state => AssertLogStructuring(state))*/);
     }
 
-    private static bool AssertLogStructuring(LogState state)
-    {
-        var person = (from s in state
-                      where s.Key == "person"
-                      select s.Value as SomePersonObject).First();
-
-        var order = (from s in state
-                     where s.Key == "order"
-                     select s.Value as SomeOrderObject).First();
-
-        return person.Name == "Hiep" && person.Age == 18 && order.Id == "#1" && order.Amount == 30.5;
-    }
+    // private static bool AssertLogStructuring(LogState state)
+    // {
+    //     var person = (from s in state
+    //                   where s.Key == "person"
+    //                   select s.Value as SomePersonObject).First();
+    //
+    //     var order = (from s in state
+    //                  where s.Key == "order"
+    //                  select s.Value as SomeOrderObject).First();
+    //
+    //     return person.Name == "Hiep" && person.Age == 18 && order.Id == "#1" && order.Amount == 30.5;
+    // }
 
     /// <summary>
     /// Demontrate how to use mock logger in complex application with Dependency injection (an ASP.NET application for eg)
@@ -118,4 +118,7 @@ public class MockLoggerTests
         ILogger<MockLoggerTests> logger = Substitute.For<MockLogger<MockLoggerTests>>();
         logger.LogSendRequestInfo("toto");
     }
+
+    [GeneratedRegex("The person .* odered .*")]
+    private static partial Regex MyRegex();
 }

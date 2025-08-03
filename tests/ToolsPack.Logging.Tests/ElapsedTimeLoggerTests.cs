@@ -2,6 +2,7 @@ using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging.Abstractions;
 using ToolsPack.NLog;
 using Xunit;
 
@@ -45,7 +46,7 @@ namespace ToolsPack.Logging.Tests
         {
             var log = loggerFactory.CreateLogger<ElapsedTimeLoggerTests>();
             log.LogInformation("Normal log");
-            using (ElapsedTimeLogger etl = ElapsedTimeLogger.Create(null, "toto", "beginContext", "endContext", "  "))
+            using (ElapsedTimeLogger etl = ElapsedTimeLogger.Create(NullLogger.Instance, "toto", "beginContext", "endContext", "  "))
             {
 
                 log.LogDebug("Normal log");

@@ -5,12 +5,12 @@ using System.Net;
 using System.Runtime.InteropServices;
 using ToolsPack.String;
 
-/// <summary>
-/// Don't touch this class
-/// https://stackoverflow.com/questions/40017663/create-file-get-file-and-delete-with-smb-protocol
-/// </summary>
 namespace ToolsPack.Samba
 {
+    /// <summary>
+    /// Don't touch this class
+    /// https://stackoverflow.com/questions/40017663/create-file-get-file-and-delete-with-smb-protocol
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public class NetResource
     {

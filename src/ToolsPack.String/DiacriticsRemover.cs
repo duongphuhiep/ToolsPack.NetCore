@@ -12,7 +12,7 @@ namespace ToolsPack.String
         /// Remove accent from string "Léo lacrève" => "Leo lacreve"
         /// </summary>
         /// <returns></returns>
-        public static string RemoveDiacritics(this string s)
+        public static string? RemoveDiacritics(this string? s)
         {
             if (s == null) return null;
             var normalizedString = s.Normalize(NormalizationForm.FormD);

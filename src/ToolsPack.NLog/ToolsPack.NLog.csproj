@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>net8.0;net7.0;net6.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFrameworks>net8.0;net9.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>default</LangVersion>
         <PackageVersion>3.1.0</PackageVersion>
         <Description>
@@ -20,7 +20,7 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="NLog" Version="5.2.8" />
-        <PackageReference Include="System.Text.Json" Version="8.0.1" />
+        <PackageReference Include="NLog" Version="6.0.2" />
+        <PackageReference Include="System.Text.Json" Version="9.0.7" />
     </ItemGroup>
 </Project>

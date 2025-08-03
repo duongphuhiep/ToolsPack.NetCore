@@ -21,7 +21,7 @@ namespace ToolsPack.String
         /// <returns></returns>
         public static byte[] ConvertToBytesArray(string content, bool contentIsHexString)
         {
-            return contentIsHexString ? HexStringToByteArray(content) : UTF8.GetBytes(content);
+            return (contentIsHexString ? HexStringToByteArray(content) : UTF8.GetBytes(content)) ?? [];
         }
 
         [Obsolete("CA5350 Do Not Use Weak Cryptographic Algorithms")]
@@ -98,7 +98,7 @@ namespace ToolsPack.String
             return hex.ToString();
         }
 
-        public static byte[] HexStringToByteArray(string hexString)
+        public static byte[]? HexStringToByteArray(string? hexString)
         {
             if (hexString == null) return null;
             return Enumerable.Range(0, hexString.Length)

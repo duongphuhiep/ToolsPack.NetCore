@@ -1,3 +1,5 @@
+# This package is obsolete. Use the [ToolsPack.Msql](../ToolsPack.Msql) package instead.
+
 # ToolsPack.Sql
 
 This package helps to avoid redundancy when writing ADO.NET codes. It is very tiny and battle tested in production since several years. There won't be any evolution on this package because the ADO.NET interface have been stable for years.

@@ -147,13 +147,10 @@ namespace ToolsPack.NLog
             return new N.Targets.FileTarget("logfile")
             {
                 FileName = filePath,
-                ArchiveNumbering = N.Targets.ArchiveNumberingMode.DateAndSequence,
                 ArchiveEvery = N.Targets.FileArchivePeriod.Day,
                 KeepFileOpen = true,
                 OpenFileCacheTimeout = 30,
-                ConcurrentWrites = true,
                 ArchiveOldFileOnStartup = false,
-                EnableArchiveFileCompression = true,
                 Encoding = Encoding.UTF8,
                 Layout = pattern
             };

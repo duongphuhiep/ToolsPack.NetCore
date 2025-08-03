@@ -1,3 +1,7 @@
+# This package is obsolete. Use the [ToolsPack.Logging](../ToolsPack.Logging) package instead.
+
+--
+
 # ToolsPack.NLog
 
 NLog helper - format the structured logs with `Newtonsoft.Json` as described in the [NLog documentation](https://github.com/NLog/NLog/wiki/How-to-use-structured-logging)

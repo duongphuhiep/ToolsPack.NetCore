@@ -14,7 +14,7 @@ namespace ToolsPack.String
     /// </summary>
     public static class XDocumentFactory
     {
-        public static XDocument CreateDocFromXmlSerializer<T>(T o, XmlSerializer serializer = null, XDocument doc = null)
+        public static XDocument CreateDocFromXmlSerializer<T>(T o, XmlSerializer? serializer = null, XDocument? doc = null)
         {
             if (serializer == null) 
             {
@@ -30,7 +30,7 @@ namespace ToolsPack.String
             }
             return doc;
         }
-        public static XDocument CreateDocFromDataContractSerializer<T>(T o, DataContractSerializer serializer = null, XDocument doc = null)
+        public static XDocument CreateDocFromDataContractSerializer<T>(T o, DataContractSerializer? serializer = null, XDocument? doc = null)
         {
             if (serializer == null)
             {
@@ -38,7 +38,7 @@ namespace ToolsPack.String
             }
             return CreateDocFromXmlObjectSerializer(o, serializer, doc);
         }
-        public static XDocument CreateDocFromDataContractJsonSerializer<T>(T o, DataContractJsonSerializer serializer = null, XDocument doc = null)
+        public static XDocument CreateDocFromDataContractJsonSerializer<T>(T o, DataContractJsonSerializer? serializer = null, XDocument? doc = null)
         {
             if (serializer == null)
             {
@@ -46,7 +46,7 @@ namespace ToolsPack.String
             }
             return CreateDocFromXmlObjectSerializer(o, serializer, doc);
         }
-        public static XDocument CreateDocFromXmlObjectSerializer<T>(T o, XmlObjectSerializer serializer, XDocument doc = null)
+        public static XDocument CreateDocFromXmlObjectSerializer<T>(T o, XmlObjectSerializer serializer, XDocument? doc = null)
         {
             if (serializer == null)
             {
