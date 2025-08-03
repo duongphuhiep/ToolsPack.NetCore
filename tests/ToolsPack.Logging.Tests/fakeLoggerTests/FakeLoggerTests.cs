@@ -1,16 +1,16 @@
+using System;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
-using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace ToolsPack.Logging.Tests;
+
 public class FakeLoggerTests
 {
     private readonly FakeLogger _logger = new FakeLogger<FakeLoggerTests>();
 
     /// <summary>
-    /// Demontrate how to use mock logger to spy on normal log message
+    ///     Demontrate how to use mock logger to spy on normal log message
     /// </summary>
     [Fact]
     public void FakeLoggerBasicTest()
@@ -23,7 +23,7 @@ public class FakeLoggerTests
 
         //Assert
         var collector = _logger.Collector;
-        IReadOnlyList<FakeLogRecord> logs = collector.GetSnapshot();
+        var logs = collector.GetSnapshot();
 
         Assert.Equal(LogLevel.Information, logs[0].Level);
         Assert.Equal("haha", logs[0].Message);
@@ -41,6 +41,4 @@ public class FakeLoggerTests
         Assert.Contains("Received something wrong", logs[3].Message);
         Assert.Equal("Failed to do thing", logs[3].Exception?.Message);
     }
-
-
 }

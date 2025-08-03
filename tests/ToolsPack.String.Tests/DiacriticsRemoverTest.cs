@@ -1,14 +1,12 @@
-using System;
 using Xunit;
 
-namespace ToolsPack.String.Tests
+namespace ToolsPack.String.Tests;
+
+public class DiacriticsRemoverTest
 {
-    public class DiacriticsRemoverTest
+    [Fact]
+    public void RemoveTest()
     {
-        [Fact]
-        public void RemoveTest()
-        {
-            Assert.Equal("Leo lacreve", "Léo lacrève".RemoveDiacritics());
-        }
+        Assert.Equal("Leo lacreve", "Léo lacrève".RemoveDiacritics());
     }
 }

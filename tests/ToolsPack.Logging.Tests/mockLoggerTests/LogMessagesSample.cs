@@ -1,9 +1,10 @@
-using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace ToolsPack.Logging.Tests;
 
 public record SomePersonObject(string Name, int Age);
+
 public record SomeOrderObject(string Id, double Amount);
 
 public static partial class LogMessagesSample
@@ -15,6 +16,6 @@ public static partial class LogMessagesSample
     public static partial void LogGetResponseError(this ILogger logger, Exception ex);
 
     [LoggerMessage(EventId = 2, Level = LogLevel.Information, Message = "The person {person} odered {order}")]
-    public static partial void LogStructuringSampleInfo(this ILogger logger, SomePersonObject person, SomeOrderObject order);
+    public static partial void LogStructuringSampleInfo(this ILogger logger, SomePersonObject person,
+        SomeOrderObject order);
 }
-

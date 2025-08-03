@@ -1,16 +1,16 @@
-using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace ToolsPack.Logging.Tests;
 
 /// <summary>
-/// - in normal time, this is NullLogger
-/// - but whenever a Xunit TestOutput is set in the TestOutputInitializer then the Logger will log to the testOutput
+///     - in normal time, this is NullLogger
+///     - but whenever a Xunit TestOutput is set in the TestOutputInitializer then the Logger will log to the testOutput
 /// </summary>
 public class TestOutputLogger : ILogger
 {
-    private readonly TestOutputInitializer _testOutput;
     private readonly string _category;
+    private readonly TestOutputInitializer _testOutput;
 
     public TestOutputLogger(TestOutputInitializer testRegistration, string category)
     {
@@ -28,11 +28,11 @@ public class TestOutputLogger : ILogger
         return _testOutput.Logger.IsEnabled(logLevel);
     }
 
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception,
+        Func<TState, Exception?, string> formatter)
     {
         //TODO find a way to include the category in the message?
         _testOutput.Logger.Log(logLevel, eventId, state, exception, formatter);
         //Microsoft.Extensions.Logging.Formatted
-
     }
 }

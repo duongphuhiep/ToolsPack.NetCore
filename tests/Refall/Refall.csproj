@@ -8,12 +8,9 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\src\ToolsPack.Config\ToolsPack.Config.csproj" />
-        <ProjectReference Include="..\..\src\ToolsPack.Log4net\ToolsPack.Log4net.csproj" />
         <ProjectReference Include="..\..\src\ToolsPack.Logging\ToolsPack.Logging.csproj" />
         <ProjectReference Include="..\..\src\ToolsPack.Msql\ToolsPack.Msql.csproj" />
-        <ProjectReference Include="..\..\src\ToolsPack.NLog\ToolsPack.NLog.csproj" />
         <ProjectReference Include="..\..\src\ToolsPack.Samba\ToolsPack.Samba.csproj" />
-        <ProjectReference Include="..\..\src\ToolsPack.Sql\ToolsPack.Sql.csproj" />
         <ProjectReference Include="..\..\src\ToolsPack.String\ToolsPack.String.csproj" />
         <ProjectReference Include="..\..\src\ToolsPack.Thread\ToolsPack.Thread.csproj" />
         <ProjectReference Include="..\..\src\ToolsPack.Webservice\ToolsPack.Webservice.csproj" />

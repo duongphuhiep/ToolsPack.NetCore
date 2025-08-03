@@ -1,54 +1,54 @@
+using System;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Extensions.Logging;
-using System;
 using Xunit.Abstractions;
 
-namespace ToolsPack.Logging.Tests
+namespace ToolsPack.Logging.Tests;
+
+/// <summary>
+///     This fixture has its own loggerFactory,
+///     we want to see all the log coming from this fixture's loggerFactory on the Test Unit Output
+/// </summary>
+public class ComplexFixture : IDisposable
 {
-    /// <summary>
-    /// This fixture has its own loggerFactory,
-    /// we want to see all the log coming from this fixture's loggerFactory on the Test Unit Output
-    /// </summary>
-    public class ComplexFixture : IDisposable
+    private readonly ILogger<ComplexFixture> _logger;
+
+    private readonly ILoggerFactory _loggerFactory;
+
+    public ComplexFixture(IMessageSink messageSink)
     {
-        public TestOutputInitializer TestOutputInitializer { get; init; } = new TestOutputInitializer();
+        var serilogLogger = new LoggerConfiguration()
+            .MinimumLevel.Verbose()
+            .WriteTo.TestOutput(messageSink)
+            .WriteTo.Seq("http://localhost:5341/")
+            .CreateLogger();
 
-        private readonly ILoggerFactory _loggerFactory;
-        private readonly ILogger<ComplexFixture> _logger;
-
-        public ComplexFixture(IMessageSink messageSink)
+        _loggerFactory = LoggerFactory.Create(builder =>
         {
-            var serilogLogger = new LoggerConfiguration()
-                   .MinimumLevel.Verbose()
-                   .WriteTo.TestOutput(messageSink)
-                   .WriteTo.Seq("http://localhost:5341/")
-                   .CreateLogger();
+            builder.AddSerilog(serilogLogger);
+            builder.AddFilter<SerilogLoggerProvider>("Microsoft", LogLevel.Error);
+            builder.AddFilter<SerilogLoggerProvider>("System", LogLevel.Error);
+            builder.AddFilter<SerilogLoggerProvider>("App.Telemetry", LogLevel.Error);
 
-            _loggerFactory = LoggerFactory.Create(builder =>
-            {
-                builder.AddSerilog(serilogLogger);
-                builder.AddFilter<SerilogLoggerProvider>("Microsoft", LogLevel.Error);
-                builder.AddFilter<SerilogLoggerProvider>("System", LogLevel.Error);
-                builder.AddFilter<SerilogLoggerProvider>("App.Telemetry", LogLevel.Error);
+            builder.AddProvider(new TestOutputLoggerProvider(TestOutputInitializer));
+            builder.AddFilter("Microsoft", LogLevel.Error);
+            builder.AddFilter("System", LogLevel.Error);
+            builder.AddFilter("App.Telemetry", LogLevel.Error);
+        });
+        _logger = _loggerFactory.CreateLogger<ComplexFixture>();
+        _logger.LogInformation("ComplexFixture started");
+    }
 
-                builder.AddProvider(new TestOutputLoggerProvider(TestOutputInitializer));
-                builder.AddFilter("Microsoft", LogLevel.Error);
-                builder.AddFilter("System", LogLevel.Error);
-                builder.AddFilter("App.Telemetry", LogLevel.Error);
-            });
-            _logger = _loggerFactory.CreateLogger<ComplexFixture>();
-            _logger.LogInformation("ComplexFixture started");
-        }
+    public TestOutputInitializer TestOutputInitializer { get; init; } = new();
 
-        public void Dispose()
-        {
-            _logger.LogInformation("ComplexFixture finished");
-        }
+    public void Dispose()
+    {
+        _logger.LogInformation("ComplexFixture finished");
+    }
 
-        public void LogFromFixture(string message)
-        {
-            _logger.LogInformation("ComplexFixture: " + message);
-        }
+    public void LogFromFixture(string message)
+    {
+        _logger.LogInformation("ComplexFixture: " + message);
     }
 }

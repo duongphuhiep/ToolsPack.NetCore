@@ -1,23 +1,19 @@
+using System;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using ToolsPack.Logging.Testing;
 using Xunit;
 
 namespace ToolsPack.Logging.Tests;
-
-using LogState = IReadOnlyList<KeyValuePair<string, object?>>;
 
 public partial class MockLoggerTests
 {
     private readonly MockLogger _logger = Substitute.For<MockLogger>();
 
     /// <summary>
-    /// Example how to use mock logger to spy on normal log message
+    ///     Example how to use mock logger to spy on normal log message
     /// </summary>
     [Fact]
     public void MockLoggerBasicTest()
@@ -55,7 +51,7 @@ public partial class MockLoggerTests
     }
 
     /// <summary>
-    /// Demontrate how to use mock logger to spy on complex structuring logs (where the message is object rather than text)
+    ///     Demontrate how to use mock logger to spy on complex structuring logs (where the message is object rather than text)
     /// </summary>
     [Fact]
     public void AssertLogStructuringSampleTest()
@@ -85,17 +81,14 @@ public partial class MockLoggerTests
     // }
 
     /// <summary>
-    /// Demontrate how to use mock logger in complex application with Dependency injection (an ASP.NET application for eg)
+    ///     Demontrate how to use mock logger in complex application with Dependency injection (an ASP.NET application for eg)
     /// </summary>
     [Fact]
     public void SimulateApplicationLoggingTest()
     {
         //Arrange a service provider similar to a ASP.NET app
         var diContainer = new ServiceCollection();
-        diContainer.AddLogging(builder =>
-        {
-            builder.AddMockLogger(_logger);
-        });
+        diContainer.AddLogging(builder => { builder.AddMockLogger(_logger); });
         var services = diContainer.BuildServiceProvider();
 
         //inject the ILogger to some service class of the Application

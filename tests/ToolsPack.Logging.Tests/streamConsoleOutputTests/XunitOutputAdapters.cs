@@ -4,7 +4,7 @@ using Xunit.Sdk;
 namespace ToolsPack.Logging.Tests;
 
 /// <summary>
-/// Common interface for ITestOuputHelper & IMessageSink
+///     Common interface for ITestOuputHelper & IMessageSink
 /// </summary>
 public interface IWriteLiner
 {
@@ -15,27 +15,39 @@ public interface IWriteLiner
 public class TestOutputWriteLiner : IWriteLiner
 {
     private readonly ITestOutputHelper _testOutputHelper;
+
     public TestOutputWriteLiner(ITestOutputHelper testOutputHelper)
     {
         _testOutputHelper = testOutputHelper;
     }
+
     public void WriteLine(string message)
-        => _testOutputHelper.WriteLine(message);
+    {
+        _testOutputHelper.WriteLine(message);
+    }
 
     public void WriteLine(string format, params object[] args)
-        => _testOutputHelper.WriteLine(format, args);
+    {
+        _testOutputHelper.WriteLine(format, args);
+    }
 }
 
 public class MessageSinkWriteLiner : IWriteLiner
 {
     private readonly IMessageSink _messageSink;
+
     public MessageSinkWriteLiner(IMessageSink messageSink)
     {
         _messageSink = messageSink;
     }
+
     public void WriteLine(string message)
-        => _messageSink.OnMessage(new DiagnosticMessage(message));
+    {
+        _messageSink.OnMessage(new DiagnosticMessage(message));
+    }
 
     public void WriteLine(string format, params object[] args)
-        => _messageSink.OnMessage(new DiagnosticMessage(format, args));
+    {
+        _messageSink.OnMessage(new DiagnosticMessage(format, args));
+    }
 }

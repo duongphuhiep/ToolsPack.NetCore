@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 namespace ToolsPack.Logging.Tests;
 
 /// <summary>
-/// The provider for TestOutputLogger
+///     The provider for TestOutputLogger
 /// </summary>
 public class TestOutputLoggerProvider : ILoggerProvider
 {

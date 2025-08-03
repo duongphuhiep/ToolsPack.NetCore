@@ -7,9 +7,9 @@ using FrameworkLogger = Microsoft.Extensions.Logging.ILogger;
 namespace ToolsPack.Logging.Tests;
 
 /// <summary>
-/// Holds a Logger object
-/// - in normal time, it holds a NullLogger
-/// - but whenever a Xunit TestOutput is set then the holding Logger will log to the testOutput
+///     Holds a Logger object
+///     - in normal time, it holds a NullLogger
+///     - but whenever a Xunit TestOutput is set then the holding Logger will log to the testOutput
 /// </summary>
 public class TestOutputInitializer
 {
@@ -17,7 +17,7 @@ public class TestOutputInitializer
 
     public void Setup(ITestOutputHelper testOutputHelper)
     {
-        if (Logger != NullLogger.Instance) { return; }
+        if (Logger != NullLogger.Instance) return;
 
         var seriLogger = new LoggerConfiguration()
             .MinimumLevel.Verbose()

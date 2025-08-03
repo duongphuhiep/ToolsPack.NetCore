@@ -1,41 +1,40 @@
-using Microsoft.Extensions.Logging;
 using System;
+using Microsoft.Extensions.Logging;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace ToolsPack.Logging.Tests
+namespace ToolsPack.Logging.Tests;
+
+public class SampleUnitTest21 : IDisposable, IClassFixture<ComplexFixture>, IClassFixture<WithMessageSinkFixture>
 {
-    public class SampleUnitTest21 : IDisposable, IClassFixture<ComplexFixture>, IClassFixture<WithMessageSinkFixture>
+    private static readonly string MSG_SETUP = "setup unit test";
+    private static readonly string MSG_TEARDOWN = "teardown unit test";
+    private readonly ComplexFixture _complexFixture;
+    private readonly ILogger _logger;
+
+    private readonly ILoggerFactory _loggerFactory;
+
+    public SampleUnitTest21(ComplexFixture complexFixture, ITestOutputHelper testOutputHelper)
     {
-        private static readonly string MSG_SETUP = "setup unit test";
-        private static readonly string MSG_TEARDOWN = "teardown unit test";
+        _complexFixture = complexFixture;
+        _loggerFactory = testOutputHelper.CreateLoggerFactory();
+        _logger = _loggerFactory.CreateLogger<TestOutputHelperExtensionTests>();
+        _logger.LogInformation(MSG_SETUP);
+        _complexFixture.TestOutputInitializer.Setup(testOutputHelper);
+    }
 
-        private readonly ILoggerFactory _loggerFactory;
-        private readonly ILogger _logger;
-        private readonly ComplexFixture _complexFixture;
+    public void Dispose()
+    {
+        _logger.LogInformation(MSG_TEARDOWN);
+    }
 
-        public SampleUnitTest21(ComplexFixture complexFixture, ITestOutputHelper testOutputHelper)
-        {
-            _complexFixture = complexFixture;
-            _loggerFactory = testOutputHelper.CreateLoggerFactory();
-            _logger = _loggerFactory.CreateLogger<TestOutputHelperExtensionTests>();
-            _logger.LogInformation(MSG_SETUP);
-            _complexFixture.TestOutputInitializer.Setup(testOutputHelper);
-        }
-
-        public void Dispose()
-        {
-            _logger.LogInformation(MSG_TEARDOWN);
-        }
-
-        [Theory]
-        [InlineData("execute my unit test 1")]
-        [InlineData("execute my unit test 2")]
-        [InlineData("execute my unit test 3")]
-        public void ExecuteMyUnitTest(string executionMessage)
-        {
-            _logger.LogInformation("UnitTest scope: " + executionMessage);
-            _complexFixture.LogFromFixture("Fixture scope: " + executionMessage);
-        }
+    [Theory]
+    [InlineData("execute my unit test 1")]
+    [InlineData("execute my unit test 2")]
+    [InlineData("execute my unit test 3")]
+    public void ExecuteMyUnitTest(string executionMessage)
+    {
+        _logger.LogInformation("UnitTest scope: " + executionMessage);
+        _complexFixture.LogFromFixture("Fixture scope: " + executionMessage);
     }
 }
