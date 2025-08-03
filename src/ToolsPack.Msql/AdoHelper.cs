@@ -30,31 +30,17 @@ namespace ToolsPack.Msql
     public class AdoHelper : IDisposable
     {
         // Internal members
-        private readonly string _connString = null;
-        private SqlConnection _conn = null;
-        private SqlTransaction _trans = null;
+        private readonly string _connString;
+        private SqlConnection? _conn = null;
+        private SqlTransaction? _trans = null;
         private bool _disposed = false;
-
-        /// <summary>
-        /// Sets or returns the connection string use by all instances of this class.
-        /// </summary>
-        public static string ConnectionString { get; set; }
 
         /// <summary>
         /// Returns the current SqlTransaction object or null if no transaction
         /// is in effect.
         /// </summary>
-        public SqlTransaction Transaction { get { return _trans; } }
-
-        /// <summary>
-        /// Constructor using global connection string.
-        /// </summary>
-        public AdoHelper()
-        {
-            _connString = ConnectionString;
-            Connect();
-        }
-
+        public SqlTransaction? Transaction => _trans;
+        
         /// <summary>
         /// Constructure using connection string override
         /// </summary>
@@ -201,7 +187,7 @@ namespace ToolsPack.Msql
         /// <param name="qry">Query text</param>
         /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
         /// <returns>Value of first column and first row of the results</returns>
-        public async Task<object> ExecScalarAsync(string qry, params object[] args)
+        public async Task<object?> ExecScalarAsync(string qry, params object[] args)
         {
             using (SqlCommand cmd = CreateCommand(qry, CommandType.Text, args))
             {
@@ -228,7 +214,7 @@ namespace ToolsPack.Msql
         /// <param name="qry">Name of stored proceduret</param>
         /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
         /// <returns>Value of first column and first row of the results</returns>
-        public async Task<object> ExecScalarProcAsync(string qry, params object[] args)
+        public async Task<object?> ExecScalarProcAsync(string qry, params object[] args)
         {
             using (SqlCommand cmd = CreateCommand(qry, CommandType.StoredProcedure, args))
             {
@@ -323,11 +309,12 @@ namespace ToolsPack.Msql
         /// Begins a transaction
         /// </summary>
         /// <returns>The new SqlTransaction object</returns>
-        public SqlTransaction BeginTransaction()
+        public SqlTransaction? BeginTransaction()
         {
+            if (_conn is null) return null;
             Rollback();
             _trans = _conn.BeginTransaction();
-            return Transaction;
+            return _trans;
         }
 
         /// <summary>

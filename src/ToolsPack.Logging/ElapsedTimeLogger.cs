@@ -47,9 +47,9 @@ namespace ToolsPack.Logging
         private readonly string? _startContext;
         private readonly string? _endContext;
 
-        private ElapsedTimeLogger(ILogger log, string scopeId, string? startContext, string? endContext, string? spaceBeforeLog)
+        private ElapsedTimeLogger(ILogger? log, string scopeId, string? startContext, string? endContext, string? spaceBeforeLog)
         {
-            _log = log;
+            _log = log ?? throw new ArgumentNullException(nameof(log));
 
             if (string.IsNullOrEmpty(spaceBeforeLog))
             {
@@ -268,7 +268,6 @@ namespace ToolsPack.Logging
         /// <returns>true if enabled.</returns>
         public bool IsEnabled(LogLevel logLevel)
         {
-            if (_log == null) return false;
             return _log.IsEnabled(logLevel);
         }
 
@@ -278,7 +277,7 @@ namespace ToolsPack.Logging
         /// <typeparam name="TState">The type of the state to begin scope for.</typeparam>
         /// <param name="state">The identifier for the scope.</param>
         /// <returns>An System.IDisposable that ends the logical operation scope on dispose.</returns>
-        public IDisposable? BeginScope<TState>(TState state) where TState : notnull => _log?.BeginScope(state);
+        public IDisposable BeginScope<TState>(TState state) => _log.BeginScope(state);
 
         #endregion
 

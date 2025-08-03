@@ -2,7 +2,7 @@
     <PropertyGroup>
         <TargetFrameworks>net8.0;net9.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <LangVersion>default</LangVersion>
-        <PackageVersion>4.0.0</PackageVersion>
+        <PackageVersion>4.0.1</PackageVersion>
         <Description>Avoid codes redudency from using pure ADO.net API.</Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/src/ToolsPack.Msql</PackageProjectUrl>
@@ -10,6 +10,7 @@
         <RepositoryUrl>https://github.com/duongphuhiep/ToolsPack.NetCore</RepositoryUrl>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <Nullable>enable</Nullable>
         <Authors>hiep</Authors>
     </PropertyGroup>
 

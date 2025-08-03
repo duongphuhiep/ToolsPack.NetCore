@@ -23,7 +23,7 @@ namespace ToolsPack.Msql
         /// <param name="columnName">The column of data to retrieve a value from</param>
         /// <returns>T, type applied; default value of type if database value is null</returns>
         [ObsoleteAttribute("This method is no longer neccessary in newer .NET version. Use GetFieldValue<T> instead.")]
-        public static T GetValue<T>(this SqlDataReader reader, string columnName)
+        public static T? GetValue<T>(this SqlDataReader reader, string columnName)
         {
             // Read the value out of the reader by string (column name); returns object
             object v = reader[columnName];
