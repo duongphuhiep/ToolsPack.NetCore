@@ -11,4 +11,7 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="9.0.7"/>
     </ItemGroup>
 
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+        <Exec Command="bash &quot;../prebuild.sh&quot;"/>
+    </Target>
 </Project>

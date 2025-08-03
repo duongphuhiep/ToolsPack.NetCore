@@ -44,6 +44,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ToolsPack.Blazor.Tests", "ToolsPack.Blazor.Tests", "{4E946EEC-6233-F736-3DA4-0CDC3A1F10DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorApp1", "BlazorApp1", "{4E7DEAA4-3641-E7EC-E3BF-F243C9277C9C}"
+	ProjectSection(SolutionItems) = preProject
+		tests\ToolsPack.Blazor.Tests\BlazorApp1\package.json = tests\ToolsPack.Blazor.Tests\BlazorApp1\package.json
+		tests\ToolsPack.Blazor.Tests\BlazorApp1\prebuild.sh = tests\ToolsPack.Blazor.Tests\BlazorApp1\prebuild.sh
+		tests\ToolsPack.Blazor.Tests\BlazorApp1\taildai.css = tests\ToolsPack.Blazor.Tests\BlazorApp1\taildai.css
+		tests\ToolsPack.Blazor.Tests\BlazorApp1\tailwind.config.js = tests\ToolsPack.Blazor.Tests\BlazorApp1\tailwind.config.js
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1", "tests\ToolsPack.Blazor.Tests\BlazorApp1\BlazorApp1\BlazorApp1.csproj", "{E852F1E0-8A70-458B-9687-089531806317}"
 EndProject
