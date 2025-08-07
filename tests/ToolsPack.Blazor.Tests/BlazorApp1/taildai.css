@@ -1,2 +1,219 @@
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "@tailwindcss/typography";
+@plugin "daisyui" {
+    themes: all;
+}
+
+@layer components {
+}
+
+:root {
+    --rz-text-color: var(--color-base-content);
+    
+    --rz-text-title-color: var(--tw-prose-headings);
+    --rz-text-secondary-color: color-mix(in oklch, var(--color-base-content) 80%, transparent);
+    --rz-text-tertiary-color: color-mix(in oklch, var(--color-base-content) 70%, transparent);
+    --rz-text-disabled-color: color-mix(in oklab, var(--color-base-content) 40%, transparent);
+    --rz-text-contrast-color: var(--color-secondary-content);
+    
+    --rz-base: var(--color-base-100);
+    --rz-base-lighter: color-mix(in oklch, var(--color-base-100) 80%, white);
+    --rz-base-light: color-mix(in oklch, var(--color-base-100) 90%, white);
+    --rz-base-dark: color-mix(in oklch, var(--color-base-100) 90%, black);
+    --rz-base-darker: color-mix(in oklch, var(--color-base-100) 80%, black);
+
+    --rz-on-base: var(--color-base-content);
+    --rz-on-base-lighter: color-mix(in oklch, var(--color-base-content) 80%, white);
+    --rz-on-base-light: color-mix(in oklch, var(--color-base-content) 90%, white);
+    --rz-on-base-dark: color-mix(in oklch, var(--color-base-content) 90%, black);
+    --rz-on-base-darker: color-mix(in oklch, var(--color-base-content) 80%, black);
+
+    --rz-primary: var(--color-primary);
+    --rz-primary-lighter: color-mix(in oklch, var(--color-primary) 80%, white);
+    --rz-primary-light: color-mix(in oklch, var(--color-primary) 90%, white);
+    --rz-primary-dark: color-mix(in oklch, var(--color-primary) 90%, black);
+    --rz-primary-darker: color-mix(in oklch, var(--color-primary) 80%, black);
+
+    --rz-on-primary: var(--color-primary-content);
+    --rz-on-primary-lighter: color-mix(in oklch, var(--color-primary-content) 80%, white);
+    --rz-on-primary-light: color-mix(in oklch, var(--color-primary-content) 90%, white);
+    --rz-on-primary-dark: color-mix(in oklch, var(--color-primary-content) 90%, black);
+    --rz-on-primary-darker: color-mix(in oklch, var(--color-primary-content) 80%, black);
+
+    --rz-secondary: var(--color-secondary);
+    --rz-secondary-lighter: color-mix(in oklch, var(--color-secondary) 80%, white);
+    --rz-secondary-light: color-mix(in oklch, var(--color-secondary) 90%, white);
+    --rz-secondary-dark: color-mix(in oklch, var(--color-secondary) 90%, black);
+    --rz-secondary-darker: color-mix(in oklch, var(--color-secondary) 80%, black);
+
+    --rz-on-secondary: var(--color-secondary-content);
+    --rz-on-secondary-lighter: color-mix(in oklch, var(--color-secondary-content) 80%, white);
+    --rz-on-secondary-light: color-mix(in oklch, var(--color-secondary-content) 90%, white);
+    --rz-on-secondary-dark: color-mix(in oklch, var(--color-secondary-content) 90%, black);
+    --rz-on-secondary-darker: color-mix(in oklch, var(--color-secondary-content) 80%, black);
+
+    --rz-info: var(--color-info);
+    --rz-info-lighter: color-mix(in oklch, var(--color-info) 80%, white);
+    --rz-info-light: color-mix(in oklch, var(--color-info) 90%, white);
+    --rz-info-dark: color-mix(in oklch, var(--color-info) 90%, black);
+    --rz-info-darker: color-mix(in oklch, var(--color-info) 80%, black);
+
+    --rz-on-info: var(--color-info-content);
+    --rz-on-info-lighter: color-mix(in oklch, var(--color-info-content) 80%, white);
+    --rz-on-info-light: color-mix(in oklch, var(--color-info-content) 90%, white);
+    --rz-on-info-dark: color-mix(in oklch, var(--color-info-content) 90%, black);
+    --rz-on-info-darker: color-mix(in oklch, var(--color-info-content) 80%, black);
+
+    --rz-success: var(--color-success);
+    --rz-success-lighter: color-mix(in oklch, var(--color-success) 80%, white);
+    --rz-success-light: color-mix(in oklch, var(--color-success) 90%, white);
+    --rz-success-dark: color-mix(in oklch, var(--color-success) 90%, black);
+    --rz-success-darker: color-mix(in oklch, var(--color-success) 80%, black);
+
+    --rz-on-success: var(--color-success-content);
+    --rz-on-success-lighter: color-mix(in oklch, var(--color-success-content) 80%, white);
+    --rz-on-success-light: color-mix(in oklch, var(--color-success-content) 90%, white);
+    --rz-on-success-dark: color-mix(in oklch, var(--color-success-content) 90%, black);
+    --rz-on-success-darker: color-mix(in oklch, var(--color-success-content) 80%, black);
+
+    --rz-warning: var(--color-warning);
+    --rz-warning-lighter: color-mix(in oklch, var(--color-warning) 80%, white);
+    --rz-warning-light: color-mix(in oklch, var(--color-warning) 90%, white);
+    --rz-warning-dark: color-mix(in oklch, var(--color-warning) 90%, black);
+    --rz-warning-darker: color-mix(in oklch, var(--color-warning) 80%, black);
+
+    --rz-on-warning: var(--color-warning-content);
+    --rz-on-warning-lighter: color-mix(in oklch, var(--color-warning-content) 80%, white);
+    --rz-on-warning-light: color-mix(in oklch, var(--color-warning-content) 90%, white);
+    --rz-on-warning-dark: color-mix(in oklch, var(--color-warning-content) 90%, black);
+    --rz-on-warning-darker: color-mix(in oklch, var(--color-warning-content) 80%, black);
+
+    --rz-danger: var(--color-error);
+    --rz-danger-lighter: color-mix(in oklch, var(--color-error) 80%, white);
+    --rz-danger-light: color-mix(in oklch, var(--color-error) 90%, white);
+    --rz-danger-dark: color-mix(in oklch, var(--color-error) 90%, black);
+    --rz-danger-darker: color-mix(in oklch, var(--color-error) 80%, black);
+
+    --rz-on-danger: var(--color-error-content);
+    --rz-on-danger-lighter: color-mix(in oklch, var(--color-error-content) 80%, white);
+    --rz-on-danger-light: color-mix(in oklch, var(--color-error-content) 90%, white);
+    --rz-on-danger-dark: color-mix(in oklch, var(--color-error-content) 90%, black);
+    --rz-on-danger-darker: color-mix(in oklch, var(--color-error-content) 80%, black);
+
+    --rz-base-50:  var(--color-base-100);
+    --rz-base-100: color-mix(in oklch, var(--color-base-100) 75%, var(--color-base-200));
+    --rz-base-200: color-mix(in oklch, var(--color-base-100) 50%, var(--color-base-200));
+    --rz-base-300: color-mix(in oklch, var(--color-base-100) 25%, var(--color-base-200));
+    --rz-base-400: var(--color-base-200);
+    --rz-base-500: color-mix(in oklch, var(--color-base-200) 80%, var(--color-base-300));
+    --rz-base-600: color-mix(in oklch, var(--color-base-200) 60%, var(--color-base-300));
+    --rz-base-700: color-mix(in oklch, var(--color-base-200) 40%, var(--color-base-300));
+    --rz-base-800: color-mix(in oklch, var(--color-base-200) 20%, var(--color-base-300));
+    --rz-base-900: var(--color-base-300);
+
+    --color-accent-lighter: color-mix(in oklch, var(--color-accent) 80%, white);
+    --color-accent-light: color-mix(in oklch, var(--color-accent) 90%, white);
+    --color-accent-dark: color-mix(in oklch, var(--color-accent) 90%, black);
+    --color-accent-darker: color-mix(in oklch, var(--color-accent) 80%, black);
+    --color-accent-content-lighter: color-mix(in oklch, var(--color-accent-content) 80%, white);
+    --color-accent-content-light: color-mix(in oklch, var(--color-accent-content) 90%, white);
+    --color-accent-content-dark: color-mix(in oklch, var(--color-accent-content) 90%, black);
+    --color-accent-content-darker: color-mix(in oklch, var(--color-accent-content) 80%, black);
+    --color-neutral-lighter: color-mix(in oklch, var(--color-neutral) 80%, white);
+    --color-neutral-light: color-mix(in oklch, var(--color-neutral) 90%, white);
+    --color-neutral-dark: color-mix(in oklch, var(--color-neutral) 90%, black);
+    --color-neutral-darker: color-mix(in oklch, var(--color-neutral) 80%, black);
+    --color-neutral-content-lighter: color-mix(in oklch, var(--color-neutral-content) 80%, white);
+    --color-neutral-content-light: color-mix(in oklch, var(--color-neutral-content) 90%, white);
+    --color-neutral-content-dark: color-mix(in oklch, var(--color-neutral-content) 90%, black);
+    --color-neutral-content-darker: color-mix(in oklch, var(--color-neutral-content) 80%, black);
+
+    --rz-base-background-color: var(--color-base-100);
+    --rz-body-font-size: var(--text-sm);
+    --rz-border-width: var(--border);
+    --rz-body-line-height: var(--text-sm--line-height);
+    --rz-border-normal: var(--rz-border-width) solid var(--color-base-300);
+    --rz-border-hover: var(--rz-border-width) solid color-mix(in oklab, var(--color-base-300) 60%, var(--color-base-content));
+    --rz-border-focus: var(--rz-border-width) solid color-mix(in oklab, var(--color-base-300) 40%, var(--color-base-content));
+    --rz-border-disabled: var(--rz-border-width) solid color-mix(in oklab, var(--color-base-300) 40%, transparent);
+    --rz-outline-width: var(--border);
+    --rz-outline-color: var(--color-secondary);
+    --rz-grid-background-color: var(--color-base-100);
+    --rz-grid-cell-focus-background-color: var(--color-secondary);
+    --rz-grid-cell-focus-color: var(--color-secondary-content);
+    --rz-grid-hover-background-color: var(--rz-secondary-light);
+    --rz-grid-hover-color: var(--color-secondary-content);
+    --rz-grid-selected-background-color: var(--color-primary);
+    --rz-grid-selected-color: var(--color-primary-content);
+    --rz-grid-toolbar-background-color: var(--color-base-300);
+    --rz-grid-header-background-color: var(--color-base-300);
+    --rz-grid-header-color: var(--color-base-content);
+    --rz-grid-header-sorted-background-color: var(--rz-grid-background-color);
+    --rz-grid-filter-background-color: var(--color-base-300);
+    --rz-grid-filter-color: var(--rz-text-disabled-color);
+    --rz-grid-group-header-item-color: var(--color-base-content);
+    --rz-grid-group-header-item-background-color: var(--color-base-300);
+    --rz-grid-group-header-item-border-radius: var(--radius-field);
+    --rz-grid-filter-focus-color: var(--color-primary-content);
+    --rz-grid-filter-buttons-background-color: var(--color-base-300);
+    --rz-grid-clear-filter-button-background-color: var(--color-base-200);
+    --rz-grid-clear-filter-button-color: var(--color-base-content);
+    --rz-grid-apply-filter-button-background-color: var(--color-primary);
+    --rz-grid-apply-filter-button-color: var(--color-primary-content);
+    --rz-grid-header-filter-icon-hover-color: var(--rz-primary-light);
+    --rz-grid-header-filter-icon-active-color: var(--rz-primary);
+    --rz-grid-simple-filter-icon-active-color: var(--rz-primary-light);
+    --rz-grid-simple-filter-icon-active-background-color: var(--rz-primary);
+    --rz-grid-sort-icon-color: var(--rz-text-disabled-color);
+    --rz-grid-stripe-background-color: var(--color-base-200);
+    --rz-grid-column-resizer-helper-background-color: var(--rz-secondary);
+    --rz-grid-loading-indicator-background-color: color-mix(in oklab, var(--color-base-300) 40%, transparent);
+    --rz-grid-frozen-cell-background-color: var(--rz-base-lighter);
+    --rz-grid-header-cell-border-bottom: var(--rz-border-normal);
+    
+    --rz-pager-numeric-button-background-color: var(--color-base-100);
+    --rz-pager-numeric-button-color: var(--color-base-content);
+    --rz-pager-numeric-button-hover-background-color: var(--color-secondary);
+    --rz-pager-numeric-button-hover-color: var(--color-secondary-content);
+    --rz-pager-numeric-button-selected-background-color: var(--color-primary);
+    --rz-pager-numeric-button-selected-color: var(--color-primary-content);
+    --rz-pager-back-button-background-color: var(--color-base-100);
+    --rz-pager-back-button-color: var(--color-base-content);
+    --rz-pager-back-button-hover-background-color: var(--color-secondary-content);
+    --rz-pager-next-button-background-color: var(--color-base-100);
+    --rz-pager-next-button-color: var(--color-secondary-content);
+    --rz-pager-next-button-hover-background-color: var(--color-secondary);
+    --rz-pager-next-button-hover-color: var(--color-secondary-content);
+    --rz-pager-summary-color: var(--color-base-content);
+    --rz-overlay-background-color: var(--color-base-300);
+    
+    --rz-alert-border-radius: var(--radius-box);
+    --rz-card-border-radius: var(--radius-box);
+    --rz-card-padding: var(--card-p, 1.25rem);
+    
+    /*fix daisy button color*/
+    input.btn { 
+        color: var(--btn-fg) 
+    }
+
+    /*fix radzen theme*/
+    .rz-text-title-color {
+        color: var(--rz-text-title-color) !important;
+    }
+    .rz-text-color {
+        color: var(--rz-text-color) !important;
+    }
+    .rz-text-secondary-color {
+        color: var(--rz-text-secondary-color) !important;
+    }
+    .rz-text-tertiary-color {
+        color: var(--rz-text-tertiary-color) !important;
+    }
+    .rz-text-disabled-color {
+        color: var(--rz-text-disabled-color) !important;
+    }
+    .rz-text-contrast-color {
+        color: var(--rz-text-contrast-color) !important;
+    }
+}
+

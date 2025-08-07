@@ -1,0 +1,80 @@
+@page "/Grid1"
+@rendermode InteractiveAuto
+
+<SidebarLayout>
+    <Sidebar>
+        <ThemeSwitcher></ThemeSwitcher>
+    </Sidebar>
+    <Content>
+        <article class="prose">
+
+            <h2 class="prose">QuickGrid</h2>
+
+            <div class="not-prose">
+                <QuickGrid Items="@people" Class="table">
+                    <PropertyColumn Property="@(p => p.PersonId)" Sortable="true"/>
+                    <PropertyColumn Property="@(p => p.Name)" Sortable="true"/>
+
+                    <PropertyColumn Property="@(p => p.BirthDate)" Format="yyyy-MM-dd" Sortable="true"
+                                    @ref="birthDateColumn">
+                        @*<HeaderTemplate>
+                @context
+                <div class="custom-header" @onclick="() => context.Grid.SortByColumnAsync(birthDateColumn)">
+                    <span>Name</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16">
+                        <path class="arrow"
+                              d="@(context.InitialSortDirection == SortDirection.Ascending ? "M 2 20.75 L 12 3.25 L 22 20.75 L 12 13.5 z" : "M 2 3.25 L 12 20.75 L 22 3.25 L 12 10 z")"/>
+                    </svg>
+                </div>
+            </HeaderTemplate>*@
+                    </PropertyColumn>
+                </QuickGrid>
+            </div>
+
+            <h2>Radzen grid</h2>
+
+            <div class="not-prose">
+                <RadzenDataGrid AllowFiltering="true"
+                                AllowColumnResize="true"
+                                AllowAlternatingRows="false"
+                                FilterMode="FilterMode.Advanced"
+                                AllowSorting="true"
+                                PageSize="5"
+                                AllowPaging="true"
+                                PagerHorizontalAlign="HorizontalAlign.Left" ShowPagingSummary="true"
+                                Data="@people" ColumnWidth="300px" LogicalFilterOperator="LogicalFilterOperator.Or"
+                                SelectionMode="DataGridSelectionMode.Single" @bind-Value=@selectedPeople
+                                Class="table">
+                    <Columns>
+                        <RadzenDataGridColumn Property="@nameof(Person.PersonId)" Filterable="false" Title="ID"
+                                              Frozen="true"
+                                              Width="80px" TextAlign="TextAlign.Center"/>
+                        <RadzenDataGridColumn Property="@nameof(Person.Name)" Title="First Name" Frozen="true"
+                                              Width="160px"/>
+                        <RadzenDataGridColumn Property="@nameof(Person.BirthDate)" Title="Birth Date" FormatString="{0:d}"
+                                              Width="160px"/>
+                    </Columns>
+                </RadzenDataGrid>
+            </div>
+        </article>
+    </Content>
+</SidebarLayout>
+
+@code {
+    PropertyColumn<Person, DateOnly> birthDateColumn;
+
+    record Person(int PersonId, string Name, DateOnly BirthDate);
+
+    IList<Person> selectedPeople;
+
+    IQueryable<Person> people = new[]
+    {
+        new Person(10895, "Jean Martin", new DateOnly(1985, 3, 16)),
+        new Person(10944, "António Langa", new DateOnly(1991, 12, 1)),
+        new Person(11203, "Julie Smith", new DateOnly(1958, 10, 10)),
+        new Person(11205, "Nur Sari", new DateOnly(1922, 4, 27)),
+        new Person(11898, "Jose Hernandez", new DateOnly(2011, 5, 3)),
+        new Person(12130, "Kenji Sato", new DateOnly(2004, 1, 9)),
+    }.AsQueryable();
+
+}
