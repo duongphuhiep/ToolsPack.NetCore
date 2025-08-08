@@ -29,13 +29,3 @@
     The following keys or key combinations provide a way for users to navigate and interact with Radzen Blazor FileInput component.
 </RadzenText>
 
-<KeyboardNavigationDataGrid Data="@shortcuts" />
-
-@code {
-    public List<KeyboardShortcut> shortcuts = new()
-    {
-        new KeyboardShortcut { Key = "Tab", Action = "Navigate forward across FileInput buttons." },
-        new KeyboardShortcut { Key = "Shift + Tab", Action = "Navigate backward across FileInput buttons." },
-        new KeyboardShortcut { Key = "Enter or Space", Action = "Click the focused FileInput button." }
-    };
-}

@@ -19,6 +19,8 @@ Cally is a web component calendar and it works everywhere. [Read the docs](https
 ### ~Cally calendar example
 #### Example using daisyUI styles
 
+<script type="module" src="https://unpkg.com/cally"></script>
+
 <calendar-date class="cally bg-base-100 border border-base-300 shadow-lg rounded-box">
   <svg aria-label="Previous" class="fill-current size-4" slot="previous" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M15.75 19.5 8.25 12l7.5-7.5"></path></svg>
   <svg aria-label="Next" class="fill-current size-4" slot="next" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path></svg>
@@ -43,3 +45,8 @@ Cally is a web component calendar and it works everywhere. [Read the docs](https
 
 Pikaday is a JS datepicker library and you can use it from CDN or as a JS dependency [Read the docs](https://github.com/Pikaday/Pikaday)
 
+<script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
+<input type="text" id="datepicker_pikaday">
+<script>
+    var picker = new Pikaday({ field: document.getElementById('datepicker_pikaday') });
+</script>

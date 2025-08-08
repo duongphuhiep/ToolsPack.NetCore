@@ -196,7 +196,13 @@
     --rz-card-padding: var(--card-p, 1.25rem);
     --rz-button-border-radius: var(--radius-field);
     --rz-input-border-radius: var(--radius-field);
-    --rz-checkbox-border-radius: var(--radius-field);
+    --rz-checkbox-border-radius: var(--radius-selector);
+
+    /*fix bug: disable this background color, if we set a solid color, it will hide the corner border of the dropdown*/
+    --rz-lookup-panel-background-color: transparent;  /* --rz-dropdown-open-background-colo //outer */
+    --rz-fieldset-border-radius: var(--radius-box);
+
+    --rz-upload-button-bar-background-color: var(--color-base-300);
     
     /*fix daisy button color*/
     input.btn { 
