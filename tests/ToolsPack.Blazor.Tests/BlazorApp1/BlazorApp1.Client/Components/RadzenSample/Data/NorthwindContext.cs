@@ -215,38 +215,14 @@ namespace RadzenBlazorDemos.Data
 
         public async Task SeedAsync()
         {
-            try
-            {
-                AddData();
+            AddData();
 
-                if (ChangeTracker.HasChanges())
-                {
-                    await SaveChangesAsync();
-                }
-            }
-            catch
+            if (ChangeTracker.HasChanges())
             {
-                //
+                await SaveChangesAsync();
             }
         }
-
-        public void Seed()
-        {
-            try
-            {
-                AddData();
-
-                if (ChangeTracker.HasChanges())
-                {
-                    SaveChanges();
-                }
-            }
-            catch
-            {
-                //
-            }
-        }
-
+        
         public void AddData()
         {
             if (!Customers.Any())

@@ -19,7 +19,7 @@ namespace RadzenBlazorDemos.Models.Northwind
 
     [InverseProperty("Order")]
     public ICollection<OrderDetail> OrderDetails { get; set; }
-    public string CustomerID
+    public string? CustomerID
     {
       get;
       set;
@@ -55,32 +55,32 @@ namespace RadzenBlazorDemos.Models.Northwind
       get;
       set;
     }
-    public string ShipName
+    public string? ShipName
     {
       get;
       set;
     }
-    public string ShipAddress
+    public string? ShipAddress
     {
       get;
       set;
     }
-    public string ShipCity
+    public string? ShipCity
     {
       get;
       set;
     }
-    public string ShipRegion
+    public string? ShipRegion
     {
       get;
       set;
     }
-    public string ShipPostalCode
+    public string? ShipPostalCode
     {
       get;
       set;
     }
-    public string ShipCountry
+    public string? ShipCountry
     {
       get;
       set;

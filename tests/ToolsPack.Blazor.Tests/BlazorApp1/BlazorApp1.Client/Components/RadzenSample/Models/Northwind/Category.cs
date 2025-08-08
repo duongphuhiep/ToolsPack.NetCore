@@ -19,17 +19,17 @@ namespace RadzenBlazorDemos.Models.Northwind
 
     [InverseProperty("Category")]
     public ICollection<Product> Products { get; set; }
-    public string CategoryName
+    public string? CategoryName
     {
       get;
       set;
     }
-    public string Description
+    public string? Description
     {
       get;
       set;
     }
-    public string Picture
+    public string? Picture
     {
       get;
       set;

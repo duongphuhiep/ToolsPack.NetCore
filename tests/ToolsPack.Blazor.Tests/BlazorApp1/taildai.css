@@ -132,10 +132,14 @@
     --rz-body-font-size: var(--text-sm);
     --rz-border-width: var(--border);
     --rz-body-line-height: var(--text-sm--line-height);
-    --rz-border-normal: var(--rz-border-width) solid var(--color-base-300);
-    --rz-border-hover: var(--rz-border-width) solid color-mix(in oklab, var(--color-base-300) 60%, var(--color-base-content));
-    --rz-border-focus: var(--rz-border-width) solid color-mix(in oklab, var(--color-base-300) 40%, var(--color-base-content));
-    --rz-border-disabled: var(--rz-border-width) solid color-mix(in oklab, var(--color-base-300) 40%, transparent);
+
+    /* not a official radzen variable, I invented it */
+    --rz-border-color: color-mix(in oklab,var(--color-base-content) 20%, transparent);
+    
+    --rz-border-normal: var(--rz-border-width) solid var(--rz-border-color);
+    --rz-border-hover: var(--rz-border-width) solid color-mix(in oklab, var(--rz-border-color) 60%, var(--color-base-content));
+    --rz-border-focus: var(--rz-border-width) solid color-mix(in oklab, var(--rz-border-color) 40%, var(--color-base-content));
+    --rz-border-disabled: var(--rz-border-width) solid color-mix(in oklab, var(--rz-border-color) 40%, transparent);
     --rz-outline-width: var(--border);
     --rz-outline-color: var(--color-secondary);
     --rz-grid-background-color: var(--color-base-100);
@@ -190,6 +194,9 @@
     --rz-alert-border-radius: var(--radius-box);
     --rz-card-border-radius: var(--radius-box);
     --rz-card-padding: var(--card-p, 1.25rem);
+    --rz-button-border-radius: var(--radius-field);
+    --rz-input-border-radius: var(--radius-field);
+    --rz-checkbox-border-radius: var(--radius-field);
     
     /*fix daisy button color*/
     input.btn { 

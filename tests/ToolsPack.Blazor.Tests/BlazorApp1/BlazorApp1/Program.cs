@@ -1,4 +1,5 @@
 using BlazorApp1.Components;
+using BlazorApp1.Client;
 using Radzen;
 using RadzenBlazorDemos;
 using RadzenBlazorDemos.Data;
@@ -10,14 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
-builder.Services.AddRadzenComponents();
-
-builder.Services.AddScoped<ExampleService>();
-builder.Services.AddDbContextFactory<NorthwindContext>();
-builder.Services.AddScoped<NorthwindService>();
-builder.Services.AddScoped<NorthwindODataService>();
-builder.Services.AddSingleton<GitHubService>();
-
+builder.Services.AddDemoApplication();
 
 var app = builder.Build();
 

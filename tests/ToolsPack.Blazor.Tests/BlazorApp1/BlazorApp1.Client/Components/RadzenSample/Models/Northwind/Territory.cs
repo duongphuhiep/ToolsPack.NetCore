@@ -9,7 +9,7 @@ namespace RadzenBlazorDemos.Models.Northwind
   public partial class Territory
   {
     [Key]
-    public string TerritoryID
+    public string? TerritoryID
     {
       get;
       set;
@@ -18,7 +18,7 @@ namespace RadzenBlazorDemos.Models.Northwind
 
     [InverseProperty("Territory")]
     public ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
-    public string TerritoryDescription
+    public string? TerritoryDescription
     {
       get;
       set;

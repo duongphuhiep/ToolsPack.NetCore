@@ -12,7 +12,7 @@ namespace RadzenBlazorDemos.Shared
         public IDbContextFactory<NorthwindContext> DbFactory { get; set; }
 
         protected NorthwindContext dbContext;
-
+        
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();

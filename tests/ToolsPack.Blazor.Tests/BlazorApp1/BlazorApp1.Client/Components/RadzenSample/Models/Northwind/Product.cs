@@ -47,7 +47,7 @@ namespace RadzenBlazorDemos.Models.Northwind
 
     [InverseProperty("Product")]
     public ICollection<OrderDetail> OrderDetails { get; set; }
-    public string ProductName
+    public string? ProductName
     {
       get;
       set;
@@ -68,7 +68,7 @@ namespace RadzenBlazorDemos.Models.Northwind
 
     [ForeignKey("CategoryID")]
     public Category Category { get; set; }
-    public string QuantityPerUnit
+    public string? QuantityPerUnit
     {
       get;
       set;

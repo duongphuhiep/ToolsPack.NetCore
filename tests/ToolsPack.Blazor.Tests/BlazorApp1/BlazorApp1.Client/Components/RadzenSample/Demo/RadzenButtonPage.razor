@@ -2,9 +2,6 @@
 @page "/button"
 @page "/docs/guides/components/button.html"
 
-<RadzenText TextStyle="TextStyle.H2" TagName="TagName.H1" class="rz-pt-8">
-    Button
-</RadzenText>
 <RadzenText TextStyle="TextStyle.Subtitle1" TagName="TagName.P" class="rz-pb-4">
     Demonstration and configuration of the Radzen Blazor <strong>Button</strong> component.
 </RadzenText>
@@ -89,14 +86,3 @@
     The following keys or key combinations provide a way for users to navigate and interact with Radzen Blazor Button
     component.
 </RadzenText>
-
-<KeyboardNavigationDataGrid Data="@shortcuts" />
-
-@code {
-    public List<KeyboardShortcut> shortcuts = new()
-{
-new KeyboardShortcut { Key = "Tab", Action = "Navigate to a button." },
-new KeyboardShortcut { Key = "Enter", Action = "Click the focused button." },
-new KeyboardShortcut { Key = "Space", Action = "Click the focused button." }
-};
-}

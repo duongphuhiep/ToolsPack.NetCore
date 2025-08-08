@@ -18,7 +18,7 @@ namespace RadzenBlazorDemos.Models.Northwind
 
     [InverseProperty("Region")]
     public ICollection<Territory> Territories { get; set; }
-    public string RegionDescription
+    public string? RegionDescription
     {
       get;
       set;

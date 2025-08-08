@@ -9,7 +9,7 @@ namespace RadzenBlazorDemos.Models.Northwind
   public partial class CustomerDemographic
   {
     [Key]
-    public string CustomerTypeID
+    public string? CustomerTypeID
     {
       get;
       set;
@@ -18,7 +18,7 @@ namespace RadzenBlazorDemos.Models.Northwind
 
     [InverseProperty("CustomerDemographic")]
     public ICollection<CustomerCustomerDemo> CustomerCustomerDemos { get; set; }
-    public string CustomerDesc
+    public string? CustomerDesc
     {
       get;
       set;

@@ -8,7 +8,7 @@ namespace RadzenBlazorDemos.Models.Northwind
   public partial class CustomerCustomerDemo
   {
     [Key]
-    public string CustomerID
+    public string? CustomerID
     {
       get;
       set;
@@ -16,7 +16,7 @@ namespace RadzenBlazorDemos.Models.Northwind
 
     [ForeignKey("CustomerID")]
     public Customer Customer { get; set; }
-    public string CustomerTypeID
+    public string? CustomerTypeID
     {
       get;
       set;

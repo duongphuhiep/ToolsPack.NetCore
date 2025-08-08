@@ -16,7 +16,7 @@ namespace RadzenBlazorDemos.Models.Northwind
 
     [ForeignKey("EmployeeID")]
     public Employee Employee { get; set; }
-    public string TerritoryID
+    public string? TerritoryID
     {
       get;
       set;

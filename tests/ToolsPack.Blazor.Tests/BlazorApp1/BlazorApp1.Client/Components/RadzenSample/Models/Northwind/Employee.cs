@@ -22,22 +22,22 @@ namespace RadzenBlazorDemos.Models.Northwind
 
         [InverseProperty("Employee")]
         public ICollection<EmployeeTerritory> EmployeeTerritories { get; set; }
-        public string LastName
+        public string? LastName
         {
             get;
             set;
         }
-        public string FirstName
+        public string? FirstName
         {
             get;
             set;
         }
-        public string Title
+        public string? Title
         {
             get;
             set;
         }
-        public string TitleOfCourtesy
+        public string? TitleOfCourtesy
         {
             get;
             set;
@@ -52,53 +52,53 @@ namespace RadzenBlazorDemos.Models.Northwind
             get;
             set;
         }
-        public string Address
+        public string? Address
         {
             get;
             set;
         }
-        public string City
+        public string? City
         {
             get;
             set;
         }
-        public string Region
+        public string? Region
         {
             get;
             set;
         }
-        public string PostalCode
+        public string? PostalCode
         {
             get;
             set;
         }
-        public string Country
+        public string? Country
         {
             get;
             set;
         }
-        public string HomePhone
+        public string? HomePhone
         {
             get;
             set;
         }
-        public string Extension
+        public string? Extension
         {
             get;
             set;
         }
-        public string Photo
+        public string? Photo
         {
             get;
             set;
         }
-        public string Notes
+        public string? Notes
         {
             get;
             set;
         }
 
-        public string PhotoPath
+        public string? PhotoPath
         {
             get;
             set;
