@@ -147,8 +147,8 @@
     --rz-grid-cell-focus-color: var(--color-secondary-content);
     --rz-grid-hover-background-color: var(--rz-secondary-light);
     --rz-grid-hover-color: var(--color-secondary-content);
-    --rz-grid-selected-background-color: var(--color-primary);
-    --rz-grid-selected-color: var(--color-primary-content);
+    --rz-grid-selected-background-color: var(--color-secondary);
+    --rz-grid-selected-color: var(--color-secondary-content);
     --rz-grid-toolbar-background-color: var(--color-base-300);
     --rz-grid-header-background-color: var(--color-base-300);
     --rz-grid-header-color: var(--color-base-content);
@@ -158,16 +158,16 @@
     --rz-grid-group-header-item-color: var(--color-base-content);
     --rz-grid-group-header-item-background-color: var(--color-base-300);
     --rz-grid-group-header-item-border-radius: var(--radius-field);
-    --rz-grid-filter-focus-color: var(--color-primary-content);
+    --rz-grid-filter-focus-color: var(--color-secondary-content);
     --rz-grid-filter-buttons-background-color: var(--color-base-300);
     --rz-grid-clear-filter-button-background-color: var(--color-base-200);
     --rz-grid-clear-filter-button-color: var(--color-base-content);
-    --rz-grid-apply-filter-button-background-color: var(--color-primary);
-    --rz-grid-apply-filter-button-color: var(--color-primary-content);
+    --rz-grid-apply-filter-button-background-color: var(--color-secondary);
+    --rz-grid-apply-filter-button-color: var(--color-secondary-content);
     --rz-grid-header-filter-icon-hover-color: var(--rz-primary-light);
-    --rz-grid-header-filter-icon-active-color: var(--rz-primary);
-    --rz-grid-simple-filter-icon-active-color: var(--rz-primary-light);
-    --rz-grid-simple-filter-icon-active-background-color: var(--rz-primary);
+    --rz-grid-header-filter-icon-active-color: var(--rz-secondary);
+    --rz-grid-simple-filter-icon-active-color: var(--rz-secondary-light);
+    --rz-grid-simple-filter-icon-active-background-color: var(--rz-secondary);
     --rz-grid-sort-icon-color: var(--rz-text-disabled-color);
     --rz-grid-stripe-background-color: var(--color-base-200);
     --rz-grid-column-resizer-helper-background-color: var(--rz-secondary);
@@ -177,10 +177,10 @@
     
     --rz-pager-numeric-button-background-color: var(--color-base-100);
     --rz-pager-numeric-button-color: var(--color-base-content);
-    --rz-pager-numeric-button-hover-background-color: var(--color-secondary);
-    --rz-pager-numeric-button-hover-color: var(--color-secondary-content);
-    --rz-pager-numeric-button-selected-background-color: var(--color-primary);
-    --rz-pager-numeric-button-selected-color: var(--color-primary-content);
+    --rz-pager-numeric-button-hover-background-color: var(--rz-secondary-light);
+    --rz-pager-numeric-button-hover-color: var(--rz-on-secondary-dark);
+    --rz-pager-numeric-button-selected-background-color: var(--color-secondary);
+    --rz-pager-numeric-button-selected-color: var(--color-secondary-content);
     --rz-pager-back-button-background-color: var(--color-base-100);
     --rz-pager-back-button-color: var(--color-base-content);
     --rz-pager-back-button-hover-background-color: var(--color-secondary-content);
