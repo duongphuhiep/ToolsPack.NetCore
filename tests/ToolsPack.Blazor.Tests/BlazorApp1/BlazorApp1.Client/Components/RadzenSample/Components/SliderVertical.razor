@@ -1,4 +1,5 @@
-﻿<RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceAround">
+﻿@rendermode InteractiveAuto
+<RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.SpaceAround">
     <RadzenSlider @bind-Value=@value TValue="int" Orientation="Orientation.Vertical" />
     <RadzenSlider Range="true" @bind-Value=@values TValue="IEnumerable<int>" Orientation="Orientation.Vertical" />
 </RadzenStack>

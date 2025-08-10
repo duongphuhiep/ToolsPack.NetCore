@@ -3,9 +3,7 @@
 @plugin "daisyui" {
     themes: all;
 }
-
-@layer components {
-}
+@layer components {}
 
 :root {
     --rz-text-color: var(--color-base-content);
@@ -203,11 +201,11 @@
     --rz-fieldset-border-radius: var(--radius-box);
 
     --rz-upload-button-bar-background-color: var(--color-base-300);
-    
-    /*fix daisy button color*/
-    input.btn { 
-        color: var(--btn-fg) 
-    }
+
+    --rz-tabs-border-radius: var(--radius-box);
+    --rz-tabs-border: var(--border) solid var(--tab-border-color, var(--rz-border-color));
+    --rz-tabs-padding: var(--tab-p, 1.25rem);
+    --rz-tabs-background-color: var(--tab-bg, var(--rz-base-background-color));
 
     /*fix radzen theme*/
     .rz-text-title-color {
@@ -228,5 +226,10 @@
     .rz-text-contrast-color {
         color: var(--rz-text-contrast-color) !important;
     }
+
+    /*fix daisy button color (to remove when the PR is accepted)*/
+    /*input.btn {*/
+    /*    color: var(--btn-fg)*/
+    /*}*/
 }
 

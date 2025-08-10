@@ -1,5 +1,6 @@
 ﻿@page "/slider"
 @page "/docs/guides/components/slider.html"
+@rendermode InteractiveAuto
 
 <RadzenText TextStyle="TextStyle.H2" TagName="TagName.H1" class="rz-pt-8">
     Slider
@@ -61,22 +62,3 @@
 </RadzenText>
 
     <SliderVertical />
-
-
-<RadzenText Anchor="slider#keyboard-navigation" TextStyle="TextStyle.H5" TagName="TagName.H2" class="rz-pt-12">
-    Keyboard Navigation
-</RadzenText>
-<RadzenText TextStyle="TextStyle.Body1" class="rz-mb-8">
-    The following keys or key combinations provide a way for users to navigate and interact with Radzen Blazor Slider component.
-</RadzenText>
-
-<KeyboardNavigationDataGrid Data="@shortcuts" />
-
-@code {
-    public List<KeyboardShortcut> shortcuts = new()
-    {
-        new KeyboardShortcut { Key = "Tab", Action = "Navigate to a Slider handle." },
-        new KeyboardShortcut { Key = "RightArrow on a focused Slider handle", Action = "Increase the Slider value with the Step configured." },
-        new KeyboardShortcut { Key = "LeftArrow on a focused Slider handle", Action = "Decrease the Slider value with the Step configured." }
-    };
-}
