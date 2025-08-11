@@ -24,5 +24,9 @@
       <ProjectReference Include="..\..\..\..\src\ToolsPack.Blazor\ToolsPack.Blazor.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Layout\SidebarLayout.razor" />
+    </ItemGroup>
+
     
 </Project>

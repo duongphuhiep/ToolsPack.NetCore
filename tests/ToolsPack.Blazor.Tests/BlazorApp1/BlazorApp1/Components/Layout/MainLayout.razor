@@ -1,6 +1,22 @@
-﻿@inherits LayoutComponentBase
+﻿@using BlazorApp1.Client.Components
+@inherits LayoutComponentBase
 
-@Body
+<div class="drawer lg:drawer-open">
+    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+    <div class="drawer-content">
+        <label for="my-drawer" class="btn btn-primary drawer-button lg:hidden">Open drawer</label>
+        <div class="sticky top-0">
+            <CurrentThemePeeker/>
+        </div>
+        @Body
+    </div>
+    <div class="drawer-side">
+        <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
+        <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+            <ThemeSwitcher/>
+        </ul>
+    </div>
+</div>
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.

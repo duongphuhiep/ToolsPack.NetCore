@@ -50,6 +50,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorApp1", "BlazorApp1", 
 		tests\ToolsPack.Blazor.Tests\BlazorApp1\taildai.css = tests\ToolsPack.Blazor.Tests\BlazorApp1\taildai.css
 		tests\ToolsPack.Blazor.Tests\BlazorApp1\tailwind.config.js = tests\ToolsPack.Blazor.Tests\BlazorApp1\tailwind.config.js
 		tests\ToolsPack.Blazor.Tests\BlazorApp1\Directory.Packages.props = tests\ToolsPack.Blazor.Tests\BlazorApp1\Directory.Packages.props
+		tests\ToolsPack.Blazor.Tests\BlazorApp1\README.md = tests\ToolsPack.Blazor.Tests\BlazorApp1\README.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1", "tests\ToolsPack.Blazor.Tests\BlazorApp1\BlazorApp1\BlazorApp1.csproj", "{E852F1E0-8A70-458B-9687-089531806317}"
