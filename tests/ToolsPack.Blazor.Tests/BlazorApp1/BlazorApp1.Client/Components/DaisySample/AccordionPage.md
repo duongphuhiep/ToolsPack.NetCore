@@ -1,3 +1,7 @@
+---
+url: /daisy/AccordionPage
+---
+
 ### Accordion using radio inputs
 
 <div class="collapse bg-base-100 border border-base-300">

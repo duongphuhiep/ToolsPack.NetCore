@@ -1,3 +1,7 @@
+---
+url: /daisy/DaisyButtonPage
+---
+
 ### ~Button
 <button class="btn">Default</button>
 

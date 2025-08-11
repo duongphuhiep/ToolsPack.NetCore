@@ -1,3 +1,7 @@
+---
+url: /daisy/CalendarPage
+---
+
 > :INFO:
 >
 > You can also use the native HTML `<input type="date">` for a date picker. [Read more](/components/input/#date-input)
