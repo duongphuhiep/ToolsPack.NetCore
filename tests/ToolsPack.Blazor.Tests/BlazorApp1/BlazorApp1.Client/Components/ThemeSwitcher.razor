@@ -1,5 +1,13 @@
+<RadzenListBox class="w-full max-h-10rem" 
+               Name="ThemeListBox" TValue="string" 
+               Value="@ThemeService.Theme" 
+               TextProperty=@nameof(Theme.Text)
+               ValueProperty=@nameof(Theme.Value)
+               ValueChanged="@ChangeTheme" 
+               Data="@Themes.All"/>
+
 <div class="join join-vertical">
-    @foreach (var theme in themes)
+    @foreach (var theme in (string[])["light","dark","cupcake","bumblebee","emerald","corporate","synthwave","retro","cyberpunk","valentine","halloween","garden","forest","aqua","lofi","pastel","fantasy","wireframe","black","luxury","dracula","cmyk","autumn","business","acid","lemonade","night","coffee","winter","dim","nord","sunset","caramellatte","abyss","silk"])
     {
         <input
             type="radio"
@@ -10,7 +18,11 @@
     }
 </div>
 
-@code
-{
-    private string[] themes = ["light","dark","cupcake","bumblebee","emerald","corporate","synthwave","retro","cyberpunk","valentine","halloween","garden","forest","aqua","lofi","pastel","fantasy","wireframe","black","luxury","dracula","cmyk","autumn","business","acid","lemonade","night","coffee","winter","dim","nord","sunset","caramellatte","abyss","silk"];
+@inject ThemeService ThemeService
+
+@code {
+    private void ChangeTheme(string value)
+    {
+        ThemeService.SetTheme(value);
+    }
 }

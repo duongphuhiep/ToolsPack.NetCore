@@ -202,10 +202,10 @@
 
     --rz-upload-button-bar-background-color: var(--color-base-300);
 
-    --rz-tabs-border-radius: var(--radius-box);
-    --rz-tabs-border: var(--border) solid var(--tab-border-color, var(--rz-border-color));
-    --rz-tabs-padding: var(--tab-p, 1.25rem);
-    --rz-tabs-background-color: var(--tab-bg, var(--rz-base-background-color));
+    /*--rz-tabs-border-radius: var(--radius-box);*/
+    /*--rz-tabs-border: var(--border) solid var(--tab-border-color, var(--rz-border-color));*/
+    /*--rz-tabs-padding: var(--tab-p, 1.25rem);*/
+    /*--rz-tabs-background-color: var(--tab-bg, var(--rz-base-background-color));*/
 
     /*fix radzen theme*/
     .rz-text-title-color {
