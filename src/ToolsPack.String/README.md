@@ -141,6 +141,8 @@ A normal GUID (or UUID) is a random 128-bit, the standard Microsoft Guid class f
 Why not format it in base-64 for a shorter (length-22) string? Here how to do it:
 
 ```CSharp
+// Convert back and forth between GUID and ShortGuid
+
 var g = Guid.NewGuid();
 
 var shortGuid = g.ToShortGuid();
@@ -148,6 +150,14 @@ Assert.Equal(g, ShortGuid.Parse(shortGuid));
 
 var shortGuidUrlFriendly = g.ToShortGuid(true);
 Assert.Equal(g, ShortGuid.Parse(shortGuidUrlFriendly, true));
+
+// Generate the shortGuid directly
+
+var shortGuid = ShortGuid.New();
+Assert.Equal(22, shortGuid.Length);
+
+var shortGuidUrlFriendly = ShortGuid.New(true);
+Assert.Equal(22, shortGuidUrlFriendly.Length);
 ```
 
 **Note:**

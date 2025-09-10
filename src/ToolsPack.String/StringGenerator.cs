@@ -8,7 +8,7 @@ namespace ToolsPack.String
     /// </summary>
     public static class StringGenerator
     {
-        private static Random random = new Random();
+        internal static readonly Random random = new Random(Guid.NewGuid().GetHashCode());
 
         /// <summary>
         /// Generate a random string from a given set of characters. The lenght of the random string vari between [minLength..minLenght+lengthVariable]
