@@ -2,7 +2,6 @@ using System;
 using System.Net;
 using System.Net.Http;
 using Microsoft.Extensions.Logging;
-using ToolsPack.String;
 
 namespace ToolsPack.Logging;
 
@@ -14,8 +13,9 @@ namespace ToolsPack.Logging;
 /// </summary>
 public class CompactHttpLoggingMiddlewareConfig
 {
-    public delegate LogLevel GetLogLevel(HttpMethod method, Uri uri, HttpStatusCode? statusCode, long? responseBodyLength, Exception? exception, long elapsedMilliseconds);
-
+    public delegate LogLevel GetLogLevel(HttpMethod method, Uri? uri, HttpStatusCode? statusCode, long? responseBodyLength, Exception? exception, long elapsedMilliseconds);
+    public delegate string? BodyRedactor(string? body, HttpMethod method, Uri? uri, HttpStatusCode? statusCode, int? responseBodyLength);
+    
     /// <summary>
     /// Implement this delegate to customize the log level depending on the request response situation which you wanted to log.
     /// Return <see cref="LogLevel.None"/> to disable logging. You can for example promote the log level to <see cref="LogLevel.Warning"/>
@@ -24,16 +24,17 @@ public class CompactHttpLoggingMiddlewareConfig
     /// OR skip (<see cref="LogLevel.None"/>) for GET requests/responses.
     /// By default, (if not set) the log level is <see cref="LogLevel.Information"/> 
     /// </summary>
-    public GetLogLevel LogLevelSelector { get; set; } =
-        (method, uri, statusCode, responseBodyLength, exception, elapsedMilliseconds) => LogLevel.Information; 
+    public GetLogLevel LogLevelSelector { get; set; } = (_, _, _, _, _, _) => LogLevel.Information; 
 
     /// <summary>
     /// This function defines How to hide sensitive data in the request body. By default, (if not set), it does nothing.
+    /// You can base the redaction on the request's Method, request's Uri and the response's statusCode and the response's body length.
     /// </summary>
-    public Func<string, string> RequestBodyRedactor { get; set; } = body => body;
+    public BodyRedactor RequestBodyRedactor { get; set; } = (body, _, _, _, _) => body;
     
     /// <summary>
     /// This function defines How to hide sensitive data in the response body. By default, (if not set), it does nothing.
+    /// You can base the redaction on the request's Method, request's Uri and the response's statusCode and the response's body length.
     /// </summary>
-    public Func<string, string> ResponseBodyRedactor { get; set; } = body => body;
+    public BodyRedactor ResponseBodyRedactor { get; set; } = (body, _, _, _, _) => body;
 }

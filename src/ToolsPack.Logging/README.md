@@ -1,5 +1,38 @@
 # ToolsPack.Logging
 
+## Http Logging middlewares
+
+This nuget provides several middlewares of `HttpClient` allowing to log HTTP requests and responses.
+
+```csharp
+CompactHttpLoggingMiddleware loggingMiddleware = new(logger)
+var httpClient = new HttpClient(loggingMiddleware)
+
+//the request and response will be logged
+await httpClient.GetAsync("https://api.example.com/user/42?metadata=off");
+```
+
+* [`CompactHttpLoggingMiddleware`] produces only ONE log message per request. The log is emitted after receiving the response, the middleware logs both the request, response and the elapsed time in only one log item. In case `Exception` occurs before receiving the response, the Exception would be logged in the same log item and be re-thrown.
+* [`SimpleHttpLoggingMiddleware`] produces multiple log messages per requests. It logs the request before sending, then log the response after receiving. The middleware generates a `HttpRequestCorrelationId` in the logging scope to correlate the request and response log items. In case `Exception` occurs before receiving the response, only the request would be logged.  
+
+* Using the corresponding [`CustomCompactHttpLoggingMiddleware`] and [`CustomSimpleHttpLoggingMiddleware`]. You would be able
+    * to configure the logging level depending on the request/response. You can configure for example: 
+      * `LogLevel.Warning` when the response status is not 2XX, and `LogLevel.Information` otherwise.
+      * `LogLevel.None` for all GET request to avoid logging them.
+    * to configure logging redaction depending on the request/response. You can configure for example:
+      * Hide the "password:*" value in the request's body of `POST https://external-api/registration/user`
+      * Hide the "bankCardNumber:*" in the response's body of `GET https://external-api/payment/*`
+
+### Recommendation
+
+* Choose [`CompactHttpLoggingMiddleware`] over [`SimpleHttpLoggingMiddleware`] 
+* Choose [`CustomCompactHttpLoggingMiddleware`] over [`CustomSimpleHttpLoggingMiddleware`]
+
+[`CompactHttpLoggingMiddleware`]: ./CompactHttpLoggingMiddleware.cs
+[`SimpleHttpLoggingMiddleware`]: ./SimpleHttpLoggingMiddleware.cs
+[`CustomCompactHttpLoggingMiddleware`]: ./CustomCompactHttpLoggingMiddleware.cs
+[`CustomSimpleHttpLoggingMiddleware`]: ./CustomSimpleHttpLoggingMiddleware.cs
+
 ## MockLogger
 
 Your test is executing some application codes which log certain messages via the `Microsoft.Extensions.Logging` library.

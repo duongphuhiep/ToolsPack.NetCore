@@ -38,8 +38,8 @@ public class CustomSimpleHttpLoggingMiddlewareTests
         SimpleHttpLoggingMiddlewareConfig config = new()
         {
             CorrelationIdGenerator = () => "fixedCorrelationIdForTest",
-            RequestBodyRedactor = body => body.Replace("world", "country"),
-            ResponseBodyRedactor = body => body.Replace("Alice", "Peter"),
+            RequestBodyRedactor = (body, method, uri) => body.Replace("world", "country"),
+            ResponseBodyRedactor = (body, method, uri, statusCode) =>  body.Replace("Alice", "Peter"),
             RequestBodyLogLevel = (method, uri) => LogLevel.Debug,
             RequestUriLogLevel = (method, uri) => LogLevel.Information,
             ResponseBodyLogLevel = (method, uri, statusCode) => LogLevel.Warning,

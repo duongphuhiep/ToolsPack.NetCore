@@ -22,8 +22,8 @@ public class CustomSimpleHttpLoggingMiddleware : DelegatingHandler
     /// <summary>
     /// Middleware constructor.
     /// </summary>
-    /// <param name="logger">non nullable</param>
-    /// <param name="config">non nullable, you can create a default config with the default constructor</param>
+    /// <param name="logger">non-nullable</param>
+    /// <param name="config">non-nullable, you can create a default config with the default constructor</param>
     /// <exception cref="ArgumentNullException"></exception>
     public CustomSimpleHttpLoggingMiddleware(ILogger<CustomSimpleHttpLoggingMiddleware> logger,
         SimpleHttpLoggingMiddlewareConfig config)
@@ -51,27 +51,32 @@ public class CustomSimpleHttpLoggingMiddleware : DelegatingHandler
             if (requestBodyLogLevel != LogLevel.None)
             {
                 var requestBody = await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-                _logger.Log(logLevel: requestBodyLogLevel, message: "Send HTTP Request Body {Body}", _config.RequestBodyRedactor(requestBody));
+                _logger.Log(logLevel: requestBodyLogLevel, message: "Send HTTP Request Body {Body}",
+                    _config.RequestBodyRedactor(requestBody, request.Method, request.RequestUri));
             }
         }
 
         var response = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-        var responseStatusLogLevel = _config.ResponseStatusLogLevel(request.Method, request.RequestUri, response.StatusCode);
+        var responseStatusLogLevel =
+            _config.ResponseStatusLogLevel(request.Method, request.RequestUri, response.StatusCode);
         if (responseStatusLogLevel != LogLevel.None)
         {
             _logger.Log(logLevel: responseStatusLogLevel,
                 message: "Received HTTP Response {HttpStatus}", (int)response.StatusCode);
         }
-        
+
         if (response.Content is not null)
         {
-            var responseBodyLogLevel = _config.ResponseBodyLogLevel(request.Method, request.RequestUri, response.StatusCode);
+            var responseBodyLogLevel =
+                _config.ResponseBodyLogLevel(request.Method, request.RequestUri, response.StatusCode);
             if (responseBodyLogLevel != LogLevel.None)
             {
                 var responseBody = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 _logger.Log(logLevel: responseBodyLogLevel,
-                    message: "Received HTTP Response Body {Body}", _config.ResponseBodyRedactor(responseBody));
+                    message: "Received HTTP Response Body {Body}",
+                    _config.ResponseBodyRedactor(responseBody, request.Method, request.RequestUri,
+                        response.StatusCode));
             }
         }
 

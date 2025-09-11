@@ -1,11 +1,9 @@
 using System;
 using System.Diagnostics;
-using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using ToolsPack.String;
 
 namespace ToolsPack.Logging;
 
@@ -24,12 +22,13 @@ public class CustomCompactHttpLoggingMiddleware : DelegatingHandler
     /// <summary>
     /// Middleware constructor.
     /// </summary>
-    /// <param name="logger">non nullable</param>
+    /// <param name="logger">non-nullable</param>
     /// <exception cref="ArgumentNullException"></exception>
-    public CustomCompactHttpLoggingMiddleware(ILogger<CustomCompactHttpLoggingMiddleware> logger, CompactHttpLoggingMiddlewareConfig config)
+    public CustomCompactHttpLoggingMiddleware(ILogger<CustomCompactHttpLoggingMiddleware> logger,
+        CompactHttpLoggingMiddlewareConfig config)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        _config = config  ?? throw new ArgumentNullException(nameof(config));;
+        _config = config ?? throw new ArgumentNullException(nameof(config));
     }
 
     protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
@@ -49,25 +48,51 @@ public class CustomCompactHttpLoggingMiddleware : DelegatingHandler
         }
     }
 
-    private async Task LogRequestResponse(HttpRequestMessage request, HttpResponseMessage response, long elapsedMilliseconds)
+    private async Task LogRequestResponse(HttpRequestMessage request, HttpResponseMessage response,
+        long elapsedMilliseconds)
     {
-        string? requestBody = request.Content is null ? null : await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-        string? responseBody = response.Content is null ? null : await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-        var logLevel = _config.LogLevelSelector(request.Method, request.RequestUri, response.StatusCode, responseBody.Length, null, elapsedMilliseconds);
+        string? requestBody = request.Content is null
+            ? null
+            : await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+        string? responseBody = response.Content is null
+            ? null
+            : await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+        var logLevel = _config.LogLevelSelector(request.Method, request.RequestUri, response.StatusCode,
+            responseBody?.Length, null, elapsedMilliseconds);
         if (logLevel == LogLevel.None)
         {
             return;
         }
-        _logger.Log(logLevel: logLevel, message: "Sent HTTP Request {Method} {Uri} {RequestBody}. Got response {HttpStatus} {ResponseBody}. Elapsed {ElapsedMilliseconds}", request.Method, request.RequestUri, _config.RequestBodyRedactor(requestBody), (int)response.StatusCode, _config.ResponseBodyRedactor(responseBody), elapsedMilliseconds);
+
+        _logger.Log(logLevel: logLevel,
+            message:
+            "Sent HTTP Request {Method} {Uri} {RequestBody}. Got response {HttpStatus} {ResponseBody}. Elapsed {ElapsedMilliseconds}",
+            request.Method,
+            request.RequestUri,
+            _config.RequestBodyRedactor(requestBody, request.Method, request.RequestUri, response.StatusCode,
+                responseBody?.Length),
+            (int)response.StatusCode,
+            _config.ResponseBodyRedactor(responseBody, request.Method, request.RequestUri, response.StatusCode,
+                responseBody?.Length),
+            elapsedMilliseconds);
     }
+
     private async Task LogRequestException(HttpRequestMessage request, Exception exception, long elapsedMilliseconds)
     {
-        string? requestBody = request.Content is null ? null : await request.Content.ReadAsStringAsync().ConfigureAwait(false);
-        var logLevel = _config.LogLevelSelector(request.Method, request.RequestUri, null, null, exception, elapsedMilliseconds);
+        string? requestBody = request.Content is null
+            ? null
+            : await request.Content.ReadAsStringAsync().ConfigureAwait(false);
+        
+        var logLevel = _config.LogLevelSelector(request.Method, request.RequestUri, null, null, exception,
+            elapsedMilliseconds);
         if (logLevel == LogLevel.None)
         {
             return;
         }
-        _logger.Log(logLevel: logLevel, exception: exception, message: "Sent HTTP Request {Method} {Uri} {RequestBody}. Got error. Elapsed {ElapsedMilliseconds}", request.Method, request.RequestUri, _config.RequestBodyRedactor(requestBody), elapsedMilliseconds);
+
+        _logger.Log(logLevel: logLevel, exception: exception,
+            message: "Sent HTTP Request {Method} {Uri} {RequestBody}. Got error. Elapsed {ElapsedMilliseconds}",
+            request.Method, request.RequestUri, 
+            _config.RequestBodyRedactor(requestBody, request.Method, request.RequestUri, null, null), elapsedMilliseconds);
     }
 }

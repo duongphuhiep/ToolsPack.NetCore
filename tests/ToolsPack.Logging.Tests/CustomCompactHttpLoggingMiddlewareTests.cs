@@ -39,8 +39,8 @@ public class CustomCompactHttpLoggingMiddlewareTests
         CompactHttpLoggingMiddlewareConfig config = new()
         {
             LogLevelSelector = (method, uri, code, length, exception, milliseconds) => LogLevel.Warning,
-            RequestBodyRedactor = body => body.Replace("world", "country"),
-            ResponseBodyRedactor = body => body.Replace("Alice", "Peter"),
+            RequestBodyRedactor = (body, method, uri, code, length) => body.Replace("world", "country"),
+            ResponseBodyRedactor = (body, method, uri, code, length) => body.Replace("Alice", "Peter"),
         };
         var httpClient = new HttpClient(new CustomCompactHttpLoggingMiddleware(_fakeLogger, config)
         {
