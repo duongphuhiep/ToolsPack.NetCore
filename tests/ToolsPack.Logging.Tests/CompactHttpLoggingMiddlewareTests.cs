@@ -25,7 +25,7 @@ public class CompactHttpLoggingMiddlewareTests
         _vsettings.ScrubMembers<FakeLogRecord>(
             record => record.Timestamp /*ignore timestamp value in the snapshot */, 
             record => record.Message /* ignore the message string which contains the elapsed time */);
-        _vsettings.ScrubMember("ElapsedMilliseconds");
+        _vsettings.ScrubMembers("ElapsedMilliseconds", "StackTrace");
     }
     
     /// <summary>

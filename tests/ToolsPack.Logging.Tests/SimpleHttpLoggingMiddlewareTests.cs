@@ -28,7 +28,7 @@ public class SimpleHttpLoggingMiddlewareTests
         
         //ignore timestamp value in the snapshot
         _vsettings.ScrubMember<FakeLogRecord>(record => record.Timestamp);  
-        _vsettings.ScrubMember("HttpRequestCorrelationId");
+        _vsettings.ScrubMembers("HttpRequestCorrelationId", "StackTrace");
     }
     
     /// <summary>
