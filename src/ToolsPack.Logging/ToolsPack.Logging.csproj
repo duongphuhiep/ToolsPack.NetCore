@@ -5,7 +5,7 @@
         <LangVersion>default</LangVersion>
         <PackageVersion>4.0.1</PackageVersion>
         <Description>
-            Micro-benchmark logger: add elapsed time of operations to the log messages, MockLogger
+            Micro-benchmark logger: add elapsed time of operations to the log messages, MockLogger, HttpLoggingMiddleware
         </Description>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/duongphuhiep/ToolsPack.NetCore/tree/master/src/ToolsPack.Logging</PackageProjectUrl>
