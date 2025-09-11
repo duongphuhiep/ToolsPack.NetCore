@@ -1,0 +1,102 @@
+﻿[
+  {
+    Level: Warning,
+    State: [
+      {
+        Method: POST
+      },
+      {
+        Uri: https://api.example.com/user/42?metadata=off
+      },
+      {
+        RequestBody: hello country
+      },
+      {
+        HttpStatus: 200
+      },
+      {
+        ResponseBody: { 'id': 42, 'name': 'Peter' }
+      },
+      {
+        ElapsedMilliseconds: Scrubbed
+      },
+      {
+        {OriginalFormat}: Sent HTTP Request {Method} {Uri} {RequestBody}. Got response {HttpStatus} {ResponseBody}. Elapsed {ElapsedMilliseconds}
+      }
+    ],
+    StructuredState: [
+      {
+        Method: POST
+      },
+      {
+        Uri: https://api.example.com/user/42?metadata=off
+      },
+      {
+        RequestBody: hello country
+      },
+      {
+        HttpStatus: 200
+      },
+      {
+        ResponseBody: { 'id': 42, 'name': 'Peter' }
+      },
+      {
+        ElapsedMilliseconds: Scrubbed
+      },
+      {
+        {OriginalFormat}: Sent HTTP Request {Method} {Uri} {RequestBody}. Got response {HttpStatus} {ResponseBody}. Elapsed {ElapsedMilliseconds}
+      }
+    ],
+    Message: {Scrubbed},
+    Category: ToolsPack.Logging.CustomCompactHttpLoggingMiddleware,
+    LevelEnabled: true,
+    Timestamp: {Scrubbed}
+  },
+  {
+    Level: Warning,
+    State: [
+      {
+        Method: POST
+      },
+      {
+        Uri: https://wrongly.com/
+      },
+      {
+        RequestBody: coucou
+      },
+      {
+        ElapsedMilliseconds: Scrubbed
+      },
+      {
+        {OriginalFormat}: Sent HTTP Request {Method} {Uri} {RequestBody}. Got error. Elapsed {ElapsedMilliseconds}
+      }
+    ],
+    StructuredState: [
+      {
+        Method: POST
+      },
+      {
+        Uri: https://wrongly.com/
+      },
+      {
+        RequestBody: coucou
+      },
+      {
+        ElapsedMilliseconds: Scrubbed
+      },
+      {
+        {OriginalFormat}: Sent HTTP Request {Method} {Uri} {RequestBody}. Got error. Elapsed {ElapsedMilliseconds}
+      }
+    ],
+    Exception: {
+      $type: HttpRequestException,
+      Type: HttpRequestException,
+      Message: Oups! Something wrong,
+      StackTrace: {Scrubbed}
+    },
+    Message: {Scrubbed},
+    Category: ToolsPack.Logging.CustomCompactHttpLoggingMiddleware,
+    LevelEnabled: true,
+    Timestamp: {Scrubbed}
+  }
+]

@@ -1,0 +1,107 @@
+﻿[
+  {
+    Level: Information,
+    State: [
+      {
+        Method: GET
+      },
+      {
+        Uri: https://api.example.com/user/42?metadata=off
+      },
+      {
+        {OriginalFormat}: Send HTTP Request {Method} {Uri}
+      }
+    ],
+    StructuredState: [
+      {
+        Method: GET
+      },
+      {
+        Uri: https://api.example.com/user/42?metadata=off
+      },
+      {
+        {OriginalFormat}: Send HTTP Request {Method} {Uri}
+      }
+    ],
+    Message: Send HTTP Request GET https://api.example.com/user/42?metadata=off,
+    Scopes: [
+      [
+        {
+          HttpRequestCorrelationId: Scrubbed
+        },
+        {
+          {OriginalFormat}: HTTP-middleware {HttpRequestCorrelationId}
+        }
+      ]
+    ],
+    Category: ToolsPack.Logging.SimpleHttpLoggingMiddleware,
+    LevelEnabled: true,
+    Timestamp: {Scrubbed}
+  },
+  {
+    Level: Information,
+    State: [
+      {
+        HttpStatus: 200
+      },
+      {
+        {OriginalFormat}: Received HTTP Response {HttpStatus}
+      }
+    ],
+    StructuredState: [
+      {
+        HttpStatus: 200
+      },
+      {
+        {OriginalFormat}: Received HTTP Response {HttpStatus}
+      }
+    ],
+    Message: Received HTTP Response 200,
+    Scopes: [
+      [
+        {
+          HttpRequestCorrelationId: Scrubbed
+        },
+        {
+          {OriginalFormat}: HTTP-middleware {HttpRequestCorrelationId}
+        }
+      ]
+    ],
+    Category: ToolsPack.Logging.SimpleHttpLoggingMiddleware,
+    LevelEnabled: true,
+    Timestamp: {Scrubbed}
+  },
+  {
+    Level: Information,
+    State: [
+      {
+        Body: { 'id': 42, 'name': 'Alice' }
+      },
+      {
+        {OriginalFormat}: Received HTTP Response Body {Body}
+      }
+    ],
+    StructuredState: [
+      {
+        Body: { 'id': 42, 'name': 'Alice' }
+      },
+      {
+        {OriginalFormat}: Received HTTP Response Body {Body}
+      }
+    ],
+    Message: Received HTTP Response Body { 'id': 42, 'name': 'Alice' },
+    Scopes: [
+      [
+        {
+          HttpRequestCorrelationId: Scrubbed
+        },
+        {
+          {OriginalFormat}: HTTP-middleware {HttpRequestCorrelationId}
+        }
+      ]
+    ],
+    Category: ToolsPack.Logging.SimpleHttpLoggingMiddleware,
+    LevelEnabled: true,
+    Timestamp: {Scrubbed}
+  }
+]

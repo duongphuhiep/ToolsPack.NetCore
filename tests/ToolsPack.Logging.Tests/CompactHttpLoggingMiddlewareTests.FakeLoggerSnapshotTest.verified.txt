@@ -1,0 +1,51 @@
+﻿[
+  {
+    Level: Information,
+    State: [
+      {
+        Method: GET
+      },
+      {
+        Uri: https://api.example.com/user/42?metadata=off
+      },
+      {},
+      {
+        HttpStatus: 200
+      },
+      {
+        ResponseBody: { 'id': 42, 'name': 'Alice' }
+      },
+      {
+        ElapsedMilliseconds: Scrubbed
+      },
+      {
+        {OriginalFormat}: Sent HTTP Request {Method} {Uri} {RequestBody}. Got response {HttpStatus} {ResponseBody}. Elapsed {ElapsedMilliseconds}
+      }
+    ],
+    StructuredState: [
+      {
+        Method: GET
+      },
+      {
+        Uri: https://api.example.com/user/42?metadata=off
+      },
+      {},
+      {
+        HttpStatus: 200
+      },
+      {
+        ResponseBody: { 'id': 42, 'name': 'Alice' }
+      },
+      {
+        ElapsedMilliseconds: Scrubbed
+      },
+      {
+        {OriginalFormat}: Sent HTTP Request {Method} {Uri} {RequestBody}. Got response {HttpStatus} {ResponseBody}. Elapsed {ElapsedMilliseconds}
+      }
+    ],
+    Message: {Scrubbed},
+    Category: ToolsPack.Logging.CompactHttpLoggingMiddleware,
+    LevelEnabled: true,
+    Timestamp: {Scrubbed}
+  }
+]
