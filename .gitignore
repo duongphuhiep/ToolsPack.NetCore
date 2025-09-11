@@ -189,7 +189,7 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 *.nupkg
-push-nupkg.bat
+push-nupkg.*
 .vs
 /.idea/
 
