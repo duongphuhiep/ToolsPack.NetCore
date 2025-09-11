@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ToolsPack.String
 {
@@ -42,16 +40,16 @@ namespace ToolsPack.String
             return new Guid(bytes);
         }
 
-        private static readonly char[] Base64UrlFriendlyChars = 
+        private static readonly char[] _Base64UrlFriendlyChars = 
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_".ToCharArray();
-        private static readonly char[] Base64Chars = 
+        private static readonly char[] _Base64Chars = 
             "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/".ToCharArray();
         
         /// <summary>
         /// Generate a ShortGuid - a random length-22 string with base64 characters.
         /// </summary>
         /// <returns>a random length-22 string</returns>
-        public static string New(bool isUrlFriendly = false) => CreateNewShortGuid(isUrlFriendly ? Base64UrlFriendlyChars : Base64Chars);
+        public static string New(bool isUrlFriendly = false) => CreateNewShortGuid(isUrlFriendly ? _Base64UrlFriendlyChars : _Base64Chars);
 
         private static string CreateNewShortGuid(char[] possibleChars)
         {
