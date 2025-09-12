@@ -1,7 +1,7 @@
-using Microsoft.Data.SqlClient;
 using System;
 using System.Data;
 using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace ToolsPack.Msql
 {
@@ -31,9 +31,9 @@ namespace ToolsPack.Msql
     {
         // Internal members
         private readonly string _connString;
-        private SqlConnection? _conn = null;
-        private SqlTransaction? _trans = null;
-        private bool _disposed = false;
+        private SqlConnection? _conn;
+        private SqlTransaction? _trans;
+        private bool _disposed;
 
         /// <summary>
         /// Returns the current SqlTransaction object or null if no transaction
@@ -69,7 +69,7 @@ namespace ToolsPack.Msql
         /// name of the parameter and the second is the value. The very last argument can
         /// optionally be a SqlParameter object for specifying a custom argument type</param>
         /// <returns></returns>
-        public SqlCommand CreateCommand(string qry, CommandType type, params object[] args)
+        public SqlCommand CreateCommand(string qry, CommandType type, params object?[] args)
         {
             SqlCommand cmd = new SqlCommand(qry, _conn);
 
@@ -80,32 +80,36 @@ namespace ToolsPack.Msql
             // Set command type
             cmd.CommandType = type;
 
-            int L = args.Length;
+            int length = args.Length;
 
             // Construct SQL parameters
-            for (int i = 0; i < L; i++)
+            for (int i = 0; i < length; i++)
             {
-                if (args[i] is string && i + 1 < L)
+                if (args[i] is string && i + 1 < length)
                 {
+                    if (args[i] is null)
+                    {
+                        throw new ArgumentNullException($"Invalid parameter name at index {i}");
+                    } 
                     SqlParameter param = new SqlParameter
                     {
-                        ParameterName = (string)args[i]
+                        ParameterName = (string)args[i]!
                     };
 
                     var v = args[++i];
 
                     //if value is a string, so the next args might be the size
-                    if ((v is string || v == null) && i + 1 < L && args[i + 1] is int)
+                    if (v is string or null && i + 1 < length && args[i + 1] is int)
                     {
-                        param.Size = (int)args[++i]; //the next args is really the size
+                        param.Size = (int)args[++i]!; //the next args is really the size
                     }
 
-                    param.Value = v == null ? DBNull.Value : v;
+                    param.Value = v ?? DBNull.Value;
                     cmd.Parameters.Add(param);
                 }
-                else if (args[i] is SqlParameter)
+                else if (args[i] is SqlParameter && args[i] is not null)
                 {
-                    cmd.Parameters.Add((SqlParameter)args[i]);
+                    cmd.Parameters.Add((SqlParameter)args[i]!);
                 }
                 else throw new ArgumentException("Invalid number or type of arguments supplied");
             }
@@ -174,7 +178,7 @@ namespace ToolsPack.Msql
         /// <param name="qry">Query text</param>
         /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
         /// <returns>Value of first column and first row of the results</returns>
-        public object ExecScalar(string qry, params object[] args)
+        public object? ExecScalar(string qry, params object[] args)
         {
             using (SqlCommand cmd = CreateCommand(qry, CommandType.Text, args))
             {
@@ -201,7 +205,7 @@ namespace ToolsPack.Msql
         /// <param name="qry">Name of stored proceduret</param>
         /// <param name="args">Any number of parameter name/value pairs and/or SQLParameter arguments</param>
         /// <returns>Value of first column and first row of the results</returns>
-        public object ExecScalarProc(string qry, params object[] args)
+        public object? ExecScalarProc(string qry, params object[] args)
         {
             using (SqlCommand cmd = CreateCommand(qry, CommandType.StoredProcedure, args))
             {

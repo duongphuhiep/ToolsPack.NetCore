@@ -1,5 +1,4 @@
 # ToolsPack.Logging
-[![Run all tests](https://github.com/duongphuhiep/ToolsPack.NetCore/actions/workflows/ci.yml/badge.svg)](https://github.com/duongphuhiep/ToolsPack.NetCore/actions/workflows/ci.yml)
 
 ## Http Logging middlewares
 
